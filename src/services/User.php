@@ -43,7 +43,7 @@ class User {
     /**
      * Atualiza a senha do usuário.
      */
-    public function updatePassword(int $userid, string $password): bool {
+    public function updatePassword(int $id, string $password): bool {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE user SET password = :password WHERE id = :id";
         return $this->executeStatement($sql, ['id' => $id, 'password' => $hashedPassword]);
@@ -59,7 +59,7 @@ class User {
     /**
      * Retorna um usuário pelo ID.
      */
-    public function findById(int $userid): ?array {
+    public function findById(int $id): ?array {
         return $this->fetchOne("SELECT * FROM user WHERE id = :id", ['id' => $id]);
     }
 
