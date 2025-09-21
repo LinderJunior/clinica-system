@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "31ae0d23-86ad-48df-8d2f-0bb61abf541d",
+		"name": "clinica-system-php",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userDelete.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"action\": \"delete\",\n    \"id\": 2\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/clinica-system/userRoutes.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"clinica-system",
+						"userRoutes.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userCreate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"add\",\n  \"username\": \"Jorge\",\n  \"password\": \"1234\",\n  \"employee_id\": 1,\n  \"role_id\": 1\n\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/clinica-system/userRoutes.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"clinica-system",
+						"userRoutes.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userUpdate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userid\": 20,\n  \"action\": \"update\",\n  \"username\": \"adminLinderUpdate\",\n  \"useremail\": \"adminLinderUpdate@mail.com\",\n  \"role\": \"Admin\",\n  \"filial_id\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/mvc/userRoutes.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"mvc",
+						"userRoutes.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserUpdatePassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"updatePassword\",\n  \"userid\": 14,\n  \"password\": \"novaSenh\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/mvc/userRoutes.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"mvc",
+						"userRoutes.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userList",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"add\",\n  \"username\": \"admin\",\n  \"useremail\": \"adminLinder@mail.com\",\n  \"password\": \"1234\",\n  \"role\": \"Admin\",\n  \"filial_id\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/mvc/userRoutes.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"mvc",
+						"userRoutes.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userGetById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/mvc/userRoutes.php?userid=9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"mvc",
+						"userRoutes.php"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
