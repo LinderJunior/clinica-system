@@ -64,7 +64,7 @@ function loginUser($email, $password) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitização de dados para evitar injeções e garantir que o formato seja adequado
     $email = filter_input(INPUT_POST, 'txt_email', FILTER_SANITIZE_EMAIL);
-    $password = filter_input(INPUT_POST, 'txt_password', FILTER_SANITIZE_STRING);
+    $password = isset($_POST['txt_password']) ? htmlspecialchars($_POST['txt_password'], ENT_QUOTES, 'UTF-8') : '';
 
     // Verificando se os campos estão preenchidos antes de tentar o login
     if (!empty($email) && !empty($password)) {
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="post">
             <!-- Campo de Email -->
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email" name="txt_email" required>
+                <input type="text" class="form-control" placeholder="Email" name="txt_email" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
 

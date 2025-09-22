@@ -92,7 +92,7 @@ function submitForm(event) {
 }
 
 function sendFormData(formData) {
-    fetch("userRoutes.php", {
+    fetch("routes/index.php?route=users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

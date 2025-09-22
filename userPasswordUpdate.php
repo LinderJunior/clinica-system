@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    fetch("userRoutes.php?userid=" + userid)
+    fetch("routes/index.php?route=users&id=" + userid)
         .then(response => response.json())
         .then(data => {
             if (data.status === "success" && data.data) {
@@ -96,7 +96,7 @@ function submitForm(event) {
         password: password
     };
 
-    fetch("userRoutes.php", {
+    fetch("routes/index.php?route=users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

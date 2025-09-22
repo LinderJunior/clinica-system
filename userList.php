@@ -42,7 +42,7 @@ AuthService::includeHeader();
 <script>
 // Função para carregar os usuários na tabela
 function loadUsers() {
-    fetch("userRoutes.php")
+    fetch("routes/index.php?route=users")
         .then(response => response.json())
         .then(data => {
             if (data.status === "success" && Array.isArray(data.data)) {
@@ -89,7 +89,7 @@ function getUserActionButtons(userid) {
 
 // Função para excluir um usuário
 function deleteUser(userid, button) {
-    fetch("userRoutes.php", {
+    fetch("routes/index.php?route=users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "delete", userid: userid })
