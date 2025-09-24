@@ -1,326 +1,505 @@
-
-
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>FARMACIA | MUNHIFE</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Clincica| System</title>
 
-<!-- jQuery 3 -->
-   <script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.min.js"></script>
 
-<script src="assets/bower_components/sweetalert/sweetalert.js"></script>
- <!-- DataTables -->
-<script src="assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="assets/chart.js/Chart.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description"
+        content="Admindek Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+    <meta name="author" content="colorlib" />
 
-<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css">  
-<!-- Select2 -->
-<link rel="stylesheet" href="assets/bower_components/select2/dist/css/select2.min.css">
-                                                
- <!-- Select2 -->
- <script src="assets/bower_components/select2/dist/js/select2.full.min.js"></script>  
+    <link rel="icon" href="https://colorlib.com/polygon/admindek/files/assets/images/favicon.ico" type="image/x-icon">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="assets/bower_components/Ionicons/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
-<link rel="stylesheet" href="assets/dist/css/skins/skin-blue.min.css">
-  
-<!-- Google Font -->
-<link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-<!-- DataTables -->
-<link rel="stylesheet" href="assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-        
-    <!-- daterange picker -->
-<link rel="stylesheet" href="assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap datepicker -->
-<link rel="stylesheet" href="assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">   
-       
-            
-<script src="assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap datepicker -->
-<script src="assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!-- bootstrap color picker -->     
-       
-<!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="assets/plugins/iCheck/all.css">  
- <!-- iCheck 1.0.1 -->
-<script src="assets/plugins/iCheck/icheck.min.js"></script>                         
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/waves.min.css" type="text/css" media="all">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/feather.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/themify-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/icofont.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+
+    <!-- datatable -->
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="assets/css/datatables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/buttons.datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.bootstrap4.min.css">
+    <!-- datatable -->
+
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/pages.css">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Main Header -->
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="dashboard.php" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>P</b>OS</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>FARMACIA</b>-MUNHIFE</span>
-    </a>
-
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-                    <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <!-- <img src="assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-              <img src="assets/dist/img/linder.png" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"> <?php echo $_SESSION['username'];?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-              <!-- <li class="user-header">
-                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  <?php echo $_SESSION['useremail'];?>
-                  <small>Member since Jun. 2025</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="changepassword.php" class="btn btn-default btn-flat">Change password</a>
-                </div>
-                <div class="pull-right">
-                <div class="pull-right">
-                <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-
-                </div>
-
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
- 
-  <aside class="main-sidebar">
-
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="assets/dist/img/linder.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>BEM VINDO-<?php echo $_SESSION['username'];?></p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-
-      <!-- Sidebar Menu -->
-
-
-      <ul class="sidebar-menu" data-widget="tree">
-    <!-- Menu Inicial -->
-    <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Pagina Inicial</span></a></li>
-
-    <!-- Menu Venda - Visível apenas para 'Caixa' -->
-    <?php if ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Caixa'): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-shopping-cart"></i> <span>Venda</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="orderCreate.php"><i class="fa fa-cart-plus"></i> <span>Efectuar venda</span></a></li>
-            <li><a href="orderList.php"><i class="fa fa-list-ul"></i> <span>Lista de Vendas</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-    <!-- Menu Produto - Visível apenas para 'Admin' ou 'Caixa' -->
-    <?php if ($_SESSION['role'] === 'Admin' || $_SESSION['role'] === 'Caixa'): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-cogs"></i> <span>Produto</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-
-        <li><a href="productList.php"><i class="fa fa-th-list"></i> <span>Lista de Produto</span></a></li>
-        
-            
-                    <li><a href="productCreate.php">
-                      <i class="fa fa-plus-circle"></i> 
-                      <span>Adicionar produto</span></a>
-                    </li>
-            <li><a href="categoryList.php"><i class="fa fa-tag"></i> <span>Categoria</span></a></li>
-            <?php if ($_SESSION['role'] === 'Admin'): ?>
-            <li><a href="stockEntradaProduto.php"><i class="fa fa-arrow-circle-right"></i> <span>Entrada Produto</span></a></li>
-            <?php endif; ?>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-    <!-- Menu Cliente - Visível apenas para 'Admin' -->
-    <?php if ($_SESSION['role'] === 'Admin' || ($_SESSION['role']==='Caixa')): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-users"></i> <span>Cliente</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="clientCreate.php"><i class="fa fa-user-plus"></i> <span>Adicionar cliente</span></a></li>
-            <li><a href="clientList.php"><i class="fa fa-list-alt"></i> <span>Lista de Cliente</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-    <!-- Outros menus -->
-    <?php if ($_SESSION['role'] === 'Admin' || ($_SESSION['role']==='Caixa')): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-file-text"></i> <span>Cotação</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="cotacaoCreate.php"><i class="fa fa-file-o"></i> <span>Criar</span></a></li>
-            <li><a href="cotacaoList.php"><i class="fa fa-list"></i> <span>Listar</span></a></li>
-        </ul>
-    </li>
-
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-exclamation-triangle"></i> <span>Dividas</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="debtList.php"><i class="fa fa-money"></i> <span>Listar</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-
-    <?php if ($_SESSION['role'] === 'Admin'): ?>
-      <li class="treeview">
-        <a href="#">
-            <i class="fa fa-archive"></i> <span>Stock</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="stockEntrada.php"><i class="fa fa-arrow-circle-up"></i> <span>Entrada Stock</span></a></li>
-            <li><a href="stockListEntrada.php?action=entrada"><i class="fa fa-list-alt"></i> <span>Lista entradas</span></a></li>
-            <li><a href="stockListSaida.php?action=saida"><i class="fa fa-list-alt"></i> <span>Lista saidas</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-    
-    <!-- Menu Relatórios - Visível apenas para 'Admin' -->
-    <?php if ($_SESSION['role'] === 'Admin'): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-pie-chart"></i> <span>Relatórios</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="tableReport.php"><i class="fa fa-line-chart"></i> <span>Relatório de Venda</span></a></li>
-            <li><a href="tableReportStock.php"><i class="fa fa-bar-chart"></i> <span>Stock</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-    <!-- Menu Usuários - Visível apenas para 'Admin' -->
-    <?php if ($_SESSION['role'] === 'Admin'): ?>
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-users"></i> <span>Usuarios</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="userCreate.php"><i class="fa fa-user-plus"></i> <span>Adicionar usuario</span></a></li>
-            <li><a href="userList.php"><i class="fa fa-list-alt"></i> <span>Lista de usuarios</span></a></li>
-        </ul>
-    </li>
-    <?php endif; ?>
-
-</ul>
-
-
-
-
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
 <body>
+
+    <div class="loader-bg">
+        <div class="loader-bar"></div>
+    </div>
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo">
+                        <a href="index.html">
+
+                            <img class="img-fluid" src="png/logo.png" alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu icon-toggle-right"></i>
+                        </a>
+                        <a class="mobile-options waves-effect waves-light">
+                            <i class="feather icon-more-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend search-close">
+                                            <i class="feather icon-x input-group-text"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-append search-btn">
+                                            <i class="feather icon-search input-group-text"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#!"
+                                    onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleFullScreen()"
+                                    class="waves-effect waves-light" data-cf-modified-6424b555e09833c9225d172a-="">
+                                    <i class="full-screen feather icon-maximize"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-bell"></i>
+                                        <span class="badge bg-c-red">5</span>
+                                    </div>
+                                    <ul class="show-notification notification-view dropdown-menu"
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <h6>Notifications</h6>
+                                            <label class="label label-danger">New</label>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <img class="img-radius" src="jpg/avatar-4.jpg"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">John Doe</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                        elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <img class="img-radius" src="jpg/avatar-3.jpg"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Joseph William</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                        elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="media">
+                                                <img class="img-radius" src="jpg/avatar-4.jpg"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Sara Soudein</h5>
+                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
+                                                        elit.</p>
+                                                    <span class="notification-time">30 minutes ago</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-message-square"></i>
+                                        <span class="badge bg-c-green">3</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="jpg/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                        <span>John Doe</span>
+                                        <i class="feather icon-chevron-down"></i>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu"
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <a href="#!">
+                                                <i class="feather icon-settings"></i> Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="feather icon-user"></i> Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="email-inbox.html">
+                                                <i class="feather icon-mail"></i> My Messages
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="auth-lock-screen.html">
+                                                <i class="feather icon-lock"></i> Lock Screen
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="auth-sign-in-social.html">
+                                                <i class="feather icon-log-out"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="sidebar" class="users p-chat-user showChat">
+                <div class="had-container">
+                    <div class="p-fixed users-main">
+                        <div class="user-box">
+                            <div class="chat-search-box">
+                                <a class="back_friendlist">
+                                    <i class="feather icon-x"></i>
+                                </a>
+                                <div class="right-icon-control">
+                                    <div class="input-group input-group-button">
+                                        <input type="text" id="search-friends" name="footer-email" class="form-control"
+                                            placeholder="Search Friend">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary waves-effect waves-light" type="button"><i
+                                                    class="feather icon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-friend-list">
+                                <div class="media userlist-box waves-effect waves-light" data-id="1"
+                                    data-status="online" data-username="Josephin Doe">
+                                    <a class="media-left" href="#!">
+                                        <img class="media-object img-radius img-radius" src="jpg/avatar-3.jpg"
+                                            alt="Generic placeholder image ">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="chat-header">Josephin Doe</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box waves-effect waves-light" data-id="2"
+                                    data-status="online" data-username="Lary Doe">
+                                    <a class="media-left" href="#!">
+                                        <img class="media-object img-radius" src="jpg/avatar-2.jpg"
+                                            alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Lary Doe</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box waves-effect waves-light" data-id="3"
+                                    data-status="online" data-username="Alice">
+                                    <a class="media-left" href="#!">
+                                        <img class="media-object img-radius" src="jpg/avatar-4.jpg"
+                                            alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Alice</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box waves-effect waves-light" data-id="4"
+                                    data-status="offline" data-username="Alia">
+                                    <a class="media-left" href="#!">
+                                        <img class="media-object img-radius" src="jpg/avatar-3.jpg"
+                                            alt="Generic placeholder image">
+                                        <div class="live-status bg-default"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Alia<small class="d-block text-muted">10 min
+                                                ago</small></div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box waves-effect waves-light" data-id="5"
+                                    data-status="offline" data-username="Suzen">
+                                    <a class="media-left" href="#!">
+                                        <img class="media-object img-radius" src="jpg/avatar-2.jpg"
+                                            alt="Generic placeholder image">
+                                        <div class="live-status bg-default"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Suzen<small class="d-block text-muted">15 min
+                                                ago</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="showChat_inner">
+                <div class="media chat-inner-header">
+                    <a class="back_chatBox">
+                        <i class="feather icon-x"></i> Josephin Doe
+                    </a>
+                </div>
+                <div class="main-friend-chat">
+                    <div class="media chat-messages">
+                        <a class="media-left photo-table" href="#!">
+                            <img class="media-object img-radius img-radius m-t-5" src="jpg/avatar-2.jpg"
+                                alt="Generic placeholder image">
+                        </a>
+                        <div class="media-body chat-menu-content">
+                            <div class="">
+                                <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?
+                                </p>
+                            </div>
+                            <p class="chat-time">8:20 a.m.</p>
+                        </div>
+                    </div>
+                    <div class="media chat-messages">
+                        <div class="media-body chat-menu-reply">
+                            <div class="">
+                                <p class="chat-cont">Ohh! very nice</p>
+                            </div>
+                            <p class="chat-time">8:22 a.m.</p>
+                        </div>
+                    </div>
+                    <div class="media chat-messages">
+                        <a class="media-left photo-table" href="#!">
+                            <img class="media-object img-radius img-radius m-t-5" src="jpg/avatar-2.jpg"
+                                alt="Generic placeholder image">
+                        </a>
+                        <div class="media-body chat-menu-content">
+                            <div class="">
+                                <p class="chat-cont">can you come with me?</p>
+                            </div>
+                            <p class="chat-time">8:20 a.m.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-reply-box">
+                    <div class="right-icon-control">
+                        <div class="input-group input-group-button">
+                            <input type="text" class="form-control" placeholder="Write hear . . ">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary waves-effect waves-light" type="button"><i
+                                        class="feather icon-message-circle"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--MENUS LATERAIS -->
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+
+                    <nav class="pcoded-navbar">
+                        <div class="nav-list">
+                            <div class="pcoded-inner-navbar main-menu">
+                                <div class="pcoded-navigation-label">MENUS</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                            <span class="pcoded-mtext">USERS</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li class="">
+                                                <a href="user-register.php" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="user-list.php" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+
+
+
+
+                                </ul>
+
+                            </div>
+                    </nav>
+
+
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery.min.js"></script>
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery-ui.min.js">
+                    </script>
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/popper.min.js"></script>
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/bootstrap.min.js">
+                    </script>
+
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery.slimscroll.js">
+                    </script>
+
+                    <script src="assets/js/waves.min.js" type="6424b555e09833c9225d172a-text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/modernizr.js"></script>
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/css-scrollbars.js">
+                    </script>
+
+                    <script src="assets/js/pcoded.min.js" type="6424b555e09833c9225d172a-text/javascript"></script>
+                    <script src="assets/js/vertical-layout.min.js" type="6424b555e09833c9225d172a-text/javascript">
+                    </script>
+                    <script src="assets/js/jquery.mcustomscrollbar.concat.min.js"
+                        type="6424b555e09833c9225d172a-text/javascript">
+                    </script>
+                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/script.js"></script>
+
+
+                    <!-- Datatable Script
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery.min.js"></script>
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery-ui.min.js"></script>
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/popper.min.js"></script>
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/bootstrap.min.js"></script>
+
+                    <script src="assets/js/waves.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery.slimscroll.js">
+                    </script>
+
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/modernizr.js"></script>
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/css-scrollbars.js"></script>
+
+                    <script src="assets/js/jquery.datatables.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/datatables.buttons.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/jszip.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+                    <script src="assets/js/pdfmake.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+                    <script src="assets/js/vfs_fonts.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+                    <script src="assets/js/buttons.print.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/buttons.html5.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/datatables.bootstrap4.min.js"
+                        type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/datatables.responsive.min.js"
+                        type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/responsive.bootstrap4.min.js"
+                        type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+
+                    <script src="assets/js/data-table-custom.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/pcoded.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+                    <script src="assets/js/vertical-layout.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
+                    </script>
+                    <script src="assets/js/jquery.mcustomscrollbar.concat.min.js"
+                        type="7ab3cb0e204785e18dc50839-text/javascript"></script>
+                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/script.js"></script> -->
+
+                    <!--Datatable Script -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+                        type="6424b555e09833c9225d172a-text/javascript"></script>
+                    <script type="6424b555e09833c9225d172a-text/javascript">
+                    window.dataLayer = window.dataLayer || [];
+
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-23581568-13');
+                    </script>
+                    <script src="assets/js/rocket-loader.min.js" data-cf-settings="6424b555e09833c9225d172a-|49"
+                        defer=""></script>
+
+
+                    <!-- 
+                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script> -->
+
+
+                    <script src="assets/js/jquery.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+
+</body>
+
+</html>
