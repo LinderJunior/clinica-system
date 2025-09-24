@@ -14,6 +14,9 @@ function routeRequest() {
     
     // Roteamento baseado no parâmetro
     switch ($route) {
+        case 'auth':
+            require_once __DIR__ . '/authRoutes.php';
+            break;
         case 'users':
             require_once __DIR__ . '/userRoutes.php';
             break;
