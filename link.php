@@ -62,7 +62,7 @@ AuthService::checkSessionAndRedirect();
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a href="index.html">
-                            <img class="img-fluid" src="assets/png/logo.jpeg" alt="Theme-Logo" />
+                            <img class="img-fluid" src="assets/png/logo1.png" alt="Theme-Logo" width="70px" />
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>
