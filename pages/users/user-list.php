@@ -1,5 +1,7 @@
 <?php 
-include_once __DIR__ . '/src/components/header.php';
+
+include_once __DIR__ . './../../src/components/header.php';
+
 ?>
 
 <div class="pcoded-content">
@@ -8,7 +10,7 @@ include_once __DIR__ . '/src/components/header.php';
         <div class="row align-items-end">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <h5 class="mb-0">Gestão de Usuários</h5>
+                    <h5 class="mb-0">Gestão de Usuários linder</h5>
                     <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
 
                         <i class="icofont icofont-plus"></i>

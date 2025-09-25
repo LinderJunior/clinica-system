@@ -59,12 +59,17 @@
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
 
+
+
+
+
+
+
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a href="index.html">
-
-                            <img class="img-fluid" src="png/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="assets/png/logo1.png" alt="Theme-Logo" width="70px" />
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>
@@ -91,18 +96,23 @@
                             <li>
                                 <a href="#!"
                                     onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleFullScreen()"
-                                    class="waves-effect waves-light" data-cf-modified-6424b555e09833c9225d172a-="">
+                                    class="waves-effect waves-light" data-cf-modified-2d8d78e876b340f9029c575b-="">
                                     <i class="full-screen feather icon-maximize"></i>
                                 </a>
                             </li>
                         </ul>
                         <ul class="nav-right">
+
+                            <!--
                             <li class="header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="feather icon-bell"></i>
                                         <span class="badge bg-c-red">5</span>
                                     </div>
+
+
+
                                     <ul class="show-notification notification-view dropdown-menu"
                                         data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>
@@ -145,21 +155,29 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> 
+
+
+
+
                                 </div>
-                            </li>
-                            <li class="header-notification">
+                            </li>-->
+                            <!-- <li class="header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
                                         <i class="feather icon-message-square"></i>
                                         <span class="badge bg-c-green">3</span>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
+
+
+
+
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="jpg/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                        <!-- <img src="jpg/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
                                         <span>John Doe</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
@@ -197,6 +215,17 @@
                     </div>
                 </div>
             </nav>
+
+
+
+
+
+
+
+
+
+
+
 
             <div id="sidebar" class="users p-chat-user showChat">
                 <div class="had-container">
@@ -344,22 +373,105 @@
 
                     <nav class="pcoded-navbar">
                         <div class="nav-list">
+
+
                             <div class="pcoded-inner-navbar main-menu">
                                 <div class="pcoded-navigation-label">MENUS</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="pcoded-hasmenu">
+
+
+
+
+                                    <li class="pcoded-hasmenu active pcoded-trigger">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                            <span class="pcoded-mtext">USERS</span>
+                                            <span class="pcoded-mtext">Dashboard</span>
                                         </a>
                                         <ul class="pcoded-submenu">
-                                            <li class="">
-                                                <a href="user-register.php" class="waves-effect waves-dark">
+                                            <li class="active">
+                                                <a href="link.php?route=1" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Início</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                                            <span class="pcoded-mtext">Pacientes linder</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=18" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Cadastrar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=19" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                                            <span class="pcoded-mtext">Médicos</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=6" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Cadastrar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=7" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-calendar"></i></span>
+                                            <span class="pcoded-mtext">Consultas</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=10" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Agendar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=11" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                                            <span class="pcoded-mtext">Usuarios</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=18" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Registar</span>
                                                 </a>
                                             </li>
-                                            <li class="">
-                                                <a href="user-list.php" class="waves-effect waves-dark">
+                                            <li>
+                                                <a href="link.php?route=19" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>
@@ -372,9 +484,22 @@
 
 
 
-                                </ul>
 
+
+
+
+
+
+
+
+
+
+                                </ul>
                             </div>
+
+
+
+
                     </nav>
 
 
@@ -414,51 +539,7 @@
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/script.js"></script>
 
 
-                    <!-- Datatable Script
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery.min.js"></script>
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery-ui.min.js"></script>
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/popper.min.js"></script>
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/bootstrap.min.js"></script>
 
-                    <script src="assets/js/waves.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/jquery.slimscroll.js">
-                    </script>
-
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/modernizr.js"></script>
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/css-scrollbars.js"></script>
-
-                    <script src="assets/js/jquery.datatables.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/datatables.buttons.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/jszip.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-                    <script src="assets/js/pdfmake.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-                    <script src="assets/js/vfs_fonts.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-                    <script src="assets/js/buttons.print.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/buttons.html5.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/datatables.bootstrap4.min.js"
-                        type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/datatables.responsive.min.js"
-                        type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/responsive.bootstrap4.min.js"
-                        type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-
-                    <script src="assets/js/data-table-custom.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/pcoded.min.js" type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-                    <script src="assets/js/vertical-layout.min.js" type="7ab3cb0e204785e18dc50839-text/javascript">
-                    </script>
-                    <script src="assets/js/jquery.mcustomscrollbar.concat.min.js"
-                        type="7ab3cb0e204785e18dc50839-text/javascript"></script>
-                    <script type="7ab3cb0e204785e18dc50839-text/javascript" src="assets/js/script.js"></script> -->
-
-                    <!--Datatable Script -->
 
 
 

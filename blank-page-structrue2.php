@@ -1,7 +1,8 @@
 <?php 
-
-include_once __DIR__ . '/../src/components/header.php';
+include_once __DIR__ . '/src/components/header.php';
 ?>
+
+
 
 <div class="pcoded-content">
     <div class="page-header card">
@@ -10,7 +11,7 @@ include_once __DIR__ . '/../src/components/header.php';
                 <div class="page-header-title">
 
                     <div class="d-inline">
-                        <h7>Bem-vindo ao Sistema de Gestão da Clínica Linder</h7>
+                        <h5>TITULO DA ENTIDADE 1</h5>
 
                     </div>
                 </div>
@@ -44,19 +45,23 @@ include_once __DIR__ . '/../src/components/header.php';
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h5>Selecione uma opção no menu lateral para começar.</h5>
+                                    <h5>Bem-vindo ao Sistema de Gestão da Clínica Linder</h5>
                                 </div>
 
                                 <div class="card-block">
 
                                     <!-- LINDERCHECK: CONTEUDO AQUI, SEJA TABELA,CARD, LISTA OU QUALQUER COISA  -->
 
-                                    <div class="card-body">
 
+
+
+
+                                    <div class="card-body">
+                                        <p>Selecione uma opção no menu lateral para começar.</p>
 
                                         <div class="row mt-4">
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-primary text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -76,7 +81,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=7" class="text-decoration-none">
                                                     <div class="card bg-success text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -96,7 +101,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=11" class="text-decoration-none">
                                                     <div class="card bg-info text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -116,7 +121,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=15" class="text-decoration-none">
                                                     <div class="card bg-warning text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -138,7 +143,7 @@ include_once __DIR__ . '/../src/components/header.php';
 
                                         <div class="row mt-4">
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=22" class="text-decoration-none">
                                                     <div class="card bg-danger text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -158,7 +163,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=25" class="text-decoration-none">
                                                     <div class="card bg-dark text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -177,10 +182,26 @@ include_once __DIR__ . '/../src/components/header.php';
                                                 </a>
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <!--Fim card block onde tem os dashboards -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 </div>
                             </div>
                         </div>

@@ -1,8 +1,7 @@
 <?php 
-include_once __DIR__ . '/src/components/header.php';
+include_once __DIR__ . './../../src/components/header.php';
+include_once __DIR__ . '.';
 ?>
-
-
 
 <div class="pcoded-content">
     <div class="page-header card">
@@ -148,7 +147,8 @@ function sendFormData(formData) {
 function handleResponse(data) {
     if (data.status === "success") {
         alert(data.message);
-        window.location.href = "user-list.php";
+        window.location.href = "link.php?route=19";
+
     } else {
         alert("Erro: " + data.message);
     }
