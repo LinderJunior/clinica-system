@@ -50,7 +50,8 @@ include_once __DIR__ . './../../src/components/header.php';
                                 </div>
                             </div>
 
-                            <?php include_once __DIR__ . '/src/components/users/modal-user.php'; ?>
+                            <?php include_once __DIR__ . '/user-modal.php'; ?>
+
 
                         </div>
                     </div>
