@@ -401,16 +401,16 @@
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-users"></i></span>
-                                            <span class="pcoded-mtext">Pacientes linder</span>
+                                            <span class="pcoded-mtext">Pacientes</span>
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
-                                                <a href="link.php?route=18" class="waves-effect waves-dark">
+                                                <a href="link.php?route=2" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Cadastrar</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="link.php?route=19" class="waves-effect waves-dark">
+                                                <a href="link.php?route=3" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>
@@ -466,12 +466,12 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
-                                                <a href="link.php?route=18" class="waves-effect waves-dark">
+                                                <a href="link.php?route=11" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Registar</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="link.php?route=19" class="waves-effect waves-dark">
+                                                <a href="link.php?route=12" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>

@@ -11,40 +11,35 @@
     $pag[1] = "inicio.php"; 
 
     // Pacientes
-    $pag[2] = "pacientes/cadastro.php";
-    $pag[3] = "pacientes/lista.php";
-    $pag[4] = "pacientes/editar.php";
-    $pag[5] = "pacientes/excluir.php";
-
+    $pag[2] = "patients/patient-register.php";
+    $pag[3] = "patients/patient-list.php";
+  
     // Médicos
-    $pag[6] = "medicos/cadastro.php";
-    $pag[7] = "medicos/lista.php";
-    $pag[8] = "medicos/editar.php";
-    $pag[9] = "medicos/excluir.php";
-
+    $pag[4] = "medicos/cadastro.php";
+    $pag[5] = "medicos/lista.php";
+  
     // Consultas
-    $pag[10] = "consultas/agendar.php";
-    $pag[11] = "consultas/lista.php";
-    $pag[12] = "consultas/editar.php";
-    $pag[13] = "consultas/excluir.php";
+    $pag[6] = "consultas/agendar.php";
+    $pag[7] = "consultas/lista.php";
+   
 
     // Exames
-    $pag[14] = "exames/cadastro.php";
-    $pag[15] = "exames/lista.php";
-    $pag[16] = "exames/editar.php";
-    $pag[17] = "exames/excluir.php";
+    $pag[9] = "exames/cadastro.php";
+    $pag[10] = "exames/lista.php";
+ 
 
     // Usuários
-    $pag[18] = "users/user-register.php";
-    $pag[19] = "users/user-list.php";
+    $pag[11] = "users/user-register.php";
+    $pag[12] = "users/user-list.php";
+
     // Relatórios
-    $pag[22] = "relatorios/pacientes.php";
-    $pag[23] = "relatorios/consultas.php";
-    $pag[24] = "relatorios/financeiro.php";
+    $pag[13] = "relatorios/pacientes.php";
+    $pag[14] = "relatorios/consultas.php";
+    $pag[15] = "relatorios/financeiro.php";
 
     // Configurações
-    $pag[25] = "configuracoes/sistema.php";
-    $pag[26] = "configuracoes/perfil.php";
+    $pag[16] = "configuracoes/sistema.php";
+    $pag[17] = "configuracoes/perfil.php";
 
     // Página de erro
     $pag[404] = "error.php";
