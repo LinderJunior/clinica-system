@@ -32,14 +32,21 @@
     $pag[11] = "users/user-register.php";
     $pag[12] = "users/user-list.php";
 
+
+    // Funcionario
+    $pag[13] = "employees/employee-register.php";
+    $pag[14] = "employees/employee-list.php";
+
+
+
     // Relatórios
-    $pag[13] = "relatorios/pacientes.php";
-    $pag[14] = "relatorios/consultas.php";
-    $pag[15] = "relatorios/financeiro.php";
+    $pag[15] = "relatorios/pacientes.php";
+    $pag[16] = "relatorios/consultas.php";
+    $pag[17] = "relatorios/financeiro.php";
 
     // Configurações
-    $pag[16] = "configuracoes/sistema.php";
-    $pag[17] = "configuracoes/perfil.php";
+    $pag[18] = "configuracoes/sistema.php";
+    $pag[19] = "configuracoes/perfil.php";
 
     // Página de erro
     $pag[404] = "error.php";

@@ -478,31 +478,27 @@
                                         </ul>
                                     </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                                            <span class="pcoded-mtext">Funcionarios</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=13" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=14" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
-
-
-
-
                     </nav>
-
-
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery.min.js"></script>
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery-ui.min.js">
                     </script>
@@ -512,20 +508,7 @@
 
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery.slimscroll.js">
                     </script>
-
                     <script src="assets/js/waves.min.js" type="6424b555e09833c9225d172a-text/javascript"></script>
-
-
-
-
-
-
-
-
-
-
-
-
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/modernizr.js"></script>
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/css-scrollbars.js">
                     </script>
