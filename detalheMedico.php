@@ -2,8 +2,6 @@
 include_once __DIR__ . '/src/components/header.php';
 ?>
 
-
-
 <div class="pcoded-content">
     <div class="page-header card">
         <div class="row align-items-end">
@@ -11,7 +9,7 @@ include_once __DIR__ . '/src/components/header.php';
                 <div class="page-header-title">
 
                     <div class="d-inline">
-                        <h5>TITULO DA ENTIDADE 1</h5>
+                        <h5>Detalhes de Médico</h5>
 
                     </div>
                 </div>
@@ -43,11 +41,11 @@ include_once __DIR__ . '/src/components/header.php';
                         <div class="col-sm-12">
 
                             <div class="card">
-                                <div class="card-header">
+                                <!-- <div class="card-header">
                                     <h5>TITULO DA TABELA/FORMULARIO</h5>
                                     <span>Add class of <code>.form-control</code> with
                                         <code>&lt;input&gt;</code> tag</span>
-                                </div>
+                                </div> -->
                                 <div class="card-block">
 
                                     <!-- LINDERCHECK: CONTEUDO AQUI, SEJA TABELA,CARD, LISTA OU QUALQUER COISA  -->
@@ -268,38 +266,6 @@ include_once __DIR__ . '/src/components/header.php';
                                         });
                                     });
                                     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                     <!-- FIM LINDERCHECK: CONTEUDO AQUI, SEJA TABELA,CARD, LISTA OU QUALQUER COISA  -->
                                 </div>

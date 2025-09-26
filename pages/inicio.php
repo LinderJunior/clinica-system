@@ -56,7 +56,7 @@ include_once __DIR__ . '/../src/components/header.php';
 
                                         <div class="row mt-4">
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-primary text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -76,7 +76,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=13" class="text-decoration-none">
                                                     <div class="card bg-success text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -96,7 +96,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-info text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -116,7 +116,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-warning text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -136,9 +136,9 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
                                         </div>
 
-                                        <div class="row mt-4">
+                                        <div class="row mt-3">
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-danger text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"
@@ -158,7 +158,7 @@ include_once __DIR__ . '/../src/components/header.php';
                                             </div>
 
                                             <div class="col-md-3 mb-4">
-                                                <a href="link.php?route=19" class="text-decoration-none">
+                                                <a href="link.php?route=3" class="text-decoration-none">
                                                     <div class="card bg-dark text-white h-100"
                                                         style="cursor: pointer; transition: transform 0.3s;"
                                                         onmouseover="this.style.transform='scale(1.05)'"

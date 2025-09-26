@@ -23,8 +23,7 @@
 
 
 
-    <!-- icones pdf excel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -44,15 +43,35 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
+    <!-- DataTables Buttons -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
     <link rel="stylesheet" type="text/css" href="assets/css/datatables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/buttons.datatables.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.bootstrap4.min.css">
-    <!-- datatable -->
 
+    <!-- datatable -->
 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/pages.css">
+
+
+    <!--novo datatable-->
+
+    <!-- FontAwesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body>
@@ -74,7 +93,7 @@
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
-                        <a href="index.html">
+                        <a href="link.php?route=1">
                             <img class="img-fluid" src="assets/png/logo1.png" alt="Theme-Logo" width="70px" />
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
@@ -99,13 +118,13 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="#!"
                                     onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleFullScreen()"
                                     class="waves-effect waves-light" data-cf-modified-2d8d78e876b340f9029c575b-="">
                                     <i class="full-screen feather icon-maximize"></i>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                         <ul class="nav-right">
 
@@ -560,14 +579,26 @@
                         defer=""></script>
 
 
-                    <!-- 
-                    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-                    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script> -->
 
 
                     <script src="assets/js/jquery.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
                     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+
+                    <!-- DataTables Buttons -->
+                    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap4.min.js"></script>
+
+                    <!-- Dependências para Excel e PDF -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+                    <!-- Botões de exportação -->
+                    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
 
 
 </body>

@@ -102,6 +102,27 @@ $(document).ready(function() {
         order: [
             [0, "asc"]
         ],
+
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'pdfHtml5',
+                text: '<i class="fas fa-file-pdf"></i> PDF',
+                titleAttr: 'Exportar para PDF',
+                className: 'btn btn-danger btn-sm',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                title: 'Relatório de Funcionários'
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fas fa-file-excel"></i> Excel',
+                titleAttr: 'Exportar para Excel',
+                className: 'btn btn-success btn-sm',
+                title: 'Relatório de Funcionários'
+            }
+        ],
+
+
         columnDefs: [{
             targets: -1,
             data: null,
@@ -135,6 +156,23 @@ $(document).ready(function() {
             }
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Carrega usuários via API
     function loadEmployees() {
@@ -302,3 +340,6 @@ $(document).ready(function() {
     });
 })
 </script>
+
+
+<!-- Nosso componente -->
