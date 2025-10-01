@@ -25,7 +25,7 @@ function loginUser($username, $password) {
 
 // Processa POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-   $username = htmlspecialchars(trim($_POST['txt_username'] ?? ''));
+    $username = htmlspecialchars(trim($_POST['txt_username'] ?? ''));
     $password = htmlspecialchars(trim($_POST['txt_password'] ?? ''));
 
 
