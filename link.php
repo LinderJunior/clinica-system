@@ -37,16 +37,18 @@
     $pag[13] = "employees/employee-register.php";
     $pag[14] = "employees/employee-list.php";
 
-
+    // Medicamentos
+    $pag[15] = "medications/medication-register.php";
+    $pag[16] = "medications/medication-list.php";
 
     // Relatórios
-    $pag[15] = "relatorios/pacientes.php";
-    $pag[16] = "relatorios/consultas.php";
-    $pag[17] = "relatorios/financeiro.php";
+    $pag[17] = "relatorios/pacientes.php";
+    $pag[18] = "relatorios/consultas.php";
+    $pag[19] = "relatorios/financeiro.php";
 
     // Configurações
-    $pag[18] = "configuracoes/sistema.php";
-    $pag[19] = "configuracoes/perfil.php";
+    $pag[20] = "configuracoes/sistema.php";
+    $pag[21] = "configuracoes/perfil.php";
 
     // Página de erro
     $pag[404] = "error.php";

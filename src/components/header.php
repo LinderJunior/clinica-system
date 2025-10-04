@@ -521,6 +521,24 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-package"></i></span>
+                                            <span class="pcoded-mtext">Medicamentos</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=15" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=16" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                     </nav>
