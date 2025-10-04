@@ -47,6 +47,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     <th>Numero de Lote</th>
                                                     <th>Preço de compra</th>
                                                     <th>Preço de venda</th>
+                                                    <th>Data de registo</th>
                                                     <th>Descrição</th>
                                                     <th>Registado por</th>
                                                     <th style="width: 180px; text-align:center;">Ações</th>
@@ -153,8 +154,9 @@ $(document).ready(function() {
                         medication.loteNumber,
                         medication.purchasePrice,
                         medication.salePrice,
+                        medication.registationDate,
                         medication.description,
-                        medication.user_name,
+                        medication.user_id,
                         null
                     ]));
                     table.draw();
@@ -170,23 +172,35 @@ $(document).ready(function() {
         const data = table.row($(this).parents('tr')).data();
 
         if (action === "view") {
-            $('#view-name').text(data[1]);
-            $('#view-employee_id').text(data[2]);
-            $('#view-role').text(data[3]);
-            $('#modalViewUser').modal('show');
+            // IDs baseados na estrutura do modalViewMedication
+            $('#view-name').text(data[1]); // Nome do medicamento
+            $('#view-type').text(data[2]); // Tipo (Antibiótico, Analgésico, etc.)
+            $('#view-dateProduction').text(data[3]); // Data de Produção
+            $('#view-dateExpiry').text(data[4]); // Data de Expiração
+            $('#view-qty').text(data[5]); // Quantidade
+            $('#view-loteNumber').text(data[6]); // Número do Lote
+            $('#view-purchasePrice').text(data[7] + " MZN"); // Preço de Compra
+            $('#view-salePrice').text(data[8] + " MZN"); // Preço de Venda
+            $('#view-registationDate').text(data[9]); // Data de Registo
+            $('#view-description').text(data[10]); // Descrição do medicamento
+            $('#view-user').text("Usuário ID: " + data[11]); // Usuário responsável
 
+            // Exibe o modal
+            $('#modalViewMedication').modal('show');
         } else if (action === "edit") {
-            $('#edit-medicationid').val(data[0]);
-            $('#edit-nome').val(data[1]);
-            $('#edit-datanascimento').val(data[2]);
-            $('#edit-bi').val(data[3]);
-            $('#edit-provincia').val(data[4]);
-            $('#edit-cidade').val(data[5]);
-            $('#edit-bairro').val(data[6]);
-            $('#edit-telefone').val(data[7]);
-            $('#edit-iswhatsapp').val(data[8]);
-            $('#modalEditmedication').modal('show');
-
+            $('#edit-medicationid').val(data[0]); // id
+            $('#edit-name').val(data[1]); // name
+            $('#edit-type').val(data[2]); // type
+            $('#edit-dateProduction').val(data[3]); // dateProduction
+            $('#edit-dateExpiry').val(data[4]); // dateExpiry
+            $('#edit-qty').val(data[5]); // qty
+            $('#edit-loteNumber').val(data[6]); // loteNumber
+            $('#edit-purchasePrice').val(data[7]); // purchasePrice
+            $('#edit-salePrice').val(data[8]); // salePrice
+            $('#edit-registationDate').val(data[9]); // registationDate
+            $('#edit-description').val(data[10]); // description
+            $('#edit-user').val(data[11]); // user_id
+            $('#modalEditMedication').modal('show');
         } else if (action === "delete") {
             $('#delete-medicationid').val(data[0]);
             $('#delete-username').text(data[1]);
@@ -237,25 +251,28 @@ $(document).ready(function() {
             .catch(err => console.error("Erro ao adicionar usuário:", err));
     });
 
-
-    // Submissão do Editar Paciente
-    $('#formEditmedication').on('submit', function(e) {
+    // Submissão do formulário de edição de medicamento
+    $('#formEditMedication').on('submit', function(e) {
         e.preventDefault();
 
         const payload = {
             action: "update",
             id: Number($('#edit-medicationid').val()),
-            name: $('#edit-nome').val(),
-            dateBirth: $('#edit-datanascimento').val(),
-            bi: $('#edit-bi').val(),
-            province: $('#edit-provincia').val(),
-            city: $('#edit-cidade').val(),
-            neighborhood: $('#edit-bairro').val(),
-            phoneNumber: $('#edit-telefone').val(),
-            iswhatsapp: $('#edit-iswhatsapp').val()
+            name: $('#edit-name').val(),
+            type: $('#edit-type').val(),
+            dateProduction: $('#edit-dateProduction').val(),
+            dateExpiry: $('#edit-dateExpiry').val(),
+            qty: Number($('#edit-qty').val()),
+            loteNumber: Number($('#edit-loteNumber').val()),
+            purchasePrice: parseFloat($('#edit-purchasePrice').val()),
+            salePrice: parseFloat($('#edit-salePrice').val()),
+            registationDate: $('#edit-registationDate').val(),
+            description: $('#edit-description').val(),
+            user_id: Number($('#edit-user').val())
         };
 
         console.log("Payload enviado:", payload);
+
         fetch("routes/medicationRoutes.php", {
                 method: "POST",
                 headers: {
@@ -266,15 +283,20 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalEditmedication').modal('hide');
-                    loadMedications(); // recarrega a tabela
-                    swal("Sucesso!", "Paciente atualizado com sucesso.", "success");
+                    $('#modalEditMedication').modal('hide');
+                    loadMedications(); // Função para recarregar a tabela
+                    swal("Sucesso!", "Medicamento atualizado com sucesso.", "success");
                 } else {
-                    swal("Erro!", data.message, "error");
+                    swal("Erro!", data.message || "Ocorreu um erro ao atualizar o medicamento.",
+                        "error");
                 }
             })
-            .catch(err => console.error("Erro ao atualizar paciente:", err));
+            .catch(err => {
+                console.error("Erro ao atualizar medicamento:", err);
+                swal("Erro!", "Falha na comunicação com o servidor.", "error");
+            });
     });
+
 
 
     // Confirmar delete
