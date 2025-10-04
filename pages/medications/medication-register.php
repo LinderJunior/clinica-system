@@ -1,6 +1,5 @@
 <?php 
 include_once __DIR__ . './../../src/components/header.php';
-
 ?>
 
 <div class="pcoded-content">
@@ -8,24 +7,19 @@ include_once __DIR__ . './../../src/components/header.php';
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-
                     <div class="d-inline">
-                        <h5>Registo de Pacientes</h5>
-
+                        <h5>Registo de Medicamentos</h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="page-header-breadcrumb">
-                    <ul class=" breadcrumb breadcrumb-title">
+                    <ul class="breadcrumb breadcrumb-title">
                         <li class="breadcrumb-item">
                             <a href="index.html"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Form Components</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="#!">Basic Form Inputs</a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Gestão de Farmácia</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Registo de Medicamentos</a></li>
                     </ul>
                 </div>
             </div>
@@ -33,165 +27,190 @@ include_once __DIR__ . './../../src/components/header.php';
     </div>
 
     <div class="pcoded-inner-content">
-
         <div class="main-body">
             <div class="page-wrapper">
-
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Prencha o formulario</h5>
-                                    <span>Add class of <code>.form-control</code> with
-                                        <code>&lt;input&gt;</code> tag</span>
+                                    <h5>Prencha o formulário de registo de medicamento</h5>
+                                    <span>Use os campos abaixo para inserir as informações do medicamento.</span>
                                 </div>
                                 <div class="card-block">
 
-                                    <!-- LINDERCHECK: CONTEUDO AQUI, SEJA TABELA,CARD, LISTA OU QUALQUER COISA  -->
-                                    <form id="userForm" onsubmit="submitForm(event)">
-                                        <!-- Username -->
+                                    <form id="medicationForm" onsubmit="submitMedicationForm(event)">
+                                        <!-- Nome -->
                                         <div class="form-group row">
-                                            <label for="txtnomepaciente" class="col-sm-2 col-form-label">Nome do
-                                                Paciente</label>
+                                            <label for="txtname" class="col-sm-2 col-form-label">Nome do
+                                                Medicamento</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtnomepaciente"
-                                                    placeholder="Nome de Usuário" required>
+                                                <input type="text" class="form-control" id="txtname"
+                                                    placeholder="Ex: Amoxicilina" required>
                                             </div>
                                         </div>
 
+                                        <!-- Tipo -->
                                         <div class="form-group row">
-                                            <label for="txtdatanascimento" class="col-sm-2 col-form-label">Data de
-                                                Nascimento</label>
+                                            <label for="txttype" class="col-sm-2 col-form-label">Tipo</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" id="txtdatanascimento"
-                                                    placeholder="Data de Nascimento" required>
+                                                <input type="text" class="form-control" id="txttype"
+                                                    placeholder="Ex: Antibiótico" required>
                                             </div>
                                         </div>
 
-
+                                        <!-- Data de Produção -->
                                         <div class="form-group row">
-                                            <label for="txtnumerobi" class="col-sm-2 col-form-label">
-                                                Numero de B.I</label>
+                                            <label for="txtdateProduction" class="col-sm-2 col-form-label">Data de
+                                                Produção</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtnumerobi"
-                                                    placeholder="Numero de B.I" required>
+                                                <input type="date" class="form-control" id="txtdateProduction" required>
                                             </div>
                                         </div>
 
+                                        <!-- Data de Expiração -->
                                         <div class="form-group row">
-                                            <label for="txtprovincia" class="col-sm-2 col-form-label">
-                                                Provincia</label>
+                                            <label for="txtdateExpiry" class="col-sm-2 col-form-label">Data de
+                                                Expiração</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtprovincia"
-                                                    placeholder="Provincia" required>
+                                                <input type="date" class="form-control" id="txtdateExpiry" required>
                                             </div>
                                         </div>
 
+                                        <!-- Quantidade -->
                                         <div class="form-group row">
-                                            <label for="txcidade" class="col-sm-2 col-form-label">
-                                                Cidade</label>
+                                            <label for="txtqty" class="col-sm-2 col-form-label">Quantidade</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtcidade"
-                                                    placeholder="Cidade" required>
+                                                <input type="number" class="form-control" id="txtqty"
+                                                    placeholder="Ex: 80" required>
                                             </div>
                                         </div>
 
+                                        <!-- Número do Lote -->
                                         <div class="form-group row">
-                                            <label for="txtbairro" class="col-sm-2 col-form-label">
-                                                Bairro</label>
+                                            <label for="txtloteNumber" class="col-sm-2 col-form-label">Número do
+                                                Lote</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtbairro"
-                                                    placeholder="Bairro" required>
+                                                <input type="number" class="form-control" id="txtloteNumber"
+                                                    placeholder="Ex: 78901" required>
                                             </div>
                                         </div>
 
+                                        <!-- Preço de Compra -->
                                         <div class="form-group row">
-                                            <label for="txttelefone" class="col-sm-2 col-form-label">
-                                                Numero de Telefone</label>
+                                            <label for="txtpurchasePrice" class="col-sm-2 col-form-label">Preço de
+                                                Compra (MZN)</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txttelefone"
-                                                    placeholder="Numero de Telefone" required>
+                                                <input type="number" step="0.01" class="form-control"
+                                                    id="txtpurchasePrice" placeholder="Ex: 15.75" required>
                                             </div>
                                         </div>
 
+                                        <!-- Preço de Venda -->
                                         <div class="form-group row">
-                                            <label for="txtiswhatsapp" class="col-sm-2 col-form-label">
-                                                Tem WhatsApp</label>
+                                            <label for="txtsalePrice" class="col-sm-2 col-form-label">Preço de Venda
+                                                (MZN)</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtiswhatsapp"
-                                                    placeholder="Is WhatsApp" required>
+                                                <input type="number" step="0.01" class="form-control" id="txtsalePrice"
+                                                    placeholder="Ex: 25.00" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Data de Registo -->
+                                        <div class="form-group row">
+                                            <label for="txtregistationDate" class="col-sm-2 col-form-label">Data de
+                                                Registo</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" id="txtregistationDate"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Descrição -->
+                                        <div class="form-group row">
+                                            <label for="txtdescription"
+                                                class="col-sm-2 col-form-label">Descrição</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" id="txtdescription" rows="3"
+                                                    placeholder="Breve descrição do medicamento"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Usuário -->
+                                        <div class="form-group row">
+                                            <label for="txtuser" class="col-sm-2 col-form-label">Usuário
+                                                Responsável</label>
+                                            <div class="col-sm-10">
+                                                <select id="txtuser" class="form-control" required>
+                                                    <option value="">Selecione o usuário</option>
+                                                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                                                    <option value="<?= $i ?>">Usuário <?= $i ?></option>
+                                                    <?php endfor; ?>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <!-- Botão -->
                                         <div class="form-group row">
                                             <div class="col-sm-12 text-right">
-                                                <button type="submit" class="btn btn-info">Adicionar Usuário</button>
+                                                <button type="submit" class="btn btn-info">
+                                                    <i class="feather icon-save"></i> Registrar Medicamento
+                                                </button>
                                             </div>
                                         </div>
 
                                     </form>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div id="styleSelector">
-    </div>
-</div>
+    <div id="styleSelector"></div>
 </div>
 
 <script>
-function submitForm(event) {
+function submitMedicationForm(event) {
     event.preventDefault();
 
     const formData = {
         action: "add",
-        name: document.getElementById("txtnomepaciente").value,
-        dateBirth: document.getElementById("txtdatanascimento").value,
-        bi: document.getElementById("txtnumerobi").value,
-        province: document.getElementById("txtprovincia").value,
-        city: document.getElementById("txtcidade").value,
-        neighborhood: document.getElementById("txtbairro").value,
-        phoneNumber: document.getElementById("txttelefone").value,
-        iswhatsapp: document.getElementById("txtiswhatsapp").value
+        name: document.getElementById("txtname").value,
+        type: document.getElementById("txttype").value,
+        dateProduction: document.getElementById("txtdateProduction").value,
+        dateExpiry: document.getElementById("txtdateExpiry").value,
+        qty: Number(document.getElementById("txtqty").value),
+        loteNumber: Number(document.getElementById("txtloteNumber").value),
+        purchasePrice: parseFloat(document.getElementById("txtpurchasePrice").value),
+        salePrice: parseFloat(document.getElementById("txtsalePrice").value),
+        registationDate: document.getElementById("txtregistationDate").value,
+        description: document.getElementById("txtdescription").value,
+        user_id: Number(document.getElementById("txtuser").value)
     };
 
-    sendFormData(formData);
-}
-
-function sendFormData(formData) {
-    fetch("routes/patientRoutes.php", {
+    fetch("routes/medicationRoutes.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(data => handleResponse(data))
-        .catch(error => handleError(error));
-}
-
-function handleResponse(data) {
-    if (data.status === "success") {
-        alert(data.message);
-        window.location.href = "link.php?route=3";
-
-    } else {
-        alert("Erro: " + data.message);
-    }
-}
-
-function handleError(error) {
-    console.error("Erro ao enviar a requisição:", error);
-    alert("Ocorreu um erro ao tentar enviar os dados.");
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+                window.location.href = "link.php?route=16";
+            } else {
+                alert("Erro: " + data.message);
+            }
+        })
+        .catch(err => {
+            console.error("Erro:", err);
+            swal("Erro!", "Falha ao enviar dados para o servidor.", "error");
+        });
 }
 </script>
