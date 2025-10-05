@@ -1,156 +1,125 @@
-<!-- Modal Ver Detalhes do Medicamento -->
-<!-- Modal de Visualização de Consulta -->
-<div class="modal fade" id="modalViewConsult" tabindex="-1" role="dialog" aria-labelledby="viewConsultaLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<!-- Modal de Visualização da Consulta -->
+<div class="modal fade" id="viewConsultModal" tabindex="-1" aria-labelledby="viewConsultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-
             <div class="modal-header bg-info text-white">
-                <h5 class="modal-title" id="viewConsultaLabel">Detalhes da Consulta</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="viewConsultModalLabel">Detalhes da Consulta</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Fechar"></button>
             </div>
 
             <div class="modal-body">
-                <div class="row">
-                    <!-- Data -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Data da Consulta:</strong>
-                        <p id="view-date" class="text-muted mb-0"></p>
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label class="form-label">ID</label>
+                        <input type="text" class="form-control" id="view_id" readonly>
                     </div>
 
-                    <!-- Hora -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Hora:</strong>
-                        <p id="view-time" class="text-muted mb-0"></p>
+                    <div class="col-md-4">
+                        <label class="form-label">Consulta ID</label>
+                        <input type="text" class="form-control" id="view_consult_id" readonly>
                     </div>
 
-                    <!-- Tipo -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Tipo de Consulta:</strong>
-                        <p id="view-type" class="text-muted mb-0"></p>
+                    <div class="col-md-4">
+                        <label class="form-label">Doutor</label>
+                        <input type="text" class="form-control" id="view_doctor_id" readonly>
                     </div>
 
-                    <!-- Status -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Status:</strong>
-                        <p id="view-status" class="text-muted mb-0"></p>
+                    <div class="col-12">
+                        <label class="form-label">Detalhes</label>
+                        <textarea class="form-control" id="view_details" rows="3" readonly></textarea>
                     </div>
 
-                    <!-- Paciente -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Paciente (ID):</strong>
-                        <p id="view-patient_id" class="text-muted mb-0"></p>
+                    <div class="col-12">
+                        <label class="form-label">Arquivo</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="view_file" readonly>
+                            <a href="#" id="view_file_link" target="_blank" class="btn btn-outline-info">Abrir
+                                Arquivo</a>
+                        </div>
                     </div>
 
-                    <!-- Médico -->
-                    <div class="col-md-6 mb-3">
-                        <strong>Médico (ID):</strong>
-                        <p id="view-doctor_id" class="text-muted mb-0"></p>
-                    </div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <i class="feather icon-x"></i> Fechar
-                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
             </div>
-
         </div>
     </div>
 </div>
 
 
 
-<!-- Modal Editar Consulta -->
-<div class="modal fade" id="modalEditConsult" tabindex="-1" role="dialog" aria-labelledby="modalEditConsultaLabel"
+
+
+<!-- MODAL: Editar Diagnóstico -->
+<div class="modal fade" id="modalEditDiagnosis" tabindex="-1" role="dialog" aria-labelledby="modalEditDiagnosisLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalEditConsultaLabel">
-                    <i class="feather icon-edit"></i> Editar Consulta
+                <h5 class="modal-title" id="modalEditDiagnosisLabel">
+                    <i class="icofont icofont-ui-edit"></i> Editar Diagnóstico
                 </h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form id="formEditConsult">
+            <form id="formEditDiagnosis">
                 <div class="modal-body">
+                    <input type="hidden" id="edit-diagnosisid">
 
-                    <input type="hidden" id="edit-consultid">
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="edit-date">Data da Consulta</label>
-                            <input type="date" class="form-control" id="edit-date" required>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="edit-time">Hora</label>
-                            <input type="time" class="form-control" id="edit-time" required>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="edit-type">Tipo de Consulta</label>
-                            <input type="text" class="form-control" id="edit-type" placeholder="Ex: Consulta de Rotina"
-                                required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="edit-patientid">Paciente</label>
-                            <select class="form-control" id="edit-patient_id" required>
-                                <option value="">Selecione um Paciente</option>
-                                <option value="1">Paciente 1</option>
-                                <option value="2">Paciente 2</option>
-                                <option value="3">Paciente 3</option>
-                                <option value="4">Paciente 4</option>
-                                <option value="5">Paciente 5</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="edit-doctorid">Médico</label>
-                            <select class="form-control" id="edit-doctor_id" required>
-                                <option value="">Selecione um Médico</option>
-                                <option value="1">Dr. Almeida</option>
-                                <option value="2">Dra. Sofia</option>
-                                <option value="3">Dr. Carlos</option>
-                                <option value="4">Dra. Joana</option>
-                                <option value="5">Dr. Mendes</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="edit-details">Detalhes do Diagnóstico</label>
+                        <textarea class="form-control" id="edit-details" rows="3" required></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-status">Estado</label>
-                        <select class="form-control" id="edit-status" required>
-                            <option value="0">Pendente</option>
-                            <option value="1">Concluída</option>
-                            <option value="2">Cancelada</option>
+                        <label for="edit-file">Arquivo (Exame/Relatório)</label>
+                        <input type="text" class="form-control" id="edit-file" placeholder="exame_resultado.pdf">
+                        <small class="form-text text-muted">Informe o nome do arquivo anexado.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-consult_id">Consulta Associada</label>
+                        <select id="edit-consult_id" class="form-control" required>
+                            <option value="">Selecione uma consulta</option>
+                            <option value="1">Consulta - Linder Aeroporto</option>
+                            <option value="2">Consulta - Pedro Nunes</option>
+                            <option value="3">Consulta - Elsa Tavares</option>
+                            <option value="4">Consulta - Nelson Lopes</option>
+                            <option value="5">Consulta - Ana Silva</option>
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="edit-doctor_id">Médico Responsável</label>
+                        <select id="edit-doctor_id" class="form-control" required>
+                            <option value="">Selecione um médico</option>
+                            <option value="1">Dr. João Matos</option>
+                            <option value="2">Dr. Pedro Nunes</option>
+                            <option value="3">Dra. Carla Mendes</option>
+                            <option value="4">Dr. Nelson Gomes</option>
+                            <option value="5">Dra. Maria Tavares</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <i class="feather icon-x"></i> Cancelar
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="feather icon-save"></i> Atualizar Consulta
+                        <i class="icofont icofont-save"></i> Atualizar Diagnóstico
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
+
 
 
 <!-- Modal Delete Patient -->

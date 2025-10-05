@@ -10,7 +10,7 @@ include_once __DIR__ . './../../src/components/header.php';
         <div class="row align-items-end">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <h5 class="mb-0">Gestão de Medicamentos
+                    <h5 class="mb-0">Gestão de Consultas
                     </h5>
                     <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
 
@@ -21,7 +21,6 @@ include_once __DIR__ . './../../src/components/header.php';
         </div>
     </div>
 
-
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -31,7 +30,7 @@ include_once __DIR__ . './../../src/components/header.php';
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Tabela de Pacientes</h5>
-                                    <span>Gestão centralizada de usuários</span>
+                                    <span>Gestão centralizada de pacientes</span>
                                 </div>
                                 <div class="card-block">
                                     <div class="table-responsive">
@@ -39,17 +38,10 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <thead>
                                                 <tr>
                                                     <th style="width: 50px;">ID</th>
-                                                    <th>Nome</th>
-                                                    <!-- <th>Tipo</th>
-                                                    <th>Data de Produção</th>
-                                                    <th>Data de validade</th>
-                                                    <th>Quantidade</th>
-                                                    <th>Numero de Lote</th>
-                                                    <th>Preço de compra</th>
-                                                    <th>Preço de venda</th>
-                                                    <th>Data de registo</th>
-                                                    <th>Descrição</th>
-                                                    <th>Registado por</th> -->
+                                                    <th>ID_Consulta</th>
+                                                    <th>ID_Doctor</th>
+                                                    <th>Detalhes</th>
+                                                    <th>Ficheiro</th>
                                                     <th style="width: 180px; text-align:center;">Ações</th>
                                                 </tr>
                                             </thead>
@@ -59,7 +51,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                 </div>
                             </div>
 
-                            <?php include_once __DIR__ . '/medication-modal.php'; ?>
+                            <?php include_once __DIR__ . '/diagnose-modal.php'; ?>
                         </div>
                     </div>
                 </div>
@@ -68,7 +60,6 @@ include_once __DIR__ . './../../src/components/header.php';
         <div id="styleSelector"></div>
     </div>
 </div>
-
 
 <style>
 #userTable th:last-child,
@@ -84,7 +75,6 @@ include_once __DIR__ . './../../src/components/header.php';
     font-size: 0.85rem;
 }
 </style>
-
 
 
 <script>
@@ -138,33 +128,35 @@ $(document).ready(function() {
     });
 
     // Carrega usuários via API
-    function loadMedications() {
-        fetch("routes/medicationRoutes.php")
+    function loadConsults() {
+        fetch("routes/diagnosisRoutes.php")
             .then(res => res.json())
             .then(data => {
+                console.log("Dados recebidos:", data);
                 if (data.status === "success" && Array.isArray(data.data)) {
                     table.clear();
-                    data.data.forEach(medication => table.row.add([
-                        medication.id,
-                        // medication.name,
-                        // medication.type,
-                        // medication.dateProduction,
-                        // medication.dateExpiry,
-                        // medication.qty,
-                        // medication.loteNumber,
-                        // medication.purchasePrice,
-                        // medication.salePrice,
-                        // medication.registationDate,
-                        // medication.description,
-                        // medication.user_id,
-                        null
-                    ]));
+
+                    data.data.forEach(consult => {
+                        table.row.add([
+                            consult.id, // ID
+                            consult.consult_id ?? "—", // Paciente
+                            consult.doctor_id ?? "—", // Doctor
+                            consult.details ?? "—", // Data
+                            consult.file ?? "—", // Hora
+                            null // Botões de ação
+                        ]);
+                    });
+
                     table.draw();
+                } else {
+                    console.warn("Resposta inválida do servidor:", data);
                 }
-            }).catch(err => console.error(err));
+            })
+            .catch(err => console.error("Erro ao carregar consultas:", err));
     }
 
-    loadMedications();
+
+    loadConsults();
 
     // Função genérica de ação
     $('#userTable tbody').on('click', '.action', function() {
@@ -173,107 +165,50 @@ $(document).ready(function() {
 
         if (action === "view") {
             // IDs baseados na estrutura do modalViewMedication
-            $('#view-name').text(data[1]); // Nome do medicamento
-            $('#view-type').text(data[2]); // Tipo (Antibiótico, Analgésico, etc.)
-            $('#view-dateProduction').text(data[3]); // Data de Produção
-            $('#view-dateExpiry').text(data[4]); // Data de Expiração
-            $('#view-qty').text(data[5]); // Quantidade
-            $('#view-loteNumber').text(data[6]); // Número do Lote
-            $('#view-purchasePrice').text(data[7] + " MZN"); // Preço de Compra
-            $('#view-salePrice').text(data[8] + " MZN"); // Preço de Venda
-            $('#view-registationDate').text(data[9]); // Data de Registo
-            $('#view-description').text(data[10]); // Descrição do medicamento
-            $('#view-user').text("Usuário ID: " + data[11]); // Usuário responsável
 
-            // Exibe o modal
-            $('#modalViewMedication').modal('show');
+            console.log("🔍 Dados completos da linha:", data);
+
+            // // Baseado na ordem do row.add
+            $('#view_id').val(data[0]); // ID
+            $('#view_consult_id').val(data[1]); // Data (ou código consulta)
+            $('#view_doctor_id').val(data[2]); // Hora (ou código paciente)
+            $('#view_details').val(data[3]); // Detalhes
+            $('#view_file').val(data[4]); // Ficheiro
+            $('#view_file_link').attr('href', data[4]); // Link para abrir o
+            $('#viewConsultModal').modal('show');
+
+
         } else if (action === "edit") {
-            $('#edit-medicationid').val(data[0]); // id
-            $('#edit-name').val(data[1]); // name
-            $('#edit-type').val(data[2]); // type
-            $('#edit-dateProduction').val(data[3]); // dateProduction
-            $('#edit-dateExpiry').val(data[4]); // dateExpiry
-            $('#edit-qty').val(data[5]); // qty
-            $('#edit-loteNumber').val(data[6]); // loteNumber
-            $('#edit-purchasePrice').val(data[7]); // purchasePrice
-            $('#edit-salePrice').val(data[8]); // salePrice
-            $('#edit-registationDate').val(data[9]); // registationDate
-            $('#edit-description').val(data[10]); // description
-            $('#edit-user').val(data[11]); // user_id
-            $('#modalEditMedication').modal('show');
+            $('#edit-diagnosisid').val(data[0]); // id
+            $('#edit-details').val(data[1]); // details
+            $('#edit-file').val(data[2]); // file
+            $('#edit-consult_id').val(data[3]); // consult_id
+            $('#edit-doctor_id').val(data[4]); // doctor_id
+            $('#modalEditDiagnosis').modal('show');
         } else if (action === "delete") {
-            $('#delete-medicationid').val(data[0]);
+            $('#delete-consultid').val(data[0]);
             $('#delete-username').text(data[1]);
-            $('#modalDeleteMedication').modal('show');
+            $('#modalDeleteConsult').modal('show');
         }
     });
 
 
-
-    //adicionar novo usuário
-    // Abrir modal de adicionar
-    $('#btnAddUser').on('click', function() {
-        $('#formAddUser')[0].reset(); // limpa os campos
-        $('#modalAddUser').modal('show');
-    });
-
-
-
-
-    $('#formAddUser').on('submit', function(e) {
-        e.preventDefault();
-
-        const payload = {
-            action: "add",
-            username: $('#add-username').val(),
-            password: $('#add-password').val(),
-            employee_id: Number($('#add-employee_id').val()),
-            role_id: Number($('#add-role_id').val())
-        };
-
-        fetch("routes/userRoutes.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    $('#modalAddUser').modal('hide');
-                    loadMedications(); // recarrega a tabela
-                    swal("Sucesso!", "Usuário adicionado.", "success");
-                } else {
-                    swal("Erro!", data.message, "error");
-                }
-            })
-            .catch(err => console.error("Erro ao adicionar usuário:", err));
-    });
-
-    // Submissão do formulário de edição de medicamento
-    $('#formEditMedication').on('submit', function(e) {
+    // 🔹 Submissão da edição
+    $('#formEditDiagnosis').on('submit', function(e) {
         e.preventDefault();
 
         const payload = {
             action: "update",
-            id: Number($('#edit-medicationid').val()),
-            name: $('#edit-name').val(),
-            type: $('#edit-type').val(),
-            dateProduction: $('#edit-dateProduction').val(),
-            dateExpiry: $('#edit-dateExpiry').val(),
-            qty: Number($('#edit-qty').val()),
-            loteNumber: Number($('#edit-loteNumber').val()),
-            purchasePrice: parseFloat($('#edit-purchasePrice').val()),
-            salePrice: parseFloat($('#edit-salePrice').val()),
-            registationDate: $('#edit-registationDate').val(),
-            description: $('#edit-description').val(),
-            user_id: Number($('#edit-user').val())
+            id: Number($('#edit-diagnosisid').val()),
+            details: $('#edit-details').val(),
+            file: $('#edit-file').val(),
+            consult_id: parseInt($('#edit-consult_id').val()),
+            doctor_id: parseInt($('#edit-doctor_id').val())
         };
 
         console.log("Payload enviado:", payload);
 
-        fetch("routes/medicationRoutes.php", {
+        fetch("routes/diagnosisRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -283,27 +218,22 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalEditMedication').modal('hide');
-                    loadMedications(); // Função para recarregar a tabela
-                    swal("Sucesso!", "Medicamento atualizado com sucesso.", "success");
+                    $('#modalEditDiagnosis').modal('hide');
+                    loadConsults(); // função que recarrega a lista
+                    swal("Sucesso!", "Diagnóstico atualizado com sucesso.", "success");
                 } else {
-                    swal("Erro!", data.message || "Ocorreu um erro ao atualizar o medicamento.",
-                        "error");
+                    swal("Erro!", data.message, "error");
                 }
             })
-            .catch(err => {
-                console.error("Erro ao atualizar medicamento:", err);
-                swal("Erro!", "Falha na comunicação com o servidor.", "error");
-            });
+            .catch(err => console.error("Erro ao atualizar diagnóstico:", err));
     });
 
 
-
     // Confirmar delete
-    $('#confirmDeleteMedication').on('click', function() {
-        const medicationId = Number($('#delete-medicationid').val()); // garante que é número
+    $('#confirmDeleteConsult').on('click', function() {
+        const medicationId = Number($('#delete-consultid').val()); // garante que é número
 
-        fetch("routes/medicationRoutes.php", {
+        fetch("routes/diagnosisRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -316,8 +246,8 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalDeleteMedication').modal('hide');
-                    loadMedications(); // recarrega a tabela
+                    $('#modalDeleteConsult').modal('hide');
+                    loadConsults(); // recarrega a tabela
                     swal("Deletado!", "Medicamento excluído.", "success");
                 } else {
                     swal("Erro!", data.message, "error");
