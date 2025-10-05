@@ -19,8 +19,8 @@
     $pag[5] = "medicos/lista.php";
   
     // Consultas
-    $pag[6] = "consultas/agendar.php";
-    $pag[7] = "consultas/lista.php";
+    $pag[6] = "consult/consult-register.php";
+    $pag[7] = "consult/consult-list.php";
    
 
     // Exames

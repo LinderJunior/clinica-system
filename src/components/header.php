@@ -472,12 +472,12 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
-                                                <a href="link.php?route=10" class="waves-effect waves-dark">
+                                                <a href="link.php?route=6" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Agendar</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="link.php?route=11" class="waves-effect waves-dark">
+                                                <a href="link.php?route=7" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>
