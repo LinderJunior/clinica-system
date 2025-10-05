@@ -26,13 +26,13 @@
     $pag[8] = "diagnoses/diagnose-register.php";
     $pag[9]= "diagnoses/diagnose-list.php";
    
-    // // Exames
-    // $pag[9] = "exames/cadastro.php";
-    // $pag[10] = "exames/lista.php";
+    // Receitas
+    $pag[10] = "recipes/recipe-register.php";
+    $pag[11] = "recipes/recipe-list.php";
  
 
     // Usuários
-    $pag[11] = "users/user-register.php";
+    //$pag[11] = "users/user-register.php";
     $pag[12] = "users/user-list.php";
 
 

@@ -501,6 +501,24 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
+                                            <span class="pcoded-mtext">Receitas</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=10" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=11" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
