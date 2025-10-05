@@ -483,6 +483,24 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
+                                            <span class="pcoded-mtext">Diagnosticos</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=8" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=9" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">

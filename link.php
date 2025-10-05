@@ -21,11 +21,14 @@
     // Consultas
     $pag[6] = "consult/consult-register.php";
     $pag[7] = "consult/consult-list.php";
-   
 
-    // Exames
-    $pag[9] = "exames/cadastro.php";
-    $pag[10] = "exames/lista.php";
+    //Diagnosticos 
+    $pag[8] = "diagnoses/diagnose-register.php";
+    $pag[9]= "diagnoses/diagnose-list.php";
+   
+    // // Exames
+    // $pag[9] = "exames/cadastro.php";
+    // $pag[10] = "exames/lista.php";
  
 
     // Usuários
