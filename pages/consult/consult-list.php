@@ -99,18 +99,15 @@ $(document).ready(function() {
             targets: -1,
             data: null,
             defaultContent: `
-
-
-            <button class="btn waves-effect waves-light btn-warning action" data-action="view" title="Visualizar">
-                <i class="icofont icofont-info-square"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-primary action" data-action="edit" title="Editar">
-                <i class="icofont icofont-ui-edit"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-danger action" data-action="delete" title="Deletar">
-                <i class="icofont icofont-ui-delete"></i>
-            </button>
-
+                <button class="btn btn-sm btn-info action" data-action="manage" title="Gerir Consulta">
+                    <i class="icofont icofont-medical-sign"></i> Gerir
+                </button>
+                <button class="btn btn-sm btn-primary action" data-action="edit" title="Editar">
+                    <i class="icofont icofont-ui-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger action" data-action="delete" title="Deletar">
+                    <i class="icofont icofont-ui-delete"></i>
+                </button>
             `
         }],
         language: {
@@ -154,7 +151,7 @@ $(document).ready(function() {
     loadConsults();
 
     // Função genérica de ação
-    $('#recipeTable tbody').on('click', '.action', function() {
+    $('#consultTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
 
@@ -180,7 +177,14 @@ $(document).ready(function() {
             $('#delete-consultid').val(data[0]);
             $('#delete-username').text(data[1]);
             $('#modalDeleteConsult').modal('show');
+        } else if (action === "manage") {
+            const consultId = data[0];
+            window.location.href = `link.php?route=17&id=${consultId}`;
+            return;
         }
+
+
+
     });
 
 

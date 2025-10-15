@@ -45,7 +45,7 @@
     $pag[16] = "medications/medication-list.php";
 
     // Relatórios
-    $pag[17] = "relatorios/pacientes.php";
+    $pag[17] = "consult/consult-details.php";
     $pag[18] = "relatorios/consultas.php";
     $pag[19] = "relatorios/financeiro.php";
 
