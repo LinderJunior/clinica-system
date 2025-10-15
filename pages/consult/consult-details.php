@@ -50,7 +50,8 @@ $id = $_GET['id'] ?? null;
                         <div
                             class="card-header bg-success text-white d-flex justify-content-between align-items-center py-2">
                             <h6 class="mb-0 fw-semibold">Receitas Médicas</h6>
-                            <button class="btn btn-light btn-sm" id="btnAddRecipe">
+                            <button class="btn btn-light btn-sm" id="btnAddRecipe" data-toggle="modal"
+                                data-target="#modalAddRecipe">
                                 <i class="icofont icofont-plus"></i> Nova Receita
                             </button>
                         </div>
@@ -124,6 +125,102 @@ $id = $_GET['id'] ?? null;
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal Nova Receita -->
+<div class="modal fade" id="modalAddRecipe" tabindex="-1" role="dialog" aria-labelledby="modalAddRecipeLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" style="max-width:90%;">
+        <div class="modal-content border-0" style="min-height:80vh;">
+
+            <!-- Cabeçalho -->
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalAddRecipeLabel">Nova Receita Médica</h5>
+                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Corpo do Modal -->
+            <div class="modal-body" style="overflow-y:auto; max-height:calc(80vh - 120px);">
+                <form id="prescriptionForm">
+
+                    <!-- Data -->
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-2 col-form-label">Data</label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Seção de Medicações -->
+                    <div class="form-group">
+                        <label class="form-label"><strong>Adicionar Medicações à Receita</strong></label>
+
+                        <div class="row align-items-center mb-2">
+                            <div class="col-md-4 mb-2">
+                                <label>Medicação</label>
+                                <select class="form-control" id="medicationSelect">
+                                    <option value="">Selecione uma medicação</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-2 mb-2">
+                                <label>Quantidade</label>
+                                <input type="number" id="qty" class="form-control" placeholder="Qtd" min="1" value="1">
+                            </div>
+
+                            <div class="col-md-4 mb-2">
+                                <label>Dosagem</label>
+                                <input type="text" id="dosage" class="form-control" placeholder="Ex: 1 comp. a cada 8h">
+                            </div>
+
+                            <div class="col-md-2 text-center mt-3 mb-2">
+                                <button type="button" class="btn btn-success w-100" onclick="addMedication()">
+                                    <i class="feather icon-plus"></i> Adicionar
+                                </button>
+                            </div>
+                        </div>
+
+                        <ul id="medicationsList" class="list-group mt-3"></ul>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Rodapé do Modal -->
+            <div class="modal-footer border-top-0">
+                <button class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" form="prescriptionForm" class="btn btn-info">
+                    <i class="feather icon-save"></i> Registar Receita
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Estilo Profissional -->
 <style>
@@ -279,14 +376,34 @@ body {
         text-align: left !important;
     }
 }
+
+
+.modal-xl {
+    max-width: 50% !important;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+#medicationsList {
+    max-height: 250px;
+    overflow-y: auto;
+}
 </style>
 
 <script>
 const consultId = <?= json_encode($id) ?>;
 
-$(document).ready(() => {
 
-    // Detalhes da Consulta
+
+$(document).ready(() => {
+    document.addEventListener("DOMContentLoaded", async () => {
+
+
+    });
+
+
     // Detalhes da Consulta (layout profissional e alinhado)
     fetch(`routes/consultRoutes.php?id=${consultId}`)
         .then(res => res.json())
@@ -457,7 +574,176 @@ $(document).ready(() => {
             .catch(err => console.error("Erro ao registrar diagnóstico:", err));
     });
 
-    // Nova Receita
-    $('#btnAddRecipe').click(() => window.location.href = `recipeForm.php?consult_id=${consultId}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
+</script>
+
+
+
+
+<script>
+$(document).ready(() => {
+
+
+    let medications = [];
+    const consultId = <?= json_encode($id) ?>; // Pegando o ID da consulta do contexto
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        await loadMedications();
+
+        // Submeter receita
+        document.getElementById("prescriptionForm").addEventListener("submit", submitPrescription);
+    });
+
+    // Carregar lista de medicações
+    async function loadMedications() {
+        try {
+            const res = await fetch("routes/medicationRoutes.php?action=list");
+            const data = await res.json();
+            const select = document.getElementById("medicationSelect");
+            select.innerHTML = '<option value="">Selecione uma medicação</option>';
+            data.data.forEach(m => {
+                select.innerHTML += `<option value="${m.id}">${m.name}</option>`;
+            });
+        } catch (error) {
+            console.error("Erro ao carregar medicações:", error);
+        }
+    }
+
+    // Adicionar medicação ao carrinho
+
+    window.addMedication = function() {
+        const select = document.getElementById("medicationSelect");
+        const medId = select.value;
+        const medName = select.options[select.selectedIndex]?.text;
+        const qty = document.getElementById("qty").value;
+        const dosage = document.getElementById("dosage").value.trim();
+
+        if (!medId || !qty || !dosage) {
+            alert("Preencha todos os campos da medicação.");
+            return;
+        }
+
+        medications.push({
+            medication_id: parseInt(medId),
+            qty: parseInt(qty),
+            dosage
+        });
+
+        renderMedicationsList();
+        clearMedicationInputs();
+    }
+
+
+    // Renderizar lista de medicações adicionadas
+    function renderMedicationsList() {
+        const list = document.getElementById("medicationsList");
+        if (!list) return;
+
+        list.innerHTML = "";
+        medications.forEach((m, index) => {
+            const medName = document.querySelector(
+                `#medicationSelect option[value='${m.medication_id}']`)?.text || 'Desconhecido';
+            const li = document.createElement("li");
+            li.className =
+                "list-group-item d-flex justify-content-between align-items-center flex-wrap";
+            li.innerHTML = `
+            <div>
+                <strong>${medName}</strong> — 
+                <span class="text-primary">${m.qty} unidade(s)</span> — 
+                <em>${m.dosage}</em>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm mt-2 mt-md-0" onclick="removeMedication(${index})">Remover</button>
+        `;
+            list.appendChild(li);
+        });
+    }
+
+    // Remover medicação do carrinho
+    function removeMedication(index) {
+        medications.splice(index, 1);
+        renderMedicationsList();
+    }
+
+    // Limpar inputs de medicação
+    function clearMedicationInputs() {
+        document.getElementById("medicationSelect").value = "";
+        document.getElementById("qty").value = 1;
+        document.getElementById("dosage").value = "";
+    }
+
+    // Submeter receita
+    function submitPrescription(event) {
+        event.preventDefault();
+
+        const formData = {
+            action: "add",
+            date: document.getElementById("date").value,
+            consult_id: parseInt(consultId),
+            medications
+        };
+
+        if (!formData.date || medications.length === 0) {
+            alert("Preencha a data e adicione pelo menos uma medicação.");
+            return;
+        }
+
+        fetch("routes/recipeRoutes.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(async res => {
+                const text = await res.text();
+                try {
+                    return JSON.parse(text);
+                } catch {
+                    throw new Error("Resposta do servidor não é JSON: " + text);
+                }
+            })
+            .then(data => {
+                if (data.status === "success" || data.success) {
+                    alert("Receita registada com sucesso!");
+                    medications = [];
+                    renderMedicationsList();
+                    document.getElementById("prescriptionForm").reset();
+                } else {
+                    alert("Erro ao registar: " + (data.message || "Erro desconhecido."));
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao enviar receita:", error);
+                alert("Ocorreu um erro ao enviar os dados.");
+            });
+    }
+
+
+
+
+
+
+
+
+
+
+
+})
 </script>
