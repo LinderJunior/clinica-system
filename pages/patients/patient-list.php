@@ -232,7 +232,7 @@ $(document).ready(function() {
 
 
     // Função genérica de ação
-    $('#userTable tbody').on('click', '.action', function() {
+    $('#patientTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
 

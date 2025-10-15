@@ -6,9 +6,9 @@
         <div class="row align-items-center">
             <div class="col-lg-12 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
-                    Gestão de Funcionários
+                    Gestão de Usuários
                 </h5>
-                <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddEmployee"
+                <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
                     style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
                     <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
                     Novo Registo
@@ -24,21 +24,20 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-header bg-light d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="text-secondary mb-0 text-uppercase">Tabela de Funcionários</h6>
-                                <small class="text-muted">Visualização geral dos funcionários</small>
+                                <h6 class="text-secondary mb-0 text-uppercase">Tabela de Usuários</h6>
+                                <small class="text-muted">Visualização geral de usuários registados</small>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="employeeTable" class="table table-sm table-striped table-hover align-middle"
+                                <table id="userTable" class="table table-sm table-striped table-hover align-middle"
                                     style="width:100%">
                                     <thead class="table-light text-center">
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nome</th>
-                                            <th>B.I</th>
-                                            <th>Telefone</th>
-                                            <th>Posições</th>
+                                            <th>Username</th>
+                                            <th>Employee ID</th>
+                                            <th>Role</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
@@ -48,7 +47,7 @@
                         </div>
                     </div>
 
-                    <?php include_once __DIR__ . '/employee-modal.php'; ?>
+                    <?php include_once __DIR__ . '/user-modal.php'; ?>
                 </div>
             </div>
         </div>
@@ -56,6 +55,7 @@
 </div>
 
 <style>
+/* ---------- Layout clínico e limpo ---------- */
 .card {
     border-radius: 10px;
 }
@@ -80,11 +80,12 @@
     padding: 6px 10px;
 }
 
-#employeeTable {
+#userTable {
     border: 1px solid #dee2e6;
 }
 
-#employeeTable .btn-sm {
+/* ---------- Ícones e botões ---------- */
+#userTable .btn-sm {
     padding: 4px 6px;
     font-size: 0.85rem;
     margin: 0 3px;
@@ -104,11 +105,43 @@
     font-size: 1rem;
 }
 
-#employeeTable thead th {
+.btn-info {
+    background-color: #17a2b8 !important;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #138496 !important;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #6c757d !important;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268 !important;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    transform: scale(1.05);
+}
+
+/* Centraliza os títulos das colunas */
+#userTable thead th {
     text-align: center !important;
     vertical-align: middle;
 }
 
+/* ---------- DataTables ---------- */
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_filter {
     margin-bottom: 10px;
@@ -127,31 +160,24 @@
 
 <script>
 $(document).ready(function() {
-    let employeesData = [];
-
-    const table = $('#employeeTable').DataTable({
+    const table = $('#userTable').DataTable({
         responsive: true,
         autoWidth: false,
         pageLength: 10,
         lengthMenu: [5, 10, 25, 50],
-        dom: 'Bfrtip',
-        buttons: [{
-                extend: 'pdfHtml5',
-                text: '<i class="fas fa-file-pdf"></i> PDF',
-                titleAttr: 'Exportar para PDF',
-                className: 'btn btn-danger btn-sm',
-                orientation: 'landscape',
-                pageSize: 'A4',
-                title: 'Relatório de Funcionários'
-            },
-            {
-                extend: 'excelHtml5',
-                text: '<i class="fas fa-file-excel"></i> Excel',
-                titleAttr: 'Exportar para Excel',
-                className: 'btn btn-success btn-sm',
-                title: 'Relatório de Funcionários'
+        language: {
+            lengthMenu: "Mostrar _MENU_ usuários",
+            zeroRecords: "Nenhum usuário encontrado",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ usuários",
+            infoEmpty: "Sem dados disponíveis",
+            search: "Pesquisar:",
+            paginate: {
+                first: "Primeiro",
+                last: "Último",
+                next: "Próximo",
+                previous: "Anterior"
             }
-        ],
+        },
         columnDefs: [{
             targets: -1,
             data: null,
@@ -168,66 +194,31 @@ $(document).ready(function() {
                     <i class="icofont icofont-trash"></i>
                 </button>
             `
-        }],
-        language: {
-            lengthMenu: "Mostrar _MENU_ registros por página",
-            zeroRecords: "Nenhum funcionário encontrado",
-            info: "Mostrando _START_ a _END_ de _TOTAL_ funcionários",
-            infoEmpty: "Sem dados disponíveis",
-            infoFiltered: "(filtrado de _MAX_ registros no total)",
-            search: "Pesquisar:",
-            paginate: {
-                first: "Primeiro",
-                last: "Último",
-                next: "Próximo",
-                previous: "Anterior"
-            }
-        }
+        }]
     });
 
-    function loadEmployees() {
-        fetch("routes/employeeRoutes.php")
+    // Carrega usuários via API
+    function loadUsers() {
+        fetch("routes/userRoutes.php")
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success" && Array.isArray(data.data)) {
-                    employeesData = data.data;
-
                     table.clear();
-                    data.data.forEach(employee => table.row.add([
-                        employee.id,
-                        employee.name,
-                        employee.bi,
-                        employee.phoneNumber,
-                        employee.positions.map(p => p.type).join(", "),
-                        null
-                    ]));
+                    data.data.forEach(user => {
+                        table.row.add([
+                            user.id,
+                            user.username,
+                            user.employee_id,
+                            user.role_id,
+                            null
+                        ]);
+                    });
                     table.draw();
                 }
             }).catch(err => console.error(err));
     }
 
-    loadEmployees();
-
-
-
-
-    function renderPositions() {
-        const list = $('#positionsList');
-        list.empty();
-
-        positions.forEach(pos => {
-            const li = `
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                ${pos.name}
-                <button type="button" class="btn btn-sm btn-danger" onclick="removePosition(${pos.id})">Remover</button>
-            </li>
-        `;
-            list.append(li);
-        });
-    }
-
-
-
+    loadUsers();
 
     // Função genérica de ação
     $('#userTable tbody').on('click', '.action', function() {
@@ -235,35 +226,22 @@ $(document).ready(function() {
         const data = table.row($(this).parents('tr')).data();
 
         if (action === "view") {
-            $('#view-name').text(data[1]);
+            $('#view-username').text(data[1]);
             $('#view-employee_id').text(data[2]);
             $('#view-role').text(data[3]);
             $('#modalViewUser').modal('show');
 
         } else if (action === "edit") {
-            const rowData = table.row($(this).parents('tr')).data();
-            const employeeId = rowData[0];
+            $('#edit-userid').val(data[0]);
+            $('#edit-username').val(data[1]);
+            $('#edit-employee_id').val(data[2]);
+            $('#edit-role_id').val(data[3]);
+            $('#modalEditUser').modal('show');
 
-            const employee = employeesData.find(e => e.id == employeeId);
-
-            if (!employee) return;
-
-            $('#edit-employeeid').val(employee.id);
-            $('#edit-nome').val(employee.name);
-            $('#edit-bi').val(employee.bi);
-            $('#edit-telefone').val(employee.phoneNumber);
-
-            positions = employee.positions.map(p => ({
-                id: parseInt(p.id),
-                name: p.type
-            }));
-            renderPositions();
-
-            $('#modalEditEmployee').modal('show');
         } else if (action === "delete") {
-            $('#delete-employeeid').val(data[0]);
+            $('#delete-userid').val(data[0]);
             $('#delete-username').text(data[1]);
-            $('#modalDeleteEmployee').modal('show');
+            $('#modalDeleteUser').modal('show');
         }
     });
 
@@ -279,24 +257,18 @@ $(document).ready(function() {
 
 
 
-
-    // Submissão do Editar Funcionário
-    $('#formEditEmployee').on('submit', function(e) {
+    $('#formAddUser').on('submit', function(e) {
         e.preventDefault();
 
         const payload = {
-            action: "update",
-            id: Number($('#edit-employeeid').val()),
-            name: $('#edit-nome').val(),
-            bi: $('#edit-bi').val(),
-            phoneNumber: $('#edit-telefone').val(),
-            positionIds: positions.map(p => p.id) // só IDs
-
+            action: "add",
+            username: $('#add-username').val(),
+            password: $('#add-password').val(),
+            employee_id: Number($('#add-employee_id').val()),
+            role_id: Number($('#add-role_id').val())
         };
 
-        console.log("Payload enviado:", payload);
-
-        fetch("routes/employeeRoutes.php", {
+        fetch("routes/userRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -306,48 +278,77 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalEditEmployee').modal('hide');
-                    loadEmployees(); // recarrega a tabela
-                    swal("Sucesso!", "Funcionário atualizado com sucesso.", "success");
+                    $('#modalAddUser').modal('hide');
+                    loadUsers(); // recarrega a tabela
+                    swal("Sucesso!", "Usuário adicionado.", "success");
                 } else {
                     swal("Erro!", data.message, "error");
                 }
             })
-            .catch(err => console.error("Erro ao atualizar funcionário:", err));
+            .catch(err => console.error("Erro ao adicionar usuário:", err));
+    });
+
+
+    // Submissão do Editar
+    $('#formEditUser').on('submit', function(e) {
+        e.preventDefault();
+
+        const payload = {
+            action: "update",
+            id: Number($('#edit-userid').val()), // id do usuário
+            username: $('#edit-username').val(),
+            password: $('#edit-password').val() || undefined, // se vazio, backend ignora
+            employee_id: Number($('#edit-employee_id').val()),
+            role_id: Number($('#edit-role_id').val())
+        };
+
+        fetch("routes/userRoutes.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    $('#modalEditUser').modal('hide');
+                    loadUsers(); // recarrega a tabela
+                    swal("Sucesso!", "Usuário atualizado.", "success");
+                } else {
+                    swal("Erro!", data.message, "error");
+                }
+            })
+            .catch(err => console.error("Erro ao atualizar usuário:", err));
     });
 
 
 
-
-
     // Confirmar delete
-    $('#confirmDeleteEmployee').on('click', function() {
-        const employeeId = Number($('#delete-employeeid').val()); // garante que é número
+    $('#confirmDeleteUser').on('click', function() {
+        const userId = Number($('#delete-userid').val()); // garante que é número
 
-        fetch("routes/employeeRoutes.php", {
+        fetch("routes/userRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     action: "delete",
-                    id: employeeId
+                    id: userId
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalDeleteEmployee').modal('hide');
-                    loadEmployees(); // recarrega a tabela
-                    swal("Deletado!", "Employee excluído.", "success");
+                    $('#modalDeleteUser').modal('hide');
+                    loadUsers(); // recarrega a tabela
+                    swal("Deletado!", "Usuário excluído.", "success");
                 } else {
                     swal("Erro!", data.message, "error");
                 }
             })
-            .catch(err => console.error("Erro ao deletar Employee:", err));
+            .catch(err => console.error("Erro ao deletar usuário:", err));
     });
 })
 </script>
-
-
-<!-- Nosso componente -->
