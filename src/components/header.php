@@ -21,11 +21,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
-
-
-
-
-
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="assets/css/waves.min.css" type="text/css" media="all">
@@ -83,11 +78,6 @@
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
-
-
-
-
-
 
 
             <nav class="navbar header-navbar pcoded-header">
@@ -483,7 +473,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="pcoded-hasmenu">
+                                    <!-- <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
                                             <span class="pcoded-mtext">Diagnosticos</span>
@@ -500,8 +490,8 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="pcoded-hasmenu">
+                                    </li> -->
+                                    <!-- <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
                                             <span class="pcoded-mtext">Receitas</span>
@@ -518,7 +508,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">

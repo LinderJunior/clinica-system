@@ -1,130 +1,180 @@
-<?php 
-
-include_once __DIR__ . './../../src/components/header.php';
-
-?>
+<?php include_once __DIR__ . './../../src/components/header.php'; ?>
 
 <div class="pcoded-content">
 
-    <div class="page-header card">
-        <div class="row align-items-end">
-            <div class="col-lg-12">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <h5 class="mb-0">Gestão de Pacientes</h5>
-                    <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
-
-                        <i class="icofont icofont-plus"></i>
-                    </button>
-                </div>
+    <div class="page-header card py-2 px-3">
+        <div class="row align-items-center">
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
+                    Gestão de Pacientes
+                </h5>
+                <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
+                    style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
+                    <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
+                    Novo Registo
+                </button>
             </div>
         </div>
     </div>
-
 
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Tabela de Pacientes</h5>
-                                    <span>Gestão centralizada de usuários</span>
-                                </div>
-                                <div class="card-block">
-                                    <div class="table-responsive">
-                                        <table id="userTable" class="table table-striped table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 50px;">ID</th>
-                                                    <th>Nome</th>
-                                                    <th>Data de Nascimento</th>
-                                                    <th>B.I</th>
-                                                    <th>Provincia</th>
-                                                    <th>Cidade</th>
-                                                    <th>Bairro</th>
-                                                    <th>Numero de telefone</th>
-                                                    <th>WhatsApp</th>
-                                                    <th style="width: 180px; text-align:center;">Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-secondary mb-0 text-uppercase">Tabela de Pacientes</h6>
+                                <small class="text-muted">Visualização geral de pacientes registados</small>
                             </div>
-
-                            <?php include_once __DIR__ . '/patient-modal.php'; ?>
-
-
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="patientTable" class="table table-sm table-striped table-hover align-middle"
+                                    style="width:100%">
+                                    <thead class="table-light text-center">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nome</th>
+                                            <th>Data de Nascimento</th>
+                                            <th>B.I</th>
+                                            <th>Provincia</th>
+                                            <th>Cidade</th>
+                                            <th>Bairro</th>
+                                            <th>Telefone</th>
+                                            <th>WhatsApp</th>
+                                            <th class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+
+                    <?php include_once __DIR__ . '/patient-modal.php'; ?>
                 </div>
             </div>
         </div>
-        <div id="styleSelector"></div>
     </div>
 </div>
 
-
 <style>
-#userTable th:last-child,
-#userTable td:last-child {
-    width: 180px;
-    text-align: center;
-    white-space: nowrap;
+/* ---------- Layout clínico e limpo ---------- */
+.card {
+    border-radius: 10px;
 }
 
-/* Botões pequenos com menos padding */
-#userTable .btn-sm {
-    padding: 2px 6px;
+.table {
+    font-size: 0.9rem;
+    border-color: #dee2e6;
+}
+
+.table thead th {
+    background-color: #f9fafb;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 6px 10px;
+}
+
+#patientTable {
+    border: 1px solid #dee2e6;
+}
+
+/* ---------- Ícones e botões ---------- */
+#patientTable .btn-sm {
+    padding: 4px 6px;
     font-size: 0.85rem;
+    margin: 0 3px;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.btn-icon i {
+    font-size: 1rem;
+}
+
+.btn-info {
+    background-color: #17a2b8 !important;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #138496 !important;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #6c757d !important;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268 !important;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    transform: scale(1.05);
+}
+
+/* ---------- Centraliza os títulos das colunas ---------- */
+#patientTable thead th {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+/* ---------- DataTables ---------- */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 2px 6px !important;
+    font-size: 0.85rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.85rem;
+    color: #6c757d;
 }
 </style>
 
-
-
 <script>
 $(document).ready(function() {
-
-    // Inicializa DataTable
-    const table = $('#userTable').DataTable({
+    const table = $('#patientTable').DataTable({
         responsive: true,
-        autoWidth: false, // importante
-        paging: true,
+        autoWidth: false,
         pageLength: 10,
-        lengthMenu: [10, 25, 50, 100],
-        ordering: true,
-        info: true,
-        searching: true,
-        order: [
-            [0, "asc"]
-        ],
-        columnDefs: [{
-            targets: -1,
-            data: null,
-            defaultContent: `
-
-
-            <button class="btn waves-effect waves-light btn-warning action" data-action="view" title="Visualizar">
-                <i class="icofont icofont-info-square"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-primary action" data-action="edit" title="Editar">
-                <i class="icofont icofont-ui-edit"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-danger action" data-action="delete" title="Deletar">
-                <i class="icofont icofont-ui-delete"></i>
-            </button>
-
-            `
-        }],
+        lengthMenu: [5, 10, 25, 50],
         language: {
-            lengthMenu: "Mostrar _MENU_ registros por página",
-            zeroRecords: "Nenhum usuário encontrado",
-            info: "Mostrando página _PAGE_ de _PAGES_",
-            infoEmpty: "Nenhum dado disponível",
-            infoFiltered: "(filtrado de _MAX_ registros no total)",
+            lengthMenu: "Mostrar _MENU_ pacientes",
+            zeroRecords: "Nenhum paciente encontrado",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ pacientes",
+            infoEmpty: "Sem dados disponíveis",
             search: "Pesquisar:",
             paginate: {
                 first: "Primeiro",
@@ -132,34 +182,54 @@ $(document).ready(function() {
                 next: "Próximo",
                 previous: "Anterior"
             }
-        }
+        },
+        columnDefs: [{
+            targets: -1,
+            data: null,
+            orderable: false,
+            className: "text-center",
+            defaultContent: `
+               <button class="btn btn-sm btn-info btn-icon action" data-action="view" title="Visualizar">
+                    <i class="icofont icofont-eye" style="font-size: 1.3rem;"></i>
+                </button>
+                <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
+                    <i class="icofont icofont-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
+                    <i class="icofont icofont-trash"></i>
+                </button>
+            `
+        }]
     });
 
-    // Carrega usuários via API
+    // Carrega pacientes
     function loadPatients() {
         fetch("routes/patientRoutes.php")
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success" && Array.isArray(data.data)) {
                     table.clear();
-                    data.data.forEach(patient => table.row.add([
-                        patient.id,
-                        patient.name,
-                        patient.dateBirth,
-                        patient.bi,
-                        patient.province,
-                        patient.city,
-                        patient.neighborhood,
-                        patient.phoneNumber,
-                        patient.iswhatsapp,
-                        null
-                    ]));
+                    data.data.forEach(patient => {
+                        table.row.add([
+                            patient.id,
+                            patient.name,
+                            patient.dateBirth,
+                            patient.bi,
+                            patient.province,
+                            patient.city,
+                            patient.neighborhood,
+                            patient.phoneNumber,
+                            patient.iswhatsapp,
+                            null
+                        ]);
+                    });
                     table.draw();
                 }
             }).catch(err => console.error(err));
     }
 
     loadPatients();
+
 
     // Função genérica de ação
     $('#userTable tbody').on('click', '.action', function() {

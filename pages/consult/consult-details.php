@@ -390,6 +390,121 @@ body {
     max-height: 250px;
     overflow-y: auto;
 }
+
+
+
+
+
+
+
+/* === Estilo clínico para tabelas de receitas === */
+
+
+/* === Estilo clínico otimizado === */
+#recipeList {
+    --font-size-base: 15px;
+    /* <<<<< AUMENTE AQUI O TAMANHO DA LETRA (ex: 15px, 16px) */
+}
+
+#recipeList .card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+#recipeList .card-header {
+    background-color: #f1f3f5 !important;
+    color: #333 !important;
+    font-size: calc(var(--font-size-base) - 1px);
+    font-weight: 600;
+    padding: 8px 12px;
+}
+
+#recipeList table {
+    font-size: var(--font-size-base);
+    margin-bottom: 0;
+    width: 100%;
+    table-layout: fixed;
+    /* 🔹 colunas uniformes */
+}
+
+#recipeList th,
+#recipeList td {
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+#recipeList th {
+    background-color: #f8f9fa;
+    color: #444;
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#recipeList td {
+    border-top: 1px solid #f0f0f0;
+}
+
+#recipeList .table {
+    margin-bottom: 6px;
+}
+
+#recipeList p.fw-bold {
+    font-size: calc(var(--font-size-base) - 1px);
+    color: #444;
+    margin: 4px 0 0;
+    text-align: right;
+}
+
+#recipeList .card-body {
+    padding: 8px 12px;
+}
+
+#recipeList .text-muted {
+    font-size: calc(var(--font-size-base) - 1px);
+}
+
+/* 🔹 Colunas com largura fixa */
+#recipeList th:nth-child(1),
+#recipeList td:nth-child(1) {
+    width: 25%;
+}
+
+/* Medicamento */
+#recipeList th:nth-child(2),
+#recipeList td:nth-child(2) {
+    width: 20%;
+}
+
+/* Tipo */
+#recipeList th:nth-child(3),
+#recipeList td:nth-child(3) {
+    width: 10%;
+}
+
+/* Quantidade */
+#recipeList th:nth-child(4),
+#recipeList td:nth-child(4) {
+    width: 20%;
+}
+
+/* Dosagem */
+#recipeList th:nth-child(5),
+#recipeList td:nth-child(5) {
+    width: 12.5%;
+}
+
+/* Unit */
+#recipeList th:nth-child(6),
+#recipeList td:nth-child(6) {
+    width: 12.5%;
+}
+
+/* Total */
 </style>
 
 <script>
@@ -518,26 +633,111 @@ $(document).ready(() => {
 
 
 
+
     // Receitas
-    fetch(`routes/recipeRoutes.php?consult_id=${consultId}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === "success" && data.data.length > 0) {
-                let html = `
-                    <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
-                        <thead><tr><th>Medicamento</th><th>Quantidade</th><th>Dosagem</th></tr></thead>
-                        <tbody>`;
-                data.data.forEach(r => {
-                    html +=
-                        `<tr><td>${r.medication_name}</td><td>${r.qty}</td><td>${r.dosage}</td></tr>`;
+
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const consultId = <?= json_encode($id) ?>;
+        await loadRecipesByConsult(consultId);
+    });
+
+    async function loadRecipesByConsult(consultId) {
+        if (!consultId) {
+            $('#recipeList').html('<p class="text-muted">Consulta inválida.</p>');
+            return;
+        }
+
+        try {
+            const res = await fetch(`routes/index.php?route=recipes&consult_id=${consultId}`);
+            const data = await res.json();
+
+            if (data.status === "success" && Array.isArray(data.data) && data.data.length > 0) {
+                let html = "";
+                let totalGeral = 0; // 🔹 acumula o total de todas as receitas
+
+                data.data.forEach(recipe => {
+                    totalGeral += parseFloat(recipe.total_price || 0);
+
+                    html += `
+                    <div class="card">
+                        <div class="card-header">
+                            Receita #${recipe.id} — ${recipe.date}
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Medicamento</th>
+                                            <th>Tipo</th>
+                                            <th>Qtd</th>
+                                            <th>Dosagem</th>
+                                            <th>Preço Unit.</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                `;
+
+                    if (recipe.medications && recipe.medications.length > 0) {
+                        recipe.medications.forEach(med => {
+                            html += `
+                            <tr>
+                                <td>${med.medication_name}</td>
+                                <td>${med.medication_type}</td>
+                                <td>${med.qty}</td>
+                                <td>${med.dosage}</td>
+                                <td>${parseFloat(med.unit_price).toFixed(2)}</td>
+                                <td>${parseFloat(med.total_price).toFixed(2)}</td>
+                            </tr>
+                        `;
+                        });
+                    } else {
+                        html +=
+                            `<tr><td colspan="6" class="text-muted text-center">Nenhum medicamento nesta receita.</td></tr>`;
+                    }
+
+                    html += `
+                                    </tbody>
+                                </table>
+                                <p class="fw-bold">Total da Receita: ${recipe.total_price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
                 });
-                html += `</tbody></table></div>`;
+
+                // 🔹 Exibir total geral no final
+                html += `
+                <div class="text-end mt-3">
+                    <h6 style="font-size:14px; font-weight:600; color:#333;">
+                         Total Geral de Todas as Receitas: ${totalGeral.toFixed(2)}
+                    </h6>
+                </div>
+            `;
+
                 $('#recipeList').html(html);
             } else {
-                $('#recipeList').html('<p class="text-muted">Nenhuma receita registrada.</p>');
+                $('#recipeList').html(
+                    '<p class="text-muted">Nenhuma receita registrada para esta consulta.</p>');
             }
-        });
+        } catch (error) {
+            console.error("Erro ao carregar receitas:", error);
+            $('#recipeList').html('<p class="text-danger">Erro ao carregar receitas.</p>');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     // Submeter Diagnóstico
     $('#btnSaveDiagnosis').click(() => {
@@ -573,21 +773,6 @@ $(document).ready(() => {
             })
             .catch(err => console.error("Erro ao registrar diagnóstico:", err));
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
