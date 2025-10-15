@@ -1,19 +1,17 @@
 <?php 
-
 include_once __DIR__ . './../../src/components/header.php';
-
 ?>
 
 <div class="pcoded-content">
-
     <div class="page-header card">
         <div class="row align-items-end">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between align-items-center w-100">
-                    <h5 class="mb-0">Gestão de Consultas
+                    <h5 class="mb-0">
+                        Gestão de Receitas Médicas
                     </h5>
-                    <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
-
+                    <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddRecipe">
+                        Nova Receita
                         <i class="icofont icofont-plus"></i>
                     </button>
                 </div>
@@ -29,22 +27,22 @@ include_once __DIR__ . './../../src/components/header.php';
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Tabela de Pacientes</h5>
-                                    <span>Gestão centralizada de pacientes</span>
+                                    <h5>Tabela de Receitas</h5>
+                                    <span>Gestão centralizada de receitas médicas</span>
                                 </div>
                                 <div class="card-block">
                                     <div class="table-responsive">
-                                        <table id="userTable" class="table table-striped table-bordered">
+                                        <table id="recipeTable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 50px;">ID</th>
+                                                    <th>ID</th>
                                                     <th>Data</th>
                                                     <th>Hora</th>
-                                                    <th>Tipo de consulta</th>
-                                                    <th>Status</th>
                                                     <th>Paciente</th>
-                                                    <th>Doctor</th>
-                                                    <th style="width: 180px; text-align:center;">Ações</th>
+                                                    <th>Médico</th>
+                                                    <th>Qtd. Medicamentos</th>
+                                                    <th>Total (MZN)</th>
+                                                    <th style="width: 160px; text-align:center;">Ações</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -52,8 +50,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                     </div>
                                 </div>
                             </div>
-
-                            <?php include_once __DIR__ . '/consult-modal.php'; ?>
+                            <?php include_once __DIR__ . '/recipe-modal.php'; ?>
                         </div>
                     </div>
                 </div>
@@ -64,31 +61,26 @@ include_once __DIR__ . './../../src/components/header.php';
 </div>
 
 <style>
-#userTable th:last-child,
-#userTable td:last-child {
-    width: 180px;
+#recipeTable th:last-child,
+#recipeTable td:last-child {
+    width: 160px;
     text-align: center;
     white-space: nowrap;
 }
 
-/* Botões pequenos com menos padding */
-#userTable .btn-sm {
+#recipeTable .btn-sm {
     padding: 2px 6px;
     font-size: 0.85rem;
 }
 </style>
 
-
 <script>
 $(document).ready(function() {
-
-    // Inicializa DataTable
-    const table = $('#userTable').DataTable({
+    const table = $('#recipeTable').DataTable({
         responsive: true,
-        autoWidth: false, // importante
+        autoWidth: false,
         paging: true,
         pageLength: 10,
-        lengthMenu: [10, 25, 50, 100],
         ordering: true,
         info: true,
         searching: true,
@@ -99,23 +91,20 @@ $(document).ready(function() {
             targets: -1,
             data: null,
             defaultContent: `
-
-
-            <button class="btn waves-effect waves-light btn-warning action" data-action="view" title="Visualizar">
-                <i class="icofont icofont-info-square"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-primary action" data-action="edit" title="Editar">
-                <i class="icofont icofont-ui-edit"></i>
-            </button>
-            <button class="btn waves-effect waves-light btn-danger action" data-action="delete" title="Deletar">
-                <i class="icofont icofont-ui-delete"></i>
-            </button>
-
+                <button class="btn waves-effect waves-light btn-warning action" data-action="view" title="Visualizar">
+                    <i class="icofont icofont-info-square"></i>
+                </button>
+                <button class="btn waves-effect waves-light btn-primary action" data-action="edit" title="Editar">
+                    <i class="icofont icofont-ui-edit"></i>
+                </button>
+                <button class="btn waves-effect waves-light btn-danger action" data-action="delete" title="Deletar">
+                    <i class="icofont icofont-ui-delete"></i>
+                </button>
             `
         }],
         language: {
             lengthMenu: "Mostrar _MENU_ registros por página",
-            zeroRecords: "Nenhum usuário encontrado",
+            zeroRecords: "Nenhuma receita encontrada",
             info: "Mostrando página _PAGE_ de _PAGES_",
             infoEmpty: "Nenhum dado disponível",
             infoFiltered: "(filtrado de _MAX_ registros no total)",
@@ -129,127 +118,49 @@ $(document).ready(function() {
         }
     });
 
-    // Carrega usuários via API
-    function loadConsults() {
-        fetch("routes/consultRoutes.php")
+    // Função para carregar receitas
+    function loadRecipes() {
+        fetch("routes/index.php?route=recipes")
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success" && Array.isArray(data.data)) {
                     table.clear();
-                    data.data.forEach(consult => table.row.add([
-                        consult.id,
-                        consult.date,
-                        consult.time,
-                        consult.type,
-                        consult.status,
-                        consult.patient_id,
-                        consult.doctor_id,
-                        null
-                    ]));
+                    data.data.forEach(recipe => {
+                        table.row.add([
+                            recipe.id,
+                            recipe.consult_date ?? '-',
+                            recipe.consult_time ?? '-',
+                            recipe.patient_name ?? '—',
+                            recipe.doctor_name ?? '—',
+                            recipe.medications_count ?? 0,
+                            recipe.total_price ?? '0.00',
+                            null
+                        ]);
+                    });
                     table.draw();
+                } else {
+                    console.error("Erro ao carregar receitas:", data.message);
                 }
-            }).catch(err => console.error(err));
+            })
+            .catch(err => console.error("Erro:", err));
     }
-
-    loadConsults();
+    loadRecipes();
 
     // Função genérica de ação
-    $('#userTable tbody').on('click', '.action', function() {
+    $('#recipeTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
 
         if (action === "view") {
-            // IDs baseados na estrutura do modalViewMedication
-            $('#view-date').text(data[1]); // date
-            $('#view-time').text(data[2]); // time
-            $('#view-type').text(data[3]); // type
-            $('#view-status').text(data[4] == 0 ? 'Pendente' : 'Concluída'); // status
-            $('#view-patient_id').text(data[5]); // patient_id
-            $('#view-doctor_id').text(data[6]); // doctor_id
-            $('#modalViewConsult').modal('show');
+            $('#modalViewRecipe').modal('show');
         } else if (action === "edit") {
-            $('#edit-consultid').val(data[0]); // id
-            $('#edit-date').val(data[1]); // date
-            $('#edit-time').val(data[2]); // time
-            $('#edit-type').val(data[3]); // type
-            $('#edit-status').val(data[4]); // status
-            $('#edit-patient_id').val(data[5]); // patient_id
-            $('#edit-doctor_id').val(data[6]); // doctor_id
-            $('#modalEditConsult').modal('show');
+            $('#modalEditRecipe').modal('show');
         } else if (action === "delete") {
-            $('#delete-consultid').val(data[0]);
-            $('#delete-username').text(data[1]);
-            $('#modalDeleteConsult').modal('show');
+            $('#modalDeleteRecipe').modal('show');
         }
     });
 
 
-    // 🔹 Submissão da edição
-    $('#formEditConsult').on('submit', function(e) {
-        e.preventDefault();
 
-        const payload = {
-            action: "update",
-            id: Number($('#edit-consultid').val()),
-            date: $('#edit-date').val(),
-            time: $('#edit-time').val(),
-            type: $('#edit-type').val(),
-            status: parseInt($('#edit-status').val()),
-            patient_id: parseInt($('#edit-patient_id').val()),
-            doctor_id: parseInt($('#edit-doctor_id').val())
-        };
-
-        console.log("Payload enviado:", payload);
-
-        fetch("routes/consultRoutes.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    $('#modalEditConsult').modal('hide');
-                    loadConsults(); // função que recarrega a tabela
-                    swal("Sucesso!", "Consulta atualizada com sucesso.", "success");
-                } else {
-                    swal("Erro!", data.message, "error");
-                }
-            })
-            .catch(err => console.error("Erro ao atualizar consulta:", err));
-        swal("Erro!", "Falha na comunicação com o servidor.", "error");
-    });
-
-
-
-
-    // Confirmar delete
-    $('#confirmDeleteConsult').on('click', function() {
-        const medicationId = Number($('#delete-consultid').val()); // garante que é número
-
-        fetch("routes/consultRoutes.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    action: "delete",
-                    id: medicationId
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    $('#modalDeleteConsult').modal('hide');
-                    loadConsults(); // recarrega a tabela
-                    swal("Deletado!", "Medicamento excluído.", "success");
-                } else {
-                    swal("Erro!", data.message, "error");
-                }
-            })
-            .catch(err => console.error("Erro ao deletar Medicamento:", err));
-    });
-})
+});
 </script>

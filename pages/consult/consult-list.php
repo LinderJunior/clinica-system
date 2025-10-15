@@ -34,7 +34,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                 </div>
                                 <div class="card-block">
                                     <div class="table-responsive">
-                                        <table id="userTable" class="table table-striped table-bordered">
+                                        <table id="consultTable" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 50px;">ID</th>
@@ -64,15 +64,15 @@ include_once __DIR__ . './../../src/components/header.php';
 </div>
 
 <style>
-#userTable th:last-child,
-#userTable td:last-child {
+#consultTable th:last-child,
+#consultTable td:last-child {
     width: 180px;
     text-align: center;
     white-space: nowrap;
 }
 
 /* Botões pequenos com menos padding */
-#userTable .btn-sm {
+#consultTable .btn-sm {
     padding: 2px 6px;
     font-size: 0.85rem;
 }
@@ -83,7 +83,7 @@ include_once __DIR__ . './../../src/components/header.php';
 $(document).ready(function() {
 
     // Inicializa DataTable
-    const table = $('#userTable').DataTable({
+    const table = $('#consultTable').DataTable({
         responsive: true,
         autoWidth: false, // importante
         paging: true,
@@ -154,7 +154,7 @@ $(document).ready(function() {
     loadConsults();
 
     // Função genérica de ação
-    $('#userTable tbody').on('click', '.action', function() {
+    $('#recipeTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
 

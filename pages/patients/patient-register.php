@@ -168,7 +168,7 @@ function submitForm(event) {
 }
 
 function sendFormData(formData) {
-    fetch("routes/medicationRoutes.php", {
+    fetch("routes/patientRoutes.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

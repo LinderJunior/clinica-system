@@ -276,7 +276,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `employee_id`, `role_id`) VALUES
 (1, 'LinderUpdate', '$2y$10$TxxFjKAUXYRzsSMZOKUqpeqXgHG18qWVzw4cruYx3yZU1tQ7kiLgu', 1, 1),
 (3, 'Jorge', '$2y$10$qxx617UHWE85TOv1zlXI5OCnv6FdXsHLnoyTZmXcDCkXa0UG/k1Dy', 1, 1),
-(4, 'Aurelio Maxwell Albino', '$2y$10$QGWI.6OyXCzLAPeZMHgH2.yFsAjq41xYfQOGhKINJrf6eWLzSxKJy', 1, 1);
+(4, 'admin', '$2y$10$QGWI.6OyXCzLAPeZMHgH2.yFsAjq41xYfQOGhKINJrf6eWLzSxKJy', 1, 1);
 
 --
 -- Indexes for dumped tables
