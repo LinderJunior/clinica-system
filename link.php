@@ -43,6 +43,8 @@
     // Medicamentos
     $pag[15] = "medications/medication-register.php";
     $pag[16] = "medications/medication-list.php";
+    $pag[25] = "medications/medication-stock-entry.php";
+    $pag[26] = "medications/medication-stock-report.php";
 
     // Pesos dos Clientes
     $pag[22] = "client-weights/client-weight-register.php";

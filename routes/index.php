@@ -47,6 +47,9 @@ function routeRequest() {
         case 'client-weights':
             require_once __DIR__ . '/clientWeightRoutes.php';
             break;
+        case 'stock-movements':
+            require_once __DIR__ . '/stock-movements.php';
+            break;
         // Adicione mais casos conforme necessário para outras rotas
         // case 'appointments':
         //     require_once __DIR__ . '/appointmentRoutes.php';

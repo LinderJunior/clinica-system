@@ -563,6 +563,16 @@
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="link.php?route=25" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Entrada</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=26" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Estoque</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
 
