@@ -44,6 +44,11 @@
     $pag[15] = "medications/medication-register.php";
     $pag[16] = "medications/medication-list.php";
 
+    // Pesos dos Clientes
+    $pag[22] = "client-weights/client-weight-register.php";
+    $pag[23] = "client-weights/client-weight-list.php";
+    $pag[24] = "client-weights/client-weight-progress.php";
+
     // Relatórios
     $pag[17] = "consult/consult-details.php";
     $pag[18] = "relatorios/consultas.php";

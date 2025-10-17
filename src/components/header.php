@@ -136,7 +136,7 @@
                                         </li>
                                         <li>
                                             <div class="media">
-                                                <img class="img-radius" src="jpg/avatar-4.jpg"
+                                                <img class="img-radius" src="assets/jpg/avatar-4.jpg"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <h5 class="notification-user">John Doe</h5>
@@ -148,7 +148,7 @@
                                         </li>
                                         <li>
                                             <div class="media">
-                                                <img class="img-radius" src="jpg/avatar-3.jpg"
+                                                <img class="img-radius" src="assets/jpg/avatar-3.jpg"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <h5 class="notification-user">Joseph William</h5>
@@ -160,7 +160,7 @@
                                         </li>
                                         <li>
                                             <div class="media">
-                                                <img class="img-radius" src="jpg/avatar-4.jpg"
+                                                <img class="img-radius" src="assets/jpg/avatar-4.jpg"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <h5 class="notification-user">Sara Soudein</h5>
@@ -192,7 +192,7 @@
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <!-- <img src="jpg/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                        <!-- <img src="assets/jpg/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
                                         <span>John Doe</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
@@ -265,7 +265,7 @@
                                 <div class="media userlist-box waves-effect waves-light" data-id="1"
                                     data-status="online" data-username="Josephin Doe">
                                     <a class="media-left" href="#!">
-                                        <img class="media-object img-radius img-radius" src="jpg/avatar-3.jpg"
+                                        <img class="media-object img-radius img-radius" src="assets/jpg/avatar-3.jpg"
                                             alt="Generic placeholder image ">
                                         <div class="live-status bg-success"></div>
                                     </a>
@@ -276,7 +276,7 @@
                                 <div class="media userlist-box waves-effect waves-light" data-id="2"
                                     data-status="online" data-username="Lary Doe">
                                     <a class="media-left" href="#!">
-                                        <img class="media-object img-radius" src="jpg/avatar-2.jpg"
+                                        <img class="media-object img-radius" src="assets/jpg/avatar-2.jpg"
                                             alt="Generic placeholder image">
                                         <div class="live-status bg-success"></div>
                                     </a>
@@ -287,7 +287,7 @@
                                 <div class="media userlist-box waves-effect waves-light" data-id="3"
                                     data-status="online" data-username="Alice">
                                     <a class="media-left" href="#!">
-                                        <img class="media-object img-radius" src="jpg/avatar-4.jpg"
+                                        <img class="media-object img-radius" src="assets/jpg/avatar-4.jpg"
                                             alt="Generic placeholder image">
                                         <div class="live-status bg-success"></div>
                                     </a>
@@ -298,7 +298,7 @@
                                 <div class="media userlist-box waves-effect waves-light" data-id="4"
                                     data-status="offline" data-username="Alia">
                                     <a class="media-left" href="#!">
-                                        <img class="media-object img-radius" src="jpg/avatar-3.jpg"
+                                        <img class="media-object img-radius" src="assets/jpg/avatar-3.jpg"
                                             alt="Generic placeholder image">
                                         <div class="live-status bg-default"></div>
                                     </a>
@@ -310,7 +310,7 @@
                                 <div class="media userlist-box waves-effect waves-light" data-id="5"
                                     data-status="offline" data-username="Suzen">
                                     <a class="media-left" href="#!">
-                                        <img class="media-object img-radius" src="jpg/avatar-2.jpg"
+                                        <img class="media-object img-radius" src="assets/jpg/avatar-2.jpg"
                                             alt="Generic placeholder image">
                                         <div class="live-status bg-default"></div>
                                     </a>
@@ -335,7 +335,7 @@
                 <div class="main-friend-chat">
                     <div class="media chat-messages">
                         <a class="media-left photo-table" href="#!">
-                            <img class="media-object img-radius img-radius m-t-5" src="jpg/avatar-2.jpg"
+                            <img class="media-object img-radius img-radius m-t-5" src="assets/jpg/avatar-2.jpg"
                                 alt="Generic placeholder image">
                         </a>
                         <div class="media-body chat-menu-content">
@@ -356,7 +356,7 @@
                     </div>
                     <div class="media chat-messages">
                         <a class="media-left photo-table" href="#!">
-                            <img class="media-object img-radius img-radius m-t-5" src="jpg/avatar-2.jpg"
+                            <img class="media-object img-radius img-radius m-t-5" src="assets/jpg/avatar-2.jpg"
                                 alt="Generic placeholder image">
                         </a>
                         <div class="media-body chat-menu-content">
@@ -565,6 +565,30 @@
                                             </li>
                                         </ul>
                                     </li>
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
+                                            <span class="pcoded-mtext">Fitness Mode</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=22" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Registar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=23" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=24" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Progresso</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                     </nav>
@@ -642,6 +666,9 @@
                     <!-- Botões de exportação -->
                     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
                     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
+                    <!-- SweetAlert -->
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
