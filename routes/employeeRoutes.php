@@ -36,6 +36,7 @@ switch ($method) {
  * Processa requisições POST
  */
 function handlePostRequest($employeeController) {
+
     $data = getRequestData();
 
     if (!isset($data['action'])) {
@@ -48,6 +49,7 @@ function handlePostRequest($employeeController) {
             $data['name'], 
             $data['bi'], 
             $data['phoneNumber'], 
+            $data['doctor'],
             $data['positionIds']
         ),
         'update' => $employeeController->editEmployee(
@@ -69,6 +71,7 @@ function handlePostRequest($employeeController) {
 /**
  * Processa requisições GET
  */
+// Lida com requisições GET
 function handleGetRequest($employeeController) {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $id = intval($_GET['id']);
@@ -78,11 +81,15 @@ function handleGetRequest($employeeController) {
         $response = $employeeController->searchEmployeesByName($name);
     } elseif (isset($_GET['positions']) && $_GET['positions'] === 'true') {
         $response = $employeeController->getAllPositions();
+    } elseif (isset($_GET['doctors']) && $_GET['doctors'] === 'true') {
+        $response = $employeeController->listDoctors(); // apenas médicos
     } else {
         $response = $employeeController->listEmployees();
     }
+
     sendResponse($response);
 }
+
 
 /**
  * Envia a resposta como JSON

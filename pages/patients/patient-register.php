@@ -1,6 +1,7 @@
 <?php 
 include_once __DIR__ . './../../src/components/header.php';
 
+
 ?>
 
 <div class="pcoded-content">
@@ -8,10 +9,8 @@ include_once __DIR__ . './../../src/components/header.php';
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-
                     <div class="d-inline">
                         <h5>Registo de Pacientes</h5>
-
                     </div>
                 </div>
             </div>
@@ -24,7 +23,7 @@ include_once __DIR__ . './../../src/components/header.php';
                         <li class="breadcrumb-item"><a href="#!">Form Components</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#!">Basic Form Inputs</a>
+                            <a href="#!">Registro Pacientes</a>
                         </li>
                     </ul>
                 </div>
@@ -33,105 +32,106 @@ include_once __DIR__ . './../../src/components/header.php';
     </div>
 
     <div class="pcoded-inner-content">
-
         <div class="main-body">
             <div class="page-wrapper">
-
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Prencha o formulario</h5>
-                                    <span>Add class of <code>.form-control</code> with
-                                        <code>&lt;input&gt;</code> tag</span>
+                                    <h5>Preencha o formulário</h5>
+                                    <span>Adicione class <code>.form-control</code> aos campos</span>
                                 </div>
                                 <div class="card-block">
-
-                                    <!-- LINDERCHECK: CONTEUDO AQUI, SEJA TABELA,CARD, LISTA OU QUALQUER COISA  -->
                                     <form id="userForm" onsubmit="submitForm(event)">
-                                        <!-- Username -->
+                                        <!-- Nome -->
                                         <div class="form-group row">
                                             <label for="txtnomepaciente" class="col-sm-2 col-form-label">Nome do
                                                 Paciente</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="txtnomepaciente"
-                                                    placeholder="Nome de Usuário" required>
+                                                    placeholder="Nome" required>
                                             </div>
                                         </div>
 
+                                        <!-- Data de nascimento -->
                                         <div class="form-group row">
                                             <label for="txtdatanascimento" class="col-sm-2 col-form-label">Data de
                                                 Nascimento</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" id="txtdatanascimento"
-                                                    placeholder="Data de Nascimento" required>
+                                                <input type="date" class="form-control" id="txtdatanascimento" required>
                                             </div>
                                         </div>
 
-
+                                        <!-- Numero BI -->
                                         <div class="form-group row">
-                                            <label for="txtnumerobi" class="col-sm-2 col-form-label">
-                                                Numero de B.I</label>
+                                            <label for="txtnumerobi" class="col-sm-2 col-form-label">Numero de
+                                                B.I</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="txtnumerobi"
                                                     placeholder="Numero de B.I" required>
                                             </div>
                                         </div>
 
+                                        <!-- Província -->
                                         <div class="form-group row">
-                                            <label for="txtprovincia" class="col-sm-2 col-form-label">
-                                                Provincia</label>
+                                            <label for="province" class="col-sm-2 col-form-label">Província</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtprovincia"
-                                                    placeholder="Provincia" required>
+                                                <select class="form-control" id="province"
+                                                    onchange="updateDistricts(this.value)" required>
+                                                    <option value="">Selecione uma província</option>
+                                                </select>
                                             </div>
                                         </div>
 
+                                        <!-- Distrito / Cidade -->
                                         <div class="form-group row">
-                                            <label for="txcidade" class="col-sm-2 col-form-label">
-                                                Cidade</label>
+                                            <label for="district" class="col-sm-2 col-form-label">Cidade /
+                                                Distrito</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtcidade"
-                                                    placeholder="Cidade" required>
+                                                <select class="form-control" id="district"
+                                                    onchange="updateNeighborhoods(this.value)" required>
+                                                    <option value="">Selecione um distrito</option>
+                                                </select>
                                             </div>
                                         </div>
 
+                                        <!-- Bairro -->
                                         <div class="form-group row">
-                                            <label for="txtbairro" class="col-sm-2 col-form-label">
-                                                Bairro</label>
+                                            <label for="neighborhood" class="col-sm-2 col-form-label">Bairro</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="txtbairro"
-                                                    placeholder="Bairro" required>
+                                                <select class="form-control" id="neighborhood" required>
+                                                    <option value="">Selecione um bairro</option>
+                                                </select>
                                             </div>
                                         </div>
 
+                                        <!-- Telefone -->
                                         <div class="form-group row">
-                                            <label for="txttelefone" class="col-sm-2 col-form-label">
-                                                Numero de Telefone</label>
+                                            <label for="txttelefone" class="col-sm-2 col-form-label">Número de
+                                                Telefone</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="txttelefone"
-                                                    placeholder="Numero de Telefone" required>
+                                                    placeholder="Número de Telefone" required>
                                             </div>
                                         </div>
 
+                                        <!-- WhatsApp -->
                                         <div class="form-group row">
-                                            <label for="txtiswhatsapp" class="col-sm-2 col-form-label">
-                                                Tem WhatsApp</label>
+                                            <label for="txtiswhatsapp" class="col-sm-2 col-form-label">Tem
+                                                WhatsApp</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="txtiswhatsapp"
-                                                    placeholder="Is WhatsApp" required>
+                                                    placeholder="Sim / Não" required>
                                             </div>
                                         </div>
 
                                         <!-- Botão -->
                                         <div class="form-group row">
                                             <div class="col-sm-12 text-right">
-                                                <button type="submit" class="btn btn-info">Adicionar Usuário</button>
+                                                <button type="submit" class="btn btn-info">Adicionar Paciente</button>
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -139,16 +139,69 @@ include_once __DIR__ . './../../src/components/header.php';
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <div id="styleSelector">
+        <div id="styleSelector"></div>
     </div>
-</div>
 </div>
 
 <script>
+// JSON geográfico de Moçambique
+let geoData = {};
+
+fetch('/clinica-system/mozambique_geo.json')
+    .then(res => res.json())
+    .then(data => {
+        console.log("JSON carregado:", data); // <-- COLOQUE AQUI
+        geoData = data;
+        loadProvinces();
+    })
+    .catch(err => console.error("Erro ao carregar JSON:", err));
+
+
+function loadProvinces() {
+    const provinceSelect = document.getElementById("province");
+    Object.keys(geoData).forEach(province => {
+        const option = document.createElement("option");
+        option.value = province;
+        option.textContent = province;
+        provinceSelect.appendChild(option);
+    });
+}
+
+function updateDistricts(province) {
+    const districtSelect = document.getElementById("district");
+    districtSelect.innerHTML = '<option value="">Selecione um distrito</option>';
+
+    const neighborhoodSelect = document.getElementById("neighborhood");
+    neighborhoodSelect.innerHTML = '<option value="">Selecione um bairro</option>';
+
+    if (geoData[province]) {
+        Object.keys(geoData[province]).forEach(district => {
+            const option = document.createElement("option");
+            option.value = district;
+            option.textContent = district;
+            districtSelect.appendChild(option);
+        });
+    }
+}
+
+function updateNeighborhoods(district) {
+    const neighborhoodSelect = document.getElementById("neighborhood");
+    neighborhoodSelect.innerHTML = '<option value="">Selecione um bairro</option>';
+
+    const province = document.getElementById("province").value;
+    if (geoData[province] && geoData[province][district]) {
+        geoData[province][district].forEach(neighborhood => {
+            const option = document.createElement("option");
+            option.value = neighborhood;
+            option.textContent = neighborhood;
+            neighborhoodSelect.appendChild(option);
+        });
+    }
+}
+
+// Envio do formulário
 function submitForm(event) {
     event.preventDefault();
 
@@ -157,9 +210,9 @@ function submitForm(event) {
         name: document.getElementById("txtnomepaciente").value,
         dateBirth: document.getElementById("txtdatanascimento").value,
         bi: document.getElementById("txtnumerobi").value,
-        province: document.getElementById("txtprovincia").value,
-        city: document.getElementById("txtcidade").value,
-        neighborhood: document.getElementById("txtbairro").value,
+        province: document.getElementById("province").value,
+        city: document.getElementById("district").value,
+        neighborhood: document.getElementById("neighborhood").value,
         phoneNumber: document.getElementById("txttelefone").value,
         iswhatsapp: document.getElementById("txtiswhatsapp").value
     };
@@ -175,23 +228,22 @@ function sendFormData(formData) {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => handleResponse(data))
-        .catch(error => handleError(error));
+        .catch(err => handleError(err));
 }
 
 function handleResponse(data) {
     if (data.status === "success") {
         alert(data.message);
         window.location.href = "link.php?route=3";
-
     } else {
         alert("Erro: " + data.message);
     }
 }
 
 function handleError(error) {
-    console.error("Erro ao enviar a requisição:", error);
-    alert("Ocorreu um erro ao tentar enviar os dados.");
+    console.error("Erro:", error);
+    alert("Ocorreu um erro ao enviar os dados.");
 }
 </script>

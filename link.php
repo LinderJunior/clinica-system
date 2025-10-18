@@ -53,12 +53,13 @@
 
     // Relatórios
     $pag[17] = "consult/consult-details.php";
-    $pag[18] = "relatorios/consultas.php";
-    $pag[19] = "relatorios/financeiro.php";
+    $pag[18] = "doctor/doctor-register.php";
+    $pag[19] = "doctor/doctor-list.php";
+    $pag[20] = "doctor/doctor-details.php";
 
-    // Configurações
-    $pag[20] = "configuracoes/sistema.php";
-    $pag[21] = "configuracoes/perfil.php";
+    // // Configurações
+    // $pag[20] = "configuracoes/sistema.php";
+    // $pag[21] = "configuracoes/perfil.php";
 
     // Página de erro
     $pag[404] = "error.php";

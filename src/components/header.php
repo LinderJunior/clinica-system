@@ -441,12 +441,12 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
-                                                <a href="link.php?route=6" class="waves-effect waves-dark">
+                                                <a href="link.php?route=18" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Cadastrar</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="link.php?route=7" class="waves-effect waves-dark">
+                                                <a href="link.php?route=19" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Listar</span>
                                                 </a>
                                             </li>
@@ -510,7 +510,7 @@
                                         </ul>
                                     </li> -->
 
-                                    <li class="pcoded-hasmenu">
+                                    <!-- <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                                             <span class="pcoded-mtext">Usuarios</span>
@@ -527,7 +527,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">

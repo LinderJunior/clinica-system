@@ -12,9 +12,9 @@ class EmployeeController {
     /**
      * Cria um novo funcionário.
      */
-    public function addEmployee(string $name, string $bi, string $phoneNumber, array $positionIds): array {
+    public function addEmployee(string $name, string $bi, string $phoneNumber, string $doctor, array $positionIds): array {
         return $this->createResponse(
-            $this->employeeModel->createEmployee($name, $bi, $phoneNumber, $positionIds),
+            $this->employeeModel->createEmployee($name, $bi, $phoneNumber, $doctor, $positionIds),
             "Funcionário cadastrado com sucesso!",
             "Erro ao cadastrar funcionário."
         );
@@ -26,6 +26,17 @@ class EmployeeController {
     public function listEmployees(): array {
         return ["status" => "success", "data" => $this->employeeModel->getAllEmployees()];
     }
+
+    public function listDoctors(): array {
+    return ["status" => "success", "data" => $this->employeeModel->getAllDoctors()];
+}
+
+
+
+
+
+
+
 
     /**
      * Atualiza os dados de um funcionário.

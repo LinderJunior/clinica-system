@@ -1,0 +1,69 @@
+{
+    "Maputo": {
+        "Maputo": [
+            "Bairro Central",
+            "Bairro da Polana",
+            "Bairro Sommerschield"
+        ],
+        "Matola": [
+            "Bairro 1",
+            "Bairro 2",
+            "Bairro 3"
+        ]
+    },
+    "Zambézia": {
+        "Quelimane": [
+            "1º de Maio",
+            "24 de Julho",
+            "Aeroporto",
+            "Chirangano",
+            "Filipe Samuel Magaia",
+            "Kansa",
+            "Liberdade",
+            "Mapiazua",
+            "Piloto",
+            "Vila Pita Popular",
+            "Saguar A",
+            "Saguar B",
+            "Sinacura",
+            "Torrone Velho",
+            "Coalane II A",
+            "Coalane II B",
+            "Icídua",
+            "Ivagalane",
+            "Janeiro",
+            "Mirazane",
+            "Murropué",
+            "Sangariveira",
+            "25 de Setembro",
+            "17 de Setembro",
+            "Brandão",
+            "Floresta A",
+            "Floresta B",
+            "Inhangome",
+            "Manhaua A",
+            "Manhaua B",
+            "Micajune A",
+            "Micajune B",
+            "Santagua A",
+            "Santagua B",
+            "Bazar",
+            "Gogone",
+            "Mborio",
+            "Megano",
+            "Namuinho"
+        ],
+        "Gurue": [
+            "Bairro M",
+            "Bairro N",
+            "Bairro O"
+        ]
+    },
+    "Sofala": {
+        "Beira": [
+            "Bairro A",
+            "Bairro B",
+            "Bairro C"
+        ]
+    }
+}

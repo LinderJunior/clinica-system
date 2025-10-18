@@ -9,55 +9,48 @@ class Employee {
         $this->pdo = $pdo;
     }
 
-    /**
-     * Cria um novo funcionário e associa às posições/cargos
-     */
-    public function createEmployee(string $name, string $bi, string $phoneNumber, array $positionIds): bool {
-        try {
-            // Iniciar transação
-            $this->pdo->beginTransaction();
-            
-            // Inserir o funcionário
+  public function createEmployee(string $name, string $bi, string $phoneNumber, string $doctor, array $positionIds): bool {
+    try {
+        $this->pdo->beginTransaction();
+
+        // Inserir o funcionário
+        $stmt = $this->pdo->prepare("
+            INSERT INTO employee (name, bi, phoneNumber, doctor)
+            VALUES (?, ?, ?, ?)
+        ");
+        $result = $stmt->execute([$name, $bi, $phoneNumber, $doctor]); // <-- corrigido
+
+        if (!$result) {
+            $this->pdo->rollBack();
+            return false;
+        }
+
+        $employeeId = $this->pdo->lastInsertId();
+
+        // Associar o funcionário às posições/cargos
+        foreach ($positionIds as $positionId) {
             $stmt = $this->pdo->prepare("
-                INSERT INTO employee (name, bi, phoneNumber)
-                VALUES (?, ?, ?)
+                INSERT INTO employee_position (employee_id, position_id)
+                VALUES (?, ?)
             ");
-            
-            $result = $stmt->execute([$name, $bi, $phoneNumber]);
-            
+            $result = $stmt->execute([$employeeId, $positionId]);
+
             if (!$result) {
                 $this->pdo->rollBack();
                 return false;
             }
-            
-            // Obter o ID do funcionário inserido
-            $employeeId = $this->pdo->lastInsertId();
-            
-            // Associar o funcionário às posições/cargos
-            foreach ($positionIds as $positionId) {
-                $stmt = $this->pdo->prepare("
-                    INSERT INTO employee_position (employee_id, position_id)
-                    VALUES (?, ?)
-                ");
-                
-                $result = $stmt->execute([$employeeId, $positionId]);
-                
-                if (!$result) {
-                    $this->pdo->rollBack();
-                    return false;
-                }
-            }
-            
-            // Confirmar transação
-            $this->pdo->commit();
-            return true;
-        } catch (PDOException $e) {
-            // Reverter em caso de erro
-            $this->pdo->rollBack();
-            error_log("Erro ao criar funcionário: " . $e->getMessage());
-            return false;
         }
+
+        $this->pdo->commit();
+        return true;
+
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        error_log("Erro ao criar funcionário: " . $e->getMessage());
+        return false;
     }
+}
+
 
     /**
      * Retorna todos os funcionários com suas posições/cargos
@@ -98,6 +91,50 @@ class Employee {
             return [];
         }
     }
+
+
+    public function getAllDoctors(): array {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT e.*, GROUP_CONCAT(p.id) as position_ids, GROUP_CONCAT(p.type) as position_types
+            FROM employee e
+            LEFT JOIN employee_position ep ON e.id = ep.employee_id
+            LEFT JOIN position p ON ep.position_id = p.id
+            WHERE e.doctor = ?
+            GROUP BY e.id
+            ORDER BY e.name ASC
+        ");
+        $stmt->execute(['1']); // apenas médicos
+
+        $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Formatar os dados para incluir as posições como arrays
+        foreach ($employees as &$employee) {
+            if (isset($employee['position_ids']) && $employee['position_ids']) {
+                $employee['positions'] = array_map(function($id, $type) {
+                    return ['id' => $id, 'type' => $type];
+                }, 
+                explode(',', $employee['position_ids']),
+                explode(',', $employee['position_types']));
+            } else {
+                $employee['positions'] = [];
+            }
+
+            // Remover campos auxiliares
+            unset($employee['position_ids']);
+            unset($employee['position_types']);
+        }
+
+        return $employees;
+    } catch (PDOException $e) {
+        error_log("Erro ao listar médicos: " . $e->getMessage());
+        return [];
+    }
+}
+
+
+
+
 
     /**
      * Busca um funcionário pelo ID com suas posições/cargos

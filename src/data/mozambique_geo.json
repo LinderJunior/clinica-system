@@ -1,0 +1,33 @@
+{
+    "Maputo": {
+        "Maputo": [
+            "Bairro Central",
+            "Bairro da Polana",
+            "Bairro Sommerschield"
+        ],
+        "Matola": [
+            "Bairro 1",
+            "Bairro 2",
+            "Bairro 3"
+        ]
+    },
+    "Zambézia": {
+        "Quelimane": [
+            "Bairro X",
+            "Bairro Y",
+            "Bairro Z"
+        ],
+        "Gurue": [
+            "Bairro M",
+            "Bairro N",
+            "Bairro O"
+        ]
+    },
+    "Sofala": {
+        "Beira": [
+            "Bairro A",
+            "Bairro B",
+            "Bairro C"
+        ]
+    }
+}
