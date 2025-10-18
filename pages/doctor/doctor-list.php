@@ -123,6 +123,84 @@
     font-size: 0.85rem;
     color: #6c757d;
 }
+
+
+/**Estilizacao de Botoes */
+
+/* ---------- Botões da tabela de médicos ---------- */
+#employeeTable .btn-sm {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    margin: 0 3px;
+    border-radius: 6px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#employeeTable .btn-sm i {
+    margin-right: 4px;
+    font-size: 1rem;
+}
+
+/* Cores dos botões */
+.btn-success {
+    background-color: #28a745 !important;
+    border: none;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838 !important;
+    transform: scale(1.05);
+}
+
+.btn-info {
+    background-color: #17a2b8 !important;
+    border: none;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496 !important;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #6c757d !important;
+    border: none;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268 !important;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border: none;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    transform: scale(1.05);
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+    border: none;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800 !important;
+    transform: scale(1.05);
+}
 </style>
 
 <script>
@@ -160,6 +238,13 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
+
+                <button class="btn btn-sm btn-success action" data-action="marcar">
+                    <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
+                </button>
+                <button class="btn btn-sm btn-info action" data-action="view">
+                    <i class="icofont icofont-eye"></i> VER CONSULTAS
+                </button>
                 <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
                     <i class="icofont icofont-eye" style="font-size: 1.5rem;"></i>
                 </button>

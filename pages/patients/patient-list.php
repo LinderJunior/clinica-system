@@ -42,7 +42,7 @@
                                             <th>Cidade</th>
                                             <th>Bairro</th>
                                             <th>Telefone</th>
-                                            <th>WhatsApp</th>
+
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
@@ -161,6 +161,57 @@
     font-size: 0.85rem;
     color: #6c757d;
 }
+
+
+
+/* BOTOES MARCAR CONSULTA E VER CONSULTA */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Botão MARCAR CONSULTA */
+.btn-marcar {
+    background: linear-gradient(135deg, #28a745, #34d058);
+    color: white;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+}
+
+.btn-marcar:hover {
+    background: linear-gradient(135deg, #218838, #2ebf4f);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* Botão VER CONSULTA */
+.btn-ver {
+    background: linear-gradient(135deg, #007bff, #3399ff);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-ver:hover {
+    background: linear-gradient(135deg, #0069d9, #2a8cff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Ícones */
+.btn i {
+    margin-right: 6px;
+    font-size: 15px;
+}
+
+/* Espaçamento entre botões */
+.action {
+    margin-right: 10px;
+}
 </style>
 
 <script>
@@ -189,14 +240,17 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-               <button class="btn btn-sm btn-info btn-icon action" data-action="view" title="Visualizar">
-                    <i class="icofont icofont-eye" style="font-size: 1.3rem;"></i>
+               <button class="btn btn-sm btn-marcar action" data-action="marcar">
+                    <i class="icofont icofont-plus"></i> MARCAR CONSULTA
+                </button>
+                <button class="btn btn-sm btn-ver action" data-action="view">
+                    <i class="icofont icofont-eye"></i> VER CONSULTAS
                 </button>
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
-                    <i class="icofont icofont-edit"></i>
+                        <i class="icofont icofont-edit"></i>
                 </button>
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
-                    <i class="icofont icofont-trash"></i>
+                        <i class="icofont icofont-trash"></i>
                 </button>
             `
         }]
@@ -219,7 +273,7 @@ $(document).ready(function() {
                             patient.city,
                             patient.neighborhood,
                             patient.phoneNumber,
-                            patient.iswhatsapp,
+
                             null
                         ]);
                     });

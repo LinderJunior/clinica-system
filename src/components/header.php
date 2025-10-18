@@ -431,6 +431,24 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-calendar"></i></span>
+                                            <span class="pcoded-mtext">Consultas</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=6" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Agendar</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=7" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
 
 
@@ -455,24 +473,7 @@
 
 
 
-                                    <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="feather icon-calendar"></i></span>
-                                            <span class="pcoded-mtext">Consultas</span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li>
-                                                <a href="link.php?route=6" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Agendar</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="link.php?route=7" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Listar</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
                                     <!-- <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
@@ -579,7 +580,7 @@
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
-                                            <span class="pcoded-mtext">Fitness Mode</span>
+                                            <span class="pcoded-mtext">Programa de Emagreci</span>
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
