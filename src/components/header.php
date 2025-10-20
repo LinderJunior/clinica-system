@@ -584,8 +584,13 @@
                                         </a>
                                         <ul class="pcoded-submenu">
                                             <li>
+                                                <a href="link.php?route=2" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Formulario de Registo</span>
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <a href="link.php?route=22" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Registar</span>
+                                                    <span class="pcoded-mtext">Iniciar programa</span>
                                                 </a>
                                             </li>
                                             <li>
