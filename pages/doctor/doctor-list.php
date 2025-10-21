@@ -239,12 +239,7 @@ $(document).ready(function() {
             className: "text-center",
             defaultContent: `
 
-                <button class="btn btn-sm btn-success action" data-action="marcar">
-                    <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
-                </button>
-                <button class="btn btn-sm btn-info action" data-action="view">
-                    <i class="icofont icofont-eye"></i> VER CONSULTAS
-                </button>
+
                 <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
                     <i class="icofont icofont-eye" style="font-size: 1.5rem;"></i>
                 </button>
@@ -271,6 +266,16 @@ $(document).ready(function() {
             }
         }
     });
+
+
+
+    //     <button class="btn btn-sm btn-success action" data-action="marcar">
+    //     <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
+    // </button>
+    // <button class="btn btn-sm btn-info action" data-action="view">
+    //     <i class="icofont icofont-eye"></i> VER CONSULTAS
+    // </button>
+
 
     // Função para carregar médicos
     function loadDoctors() {

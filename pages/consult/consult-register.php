@@ -74,8 +74,8 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <div class="col-sm-10">
                                                 <select class="form-control" id="txttype" required>
                                                     <option value="">Selecione o tipo de consulta</option>
-                                                    <option value="Rotina">Consulta de Rotina</option>
-                                                    <option value="Urgência">Consulta de Urgência</option>
+                                                    <option value="Rotina">TRIAGEM</option>
+                                                    <!-- <option value="Urgência">Consulta de Urgência</option>
                                                     <option value="Seguimento">Consulta de Seguimento</option>
                                                     <option value="Pediatria">Consulta de Pediatria</option>
                                                     <option value="Ginecologia">Consulta de Ginecologia</option>
@@ -84,7 +84,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     <option value="Dermatologia">Consulta de Dermatologia</option>
                                                     <option value="Neurologia">Consulta de Neurologia</option>
                                                     <option value="Oftalmologia">Consulta de Oftalmologia</option>
-                                                    <option value="Psiquiatria">Consulta de Psiquiatria</option>
+                                                    <option value="Psiquiatria">Consulta de Psiquiatria</option> -->
                                                     <option value="Outros">Outros</option>
                                                 </select>
                                             </div>
@@ -117,12 +117,12 @@ include_once __DIR__ . './../../src/components/header.php';
                                         <!-- Médico -->
                                         <div class="form-group row">
                                             <label for="txtdoctor"
-                                                class="col-sm-2 col-form-label font-weight-bold">Médico</label>
-                                            <div class="col-sm-10">
+                                                class="col-sm-2 col-form-label font-weight-bold">Clinico</label>
+                                            <!-- <div class="col-sm-10">
                                                 <select class="form-control" id="txtdoctor" required>
                                                     <option value="">Carregando médicos...</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <!-- Botões -->
@@ -173,21 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-    // Carregar médicos
-    fetch("routes/employeeRoutes.php")
-        .then(res => res.json())
-        .then(data => {
-            const select = document.getElementById("txtdoctor");
-            select.innerHTML = '<option value="">Selecione um Médico</option>';
-            if (data.status === "success" && data.data.length > 0) {
-                data.data.forEach(d => {
-                    const opt = document.createElement("option");
-                    opt.value = d.id;
-                    opt.textContent = d.name;
-                    select.appendChild(opt);
-                });
-            }
-        });
+
 });
 
 // Submeter consulta

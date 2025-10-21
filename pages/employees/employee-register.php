@@ -78,9 +78,14 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     <select class="form-control" id="selectPosition">
                                                         <option value="">Selecione uma posição</option>
                                                         <option value="1">Gestor</option>
-                                                        <option value="2">Motorista</option>
-                                                        <option value="3">Caixa</option>
-                                                        <option value="4">Vendedor</option>
+                                                        <option value="2">Recepcionista</option>
+                                                        <option value="3">Administrativo</option>
+                                                        <option value="4">Agente de Servico</option>
+                                                        <option value="5">Guarda</option>
+                                                        <option value="6">Motorista</option>
+
+                                                        <option value="4"></option>
+
                                                     </select>
                                                     <div class="input-group-append">
                                                         <button type="button" class="btn btn-success"

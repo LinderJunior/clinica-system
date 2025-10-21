@@ -98,7 +98,7 @@ $id = $_GET['id'] ?? null;
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="txtdoctor" class="col-sm-3 col-form-label">Médico Responsável</label>
                         <div class="col-sm-9">
                             <select id="txtdoctor" class="form-control" required>
@@ -108,6 +108,16 @@ $id = $_GET['id'] ?? null;
                                 <option value="3">Dr. Júlio Macuácua</option>
                                 <option value="4">Dra. Sandra Nhantumbo</option>
                                 <option value="5">Dr. Paulo Matola</option>
+                            </select>
+                        </div>
+                    </div> -->
+
+                    <!-- Médico -->
+                    <div class="form-group row">
+                        <label for="txtdoctor" class="col-sm-2 col-form-label font-weight-bold">Médico</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="txtdoctor" required>
+                                <option value="">Carregando médicos...</option>
                             </select>
                         </div>
                     </div>
@@ -794,6 +804,38 @@ $(document).ready(() => {
 
         // Submeter receita
         document.getElementById("prescriptionForm").addEventListener("submit", submitPrescription);
+
+
+
+
+
+
+
+        // Carregar médicos
+        fetch("routes/employeeRoutes.php")
+            .then(res => res.json())
+            .then(data => {
+                const select = document.getElementById("txtdoctor");
+                select.innerHTML = '<option value="">Selecione um Médico</option>';
+                if (data.status === "success" && data.data.length > 0) {
+                    data.data.forEach(d => {
+                        const opt = document.createElement("option");
+                        opt.value = d.id;
+                        opt.textContent = d.name;
+                        select.appendChild(opt);
+                    });
+                }
+            });
+
+
+
+
+
+
+
+
+
+
     });
 
     // Carregar lista de medicações
@@ -919,6 +961,10 @@ $(document).ready(() => {
                 alert("Ocorreu um erro ao enviar os dados.");
             });
     }
+
+
+
+
 
 
 

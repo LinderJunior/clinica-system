@@ -69,7 +69,7 @@
 }
 
 .table thead th {
-    background-color: #f9fafb;
+    background-color: #748595ff;
     color: #495057;
     font-weight: 600;
     text-align: center;
@@ -217,6 +217,12 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar Consulta">
                     <i class="icofont icofont-trash"></i>
                 </button>
+                <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+                    <i class="icofont icofont-file-pdf"></i>
+                </button>
+
+                
+                
             `
         }]
     });
@@ -327,6 +333,43 @@ $(document).ready(function() {
             .catch(err => console.error("Erro ao atualizar consulta:", err));
         swal("Erro!", "Falha na comunicação com o servidor.", "error");
     });
+
+    $('#consultTable tbody').on('click', '.action', function() {
+        const action = $(this).data('action');
+        const data = table.row($(this).parents('tr')).data();
+
+        if (action === "pdf") {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text("Detalhes da consulta", 105, 20, null, null, "center");
+
+            // Borda
+            doc.setDrawColor(0, 123, 255);
+            doc.rect(15, 30, 180, 100, "S");
+
+            // Conteúdo
+            const startY = 40;
+            const lineHeight = 10;
+            const details = [
+                `ID: ${data[0]}`,
+                `Data: ${data[1]}`,
+                `Hora: ${data[2]}`,
+                `Tipo: ${data[3]}`,
+                `Status: ${data[4]}`,
+                `Paciente: ${data[5]}`,
+                `Doutor: ${data[6]}`
+            ];
+            details.forEach((line, i) => doc.text(line, 20, startY + i * lineHeight));
+
+            // Abrir em nova aba para visualizar
+            const blobUrl = doc.output('bloburl');
+            window.open(blobUrl, '_blank');
+        }
+    });
+
 
 
 

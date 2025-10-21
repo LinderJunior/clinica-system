@@ -25,7 +25,6 @@ include_once __DIR__ . './../../src/components/header.php';
             </div>
         </div>
     </div>
-
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -39,10 +38,8 @@ include_once __DIR__ . './../../src/components/header.php';
                                     <span>Os campos abaixo são obrigatórios para registo de funcionários.</span>
                                 </div>
                                 <div class="card-block">
-
                                     <form id="employeeForm" onsubmit="submitForm(event)">
                                         <input hidden type="text" id="doctor" value="1" `>
-
                                         <!-- Nome -->
                                         <div class="form-group row">
                                             <label for="txtnome" class="col-sm-2 col-form-label">Nome Completo</label>
@@ -51,7 +48,6 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     placeholder="Ex: Pedro Nunes Linder" required>
                                             </div>
                                         </div>
-
                                         <!-- Numero de BI -->
                                         <div class="form-group row">
                                             <label for="txtnumerobi" class="col-sm-2 col-form-label">Número de
@@ -61,7 +57,6 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     placeholder="Ex: 003456789LA064" required>
                                             </div>
                                         </div>
-
                                         <!-- Telefone -->
                                         <div class="form-group row">
                                             <label for="txttelefone" class="col-sm-2 col-form-label">Número de
@@ -76,11 +71,28 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <div class="col-sm-10">
                                                 <div class="input-group mb-2">
                                                     <select class="form-control" id="selectPosition">
+
                                                         <option value="">Selecione uma posição</option>
-                                                        <option value="1">Gestor</option>
-                                                        <option value="2">Motorista</option>
-                                                        <option value="3">Caixa</option>
-                                                        <option value="4">Vendedor</option>
+                                                        <option value="">Selecione uma especialidade</option>
+                                                        <option value="1">Triagem</option>
+                                                        <option value="2">Medicina</option>
+                                                        <option value="3">Cirurgia geral</option>
+                                                        <option value="4">Ortopedista</option>
+                                                        <option value="5">Neurocirugiao</option>
+                                                        <option value="6">Geneco obstetra</option>
+                                                        <option value="7">Medico internista*</option>
+                                                        <option value="8">Cardiologista</option>
+                                                        <option value="9">Urologista + Nefrologista</option>
+                                                        <option value="10">Pediatra</option>
+                                                        <option value="11">Nutricionista</option>
+                                                        <option value="12">Tecnico Raio X</option>
+                                                        <option value="13">Tecnico de Laboratorio</option>
+                                                        <option value="14">Tecnico Farmaceutico </option>
+                                                        <option value="14">Estomatologista </option>
+                                                        <option value="14">Otorirnolaringologista </option>
+                                                        <option value="14">Protese de dentes</option>
+                                                        <option value="15">Diversos </option>
+
                                                     </select>
                                                     <div class="input-group-append">
                                                         <button type="button" class="btn btn-success"

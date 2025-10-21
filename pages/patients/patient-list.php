@@ -240,18 +240,15 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-               <button class="btn btn-sm btn-marcar action" data-action="marcar">
-                    <i class="icofont icofont-plus"></i> MARCAR CONSULTA
-                </button>
-                <button class="btn btn-sm btn-ver action" data-action="view">
-                    <i class="icofont icofont-eye"></i> VER CONSULTAS
-                </button>
+    
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
                         <i class="icofont icofont-edit"></i>
                 </button>
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
                         <i class="icofont icofont-trash"></i>
-                </button>
+                  <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+        <i class="icofont icofont-file-pdf"></i>
+    </button>
             `
         }]
     });
@@ -283,6 +280,14 @@ $(document).ready(function() {
     }
 
     loadPatients();
+
+
+    //    <button class="btn btn-sm btn-marcar action" data-action="marcar">
+    //         <i class="icofont icofont-plus"></i> MARCAR CONSULTA
+    //     </button>
+    //     <button class="btn btn-sm btn-ver action" data-action="view">
+    //         <i class="icofont icofont-eye"></i> VER CONSULTAS
+    //     </button>
 
 
     // Função genérica de ação
@@ -396,6 +401,71 @@ $(document).ready(function() {
             })
             .catch(err => console.error("Erro ao atualizar paciente:", err));
     });
+
+
+    //     $('#patientTable tbody').on('click', '.action', function() {
+    //         const action = $(this).data('action');
+    //         const data = table.row($(this).parents('tr')).data();
+
+    //         if (action === "pdf") {
+    //             window.open().document.write(`
+    //             <h3>Detalhes do Paciente</h3>
+    //             <p>ID: ${data[0]}</p>
+    //             <p>Nome: ${data[1]}</p>
+    //             <p>Data de Nascimento: ${data[2]}</p>
+    //             <p>B.I: ${data[3]}</p>
+    //             <p>Província: ${data[4]}</p>
+    //             <p>Cidade: ${data[5]}</p>
+    //             <p>Bairro: ${data[6]}</p>
+    //             <p>Telefone: ${data[7]}</p>
+    //             <script>window.print();
+    // `);
+    //         }
+    //     });
+
+
+    $('#patientTable tbody').on('click', '.action', function() {
+        const action = $(this).data('action');
+        const data = table.row($(this).parents('tr')).data();
+
+        if (action === "pdf") {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text("Detalhes do Paciente", 105, 20, null, null, "center");
+
+            // Borda
+            doc.setDrawColor(0, 123, 255);
+            doc.rect(15, 30, 180, 100, "S");
+
+            // Conteúdo
+            const startY = 40;
+            const lineHeight = 10;
+            const details = [
+                `ID: ${data[0]}`,
+                `Nome: ${data[1]}`,
+                `Data de Nascimento: ${data[2]}`,
+                `B.I: ${data[3]}`,
+                `Província: ${data[4]}`,
+                `Cidade: ${data[5]}`,
+                `Bairro: ${data[6]}`,
+                `Telefone: ${data[7]}`
+            ];
+            details.forEach((line, i) => doc.text(line, 20, startY + i * lineHeight));
+
+            // Abrir em nova aba para visualizar
+            const blobUrl = doc.output('bloburl');
+            window.open(blobUrl, '_blank');
+        }
+    });
+
+
+
+
+
+
 
 
 
