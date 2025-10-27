@@ -8,11 +8,11 @@
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
                     Gestão de Funcionários
                 </h5>
-                <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddEmployee"
+                <!-- <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddEmployee"
                     style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
                     <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
                     Novo Registo
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
@@ -239,12 +239,7 @@ $(document).ready(function() {
             className: "text-center",
             defaultContent: `
 
-                <button class="btn btn-sm btn-success action" data-action="marcar">
-                    <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
-                </button>
-                <button class="btn btn-sm btn-info action" data-action="view">
-                    <i class="icofont icofont-eye"></i> VER CONSULTAS
-                </button>
+
                 <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
                     <i class="icofont icofont-eye" style="font-size: 1.5rem;"></i>
                 </button>
@@ -271,6 +266,16 @@ $(document).ready(function() {
             }
         }
     });
+
+
+
+    //     <button class="btn btn-sm btn-success action" data-action="marcar">
+    //     <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
+    // </button>
+    // <button class="btn btn-sm btn-info action" data-action="view">
+    //     <i class="icofont icofont-eye"></i> VER CONSULTAS
+    // </button>
+
 
     // Função para carregar médicos
     function loadDoctors() {

@@ -10,11 +10,11 @@ include_once __DIR__ . './../../src/components/header.php';
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
                     Gestão de Usuários
                 </h5>
-                <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
+                <!-- <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
                     style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
                     <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
                     Novo Registo
-                </button>
+                </button> -->
             </div>
         </div>
     </div>

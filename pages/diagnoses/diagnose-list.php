@@ -12,10 +12,10 @@ include_once __DIR__ . './../../src/components/header.php';
                 <div class="d-flex justify-content-between align-items-center w-100">
                     <h5 class="mb-0">Gestão de Consultas
                     </h5>
-                    <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
+                    <!-- <button class="btn btn-mat waves-effect waves-light btn-success" id="btnAddUser">Novo Registo
 
                         <i class="icofont icofont-plus"></i>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
