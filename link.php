@@ -51,6 +51,10 @@
     $pag[23] = "client-weights/client-weight-list.php";
     $pag[24] = "client-weights/client-weight-progress.php";
 
+    // Proformas
+    $pag[27] = "proformas/proforma-register.php";
+    $pag[28] = "proformas/proforma-list.php";
+
     // Relatórios
     $pag[17] = "consult/consult-details.php";
     $pag[18] = "doctor/doctor-register.php";

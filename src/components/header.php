@@ -600,6 +600,25 @@
                                             </li>
                                         </ul>
                                     </li>
+
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
+                                            <span class="pcoded-mtext">Facturas</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+                                            <li>
+                                                <a href="link.php?route=27" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Nova Factura</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="link.php?route=28" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Listar Facturas</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                     </nav>
