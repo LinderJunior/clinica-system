@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2025 at 10:26 AM
+-- Generation Time: Oct 27, 2025 at 07:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,27 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client_weights`
+-- Table structure for table `proforma_items`
 --
 
-CREATE TABLE `client_weights` (
+CREATE TABLE `proforma_items` (
   `id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `height` decimal(4,2) NOT NULL,
-  `weight` decimal(5,2) NOT NULL,
-  `bmi` decimal(5,2) DEFAULT NULL,
-  `classification` varchar(50) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+  `proforma_id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `quantity` int(11) DEFAULT 1,
+  `unit_price` decimal(12,2) NOT NULL,
+  `total_price` decimal(12,2) GENERATED ALWAYS AS (`quantity` * `unit_price`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `proforma_items`
+--
+
+INSERT INTO `proforma_items` (`id`, `proforma_id`, `description`, `quantity`, `unit_price`) VALUES
+(1, 1, 'Limpeza de dentes', 2, 800.00),
+(2, 2, 'RaioX', 2, 2000.00),
+(3, 3, 'gh', 1, 33.00);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `client_weights`
+-- Indexes for table `proforma_items`
 --
-ALTER TABLE `client_weights`
+ALTER TABLE `proforma_items`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -52,10 +60,10 @@ ALTER TABLE `client_weights`
 --
 
 --
--- AUTO_INCREMENT for table `client_weights`
+-- AUTO_INCREMENT for table `proforma_items`
 --
-ALTER TABLE `client_weights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `proforma_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
