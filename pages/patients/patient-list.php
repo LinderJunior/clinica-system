@@ -8,11 +8,6 @@
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
                     Gestão de Pacientes
                 </h5>
-                <!-- <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
-                    style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
-                    <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
-                    Novo Registo
-                </button> -->
             </div>
         </div>
     </div>
@@ -246,12 +241,38 @@ $(document).ready(function() {
                 </button>
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
                         <i class="icofont icofont-trash"></i>
-                  <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+                <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
         <i class="icofont icofont-file-pdf"></i>
     </button>
             `
         }]
     });
+
+    // // Carrega pacientes
+    // function loadPatients() {
+    //     fetch("routes/patientRoutes.php")
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.status === "success" && Array.isArray(data.data)) {
+    //                 table.clear();
+    //                 data.data.forEach(patient => {
+    //                     table.row.add([
+    //                         patient.id,
+    //                         patient.name,
+    //                         patient.dateBirth,
+    //                         patient.bi,
+    //                         patient.province,
+    //                         patient.city,
+    //                         patient.neighborhood,
+    //                         patient.phoneNumber,
+
+    //                         null
+    //                     ]);
+    //                 });
+    //                 table.draw();
+    //             }
+    //         }).catch(err => console.error(err));
+    // }
 
     // Carrega pacientes
     function loadPatients() {
@@ -261,34 +282,42 @@ $(document).ready(function() {
                 if (data.status === "success" && Array.isArray(data.data)) {
                     table.clear();
                     data.data.forEach(patient => {
+                        // Converter a data de YYYY-MM-DD -> DD/MM/YYYY
+                        let formattedDate = "";
+                        if (patient.dateBirth) {
+                            const parts = patient.dateBirth.split("-");
+                            if (parts.length === 3) {
+                                formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                            } else {
+                                formattedDate = patient.dateBirth; // fallback
+                            }
+                        }
+
                         table.row.add([
                             patient.id,
                             patient.name,
-                            patient.dateBirth,
+                            formattedDate,
                             patient.bi,
                             patient.province,
                             patient.city,
                             patient.neighborhood,
                             patient.phoneNumber,
-
-                            null
+                            null // coluna de ações
                         ]);
                     });
                     table.draw();
                 }
-            }).catch(err => console.error(err));
+            })
+            .catch(err => console.error("Erro ao carregar pacientes:", err));
     }
 
+
+
+
+
+
+
     loadPatients();
-
-
-    //    <button class="btn btn-sm btn-marcar action" data-action="marcar">
-    //         <i class="icofont icofont-plus"></i> MARCAR CONSULTA
-    //     </button>
-    //     <button class="btn btn-sm btn-ver action" data-action="view">
-    //         <i class="icofont icofont-eye"></i> VER CONSULTAS
-    //     </button>
-
 
     // Função genérica de ação
     $('#patientTable tbody').on('click', '.action', function() {
@@ -320,17 +349,12 @@ $(document).ready(function() {
         }
     });
 
-
-
     //adicionar novo usuário
     // Abrir modal de adicionar
     $('#btnAddUser').on('click', function() {
         $('#formAddUser')[0].reset(); // limpa os campos
         $('#modalAddUser').modal('show');
     });
-
-
-
 
     $('#formAddUser').on('submit', function(e) {
         e.preventDefault();
@@ -362,7 +386,6 @@ $(document).ready(function() {
             })
             .catch(err => console.error("Erro ao adicionar usuário:", err));
     });
-
 
     // Submissão do Editar Paciente
     $('#formEditPatient').on('submit', function(e) {
@@ -402,28 +425,6 @@ $(document).ready(function() {
             .catch(err => console.error("Erro ao atualizar paciente:", err));
     });
 
-
-    //     $('#patientTable tbody').on('click', '.action', function() {
-    //         const action = $(this).data('action');
-    //         const data = table.row($(this).parents('tr')).data();
-
-    //         if (action === "pdf") {
-    //             window.open().document.write(`
-    //             <h3>Detalhes do Paciente</h3>
-    //             <p>ID: ${data[0]}</p>
-    //             <p>Nome: ${data[1]}</p>
-    //             <p>Data de Nascimento: ${data[2]}</p>
-    //             <p>B.I: ${data[3]}</p>
-    //             <p>Província: ${data[4]}</p>
-    //             <p>Cidade: ${data[5]}</p>
-    //             <p>Bairro: ${data[6]}</p>
-    //             <p>Telefone: ${data[7]}</p>
-    //             <script>window.print();
-    // `);
-    //         }
-    //     });
-
-
     $('#patientTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
@@ -460,15 +461,6 @@ $(document).ready(function() {
             window.open(blobUrl, '_blank');
         }
     });
-
-
-
-
-
-
-
-
-
 
     // Confirmar delete
     $('#confirmDeletePatient').on('click', function() {

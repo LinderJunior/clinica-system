@@ -59,7 +59,9 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <label for="txtdatanascimento" class="col-sm-2 col-form-label">Data de
                                                 Nascimento</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" id="txtdatanascimento" required>
+                                                <input type="text" class="form-control" id="txtdatanascimento"
+                                                    placeholder="dd/mm/yyyy" required>
+
                                             </div>
                                         </div>
 
@@ -249,4 +251,60 @@ function handleError(error) {
     console.error("Erro:", error);
     alert("Ocorreu um erro ao enviar os dados.");
 }
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Se flatpickr ainda não estiver definido, espera 200ms e tenta novamente (até 5x)
+    function waitForFlatpickr(attemptsLeft = 5) {
+        if (window.flatpickr) {
+            initFlatpickr();
+        } else if (attemptsLeft > 0) {
+            setTimeout(() => waitForFlatpickr(attemptsLeft - 1), 200);
+        } else {
+            // fallback: carrega dinamicamente
+            loadFlatpickrDynamically().then(initFlatpickr).catch(err => {
+                console.error("Não foi possível carregar o flatpickr:", err);
+            });
+        }
+    }
+
+    function loadFlatpickrDynamically() {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js";
+            s.onload = () => {
+                const s2 = document.createElement('script');
+                s2.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js";
+                s2.onload = resolve;
+                s2.onerror = reject;
+                document.body.appendChild(s2);
+            };
+            s.onerror = reject;
+            document.body.appendChild(s);
+        });
+    }
+
+    function initFlatpickr() {
+        // garante que o campo existe
+        const el = document.getElementById("txtdatanascimento");
+        if (!el) return;
+
+        flatpickr(el, {
+            dateFormat: "Y-m-d", // formato interno (recomendado ISO para backend)
+            altInput: true,
+            altFormat: "d/m/Y", // formato visível para o utilizador (dd/mm/yyyy)
+            locale: "pt", // pt (usa o ficheiro l10n)
+            maxDate: "today",
+            disableMobile: true
+        });
+
+        // Se quiseres forçar valor placeholder já formatado:
+        // el.placeholder = "dd/mm/yyyy";
+    }
+
+    waitForFlatpickr();
+});
 </script>
