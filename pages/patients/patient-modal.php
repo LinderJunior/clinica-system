@@ -22,13 +22,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 <!-- Modal Editar Paciente -->
 <div class="modal fade" id="modalEditPatient" tabindex="-1" role="dialog" aria-labelledby="editPatientModalLabel"
     aria-hidden="true">
@@ -83,8 +76,13 @@
 
                     <div class="form-group">
                         <label for="edit-iswhatsapp">Tem WhatsApp</label>
-                        <input type="text" class="form-control" id="edit-iswhatsapp" name="iswhatsapp" required>
+                        <select class="form-control" id="edit-iswhatsapp" name="iswhatsapp" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Sim</option>
+                            <option value="2">Não</option>
+                        </select>
                     </div>
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -96,77 +94,9 @@
 
                 </form>
             </div>
-
-
-
         </div>
     </div>
 </div>
-
-
-
-
-<!-- Modal Edit User
-<div class="modal fade" id="modalEditUser2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-info text-white">
-                <h5 class="modal-title"><i class="feather icon-edit"></i> Editar Usuário</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="formEditUser">
-                <div class="modal-body">
-                    <input type="hidden" id="edit-userid" name="id">
-
-                    <div class="form-group">
-                        <label for="edit-username">Username</label>
-                        <input type="text" class="form-control" id="edit-username" name="username" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit-password">Password</label>
-                        <input type="password" class="form-control" id="edit-password" name="password">
-                        <small class="form-text text-muted">Deixe em branco se não quiser alterar a senha.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit-employee_id">Employee ID</label>
-                        <input type="number" class="form-control" id="edit-employee_id" name="employee_id" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="edit-role_id">Role</label>
-                        <select id="edit-role_id" name="role_id" class="form-control" required>
-                            <option value="1">Admin</option>
-                            <option value="2">Caixa</option>
-                            <option value="3">Cobrança</option>
-                            <option value="4">User</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <i class="feather icon-x"></i> Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-info text-white">
-                        <i class="feather icon-save"></i> Salvar Alterações
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-
-
-
-
-
-
-
-
 
 <!-- Modal Delete Patient -->
 <div class="modal fade" id="modalDeletePatient" tabindex="-1" role="dialog" aria-hidden="true">
@@ -193,3 +123,62 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function waitForFlatpickr(attemptsLeft = 5) {
+        if (window.flatpickr) {
+            initFlatpickrs();
+        } else if (attemptsLeft > 0) {
+            setTimeout(() => waitForFlatpickr(attemptsLeft - 1), 200);
+        } else {
+            loadFlatpickrDynamically().then(initFlatpickrs).catch(err => {
+                console.error("Não foi possível carregar o flatpickr:", err);
+            });
+        }
+    }
+
+    function loadFlatpickrDynamically() {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js";
+            s.onload = () => {
+                const s2 = document.createElement('script');
+                s2.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js";
+                s2.onload = resolve;
+                s2.onerror = reject;
+                document.body.appendChild(s2);
+            };
+            s.onerror = reject;
+            document.body.appendChild(s);
+        });
+    }
+
+    function initFlatpickrs() {
+        // Seleciona todos os campos de data que precisas
+        const dateFields = [
+            document.getElementById("txtdatanascimento"), // formulário de registo
+            document.getElementById("edit-datanascimento") // modal de edição
+        ];
+
+        dateFields.forEach(el => {
+            if (el) {
+                flatpickr(el, {
+                    dateFormat: "Y-m-d", // formato interno (para o backend)
+                    altInput: true,
+                    altFormat: "d/m/Y", // formato visível (mocambicano)
+                    locale: "pt",
+                    maxDate: "today",
+                    disableMobile: true
+                });
+                el.placeholder = "dd/mm/yyyy";
+            }
+        });
+    }
+
+    waitForFlatpickr();
+});
+</script>

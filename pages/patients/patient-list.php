@@ -37,7 +37,7 @@
                                             <th>Cidade</th>
                                             <th>Bairro</th>
                                             <th>Telefone</th>
-
+                                            <th>WhatsApp</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
@@ -266,6 +266,18 @@ $(document).ready(function() {
                             }
                         }
 
+
+
+                        // Converter o valor de WhatsApp
+                        let whatsappText = "";
+                        if (patient.iswhatsapp == 1) {
+                            whatsappText = "Sim";
+                        } else if (patient.iswhatsapp == 2) {
+                            whatsappText = "Não";
+                        } else {
+                            whatsappText = "-"; // caso venha nulo ou outro valor
+                        }
+
                         table.row.add([
                             patient.id,
                             patient.name,
@@ -275,6 +287,7 @@ $(document).ready(function() {
                             patient.city,
                             patient.neighborhood,
                             patient.phoneNumber,
+                            whatsappText, // mostra texto no lugar do número
                             null // coluna de ações
                         ]);
                     });
@@ -306,13 +319,23 @@ $(document).ready(function() {
         } else if (action === "edit") {
             $('#edit-patientid').val(data[0]);
             $('#edit-nome').val(data[1]);
-            $('#edit-datanascimento').val(data[2]);
+
+            // Converte DD/MM/YYYY → YYYY-MM-DD para flatpickr (internamente)
+            const dateParts = data[2].split("/");
+            const isoDate = dateParts.length === 3 ? `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}` :
+                "";
+            $('#edit-datanascimento').val(isoDate);
+
             $('#edit-bi').val(data[3]);
             $('#edit-provincia').val(data[4]);
             $('#edit-cidade').val(data[5]);
             $('#edit-bairro').val(data[6]);
             $('#edit-telefone').val(data[7]);
-            $('#edit-iswhatsapp').val(data[8]);
+
+            // Recupera valor de WhatsApp e define o select corretamente
+            const whatsappValue = data[8] == "1" ? "1" : "2"; // 1=Sim, 2=Não
+            $('#edit-iswhatsapp').val(whatsappValue);
+
             $('#modalEditPatient').modal('show');
 
         } else if (action === "delete") {
@@ -368,7 +391,7 @@ $(document).ready(function() {
             action: "update",
             id: Number($('#edit-patientid').val()),
             name: $('#edit-nome').val(),
-            dateBirth: $('#edit-datanascimento').val(),
+            dateBirth: $('#edit-datanascimento').val(), // flatpickr envia ISO (YYYY-MM-DD)
             bi: $('#edit-bi').val(),
             province: $('#edit-provincia').val(),
             city: $('#edit-cidade').val(),
@@ -376,6 +399,7 @@ $(document).ready(function() {
             phoneNumber: $('#edit-telefone').val(),
             iswhatsapp: $('#edit-iswhatsapp').val()
         };
+
 
         console.log("Payload enviado:", payload);
         fetch("routes/patientRoutes.php", {
@@ -388,15 +412,26 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalEditPatient').modal('hide');
-                    loadPatients(); // recarrega a tabela
-                    swal("Sucesso!", "Paciente atualizado com sucesso.", "success");
+                    Swal.fire({
+                        icon: "success",
+                        title: "Cadastro realizado!",
+                        text: data.message ||
+                            "O paciente foi registado com sucesso linder.",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didClose: () => {
+                            // Redirecionar após fechar
+                            window.location.href = "link.php?route=3";
+                        }
+                    });
                 } else {
                     swal("Erro!", data.message, "error");
                 }
             })
             .catch(err => console.error("Erro ao atualizar paciente:", err));
     });
+
 
     $('#patientTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
