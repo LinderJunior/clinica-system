@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__ . './../../src/components/header.php';
+$patientId = isset($_GET['patient_id']) ? intval($_GET['patient_id']) : null;
 ?>
 
 <div class="pcoded-content">
@@ -33,13 +34,19 @@ include_once __DIR__ . './../../src/components/header.php';
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-
                             <div class="card shadow-sm">
-
-
                                 <div class="card-block p-4">
 
-                                    <!-- FORMULÁRIO DE CONSULTAS -->
+                                    <?php if ($patientId): ?>
+                                    <!-- Alerta de paciente pré-selecionado -->
+                                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                                        <i class="feather icon-user-check mr-2"></i>
+                                        <span>O paciente foi pré-selecionado automaticamente. Alteração não é
+                                            permitida.</span>
+                                    </div>
+                                    <?php endif; ?>
+
+                                    <!-- FORMULÁRIO -->
                                     <form id="consultaForm" onsubmit="submitConsulta(event)">
 
                                         <!-- Data -->
@@ -67,7 +74,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <div class="col-sm-10">
                                                 <select class="form-control" id="txttype" required>
                                                     <option value="">Selecione o tipo de consulta</option>
-                                                    <option value="Rotina">TRIAGEM</option>
+                                                    <option value="Triagem">TRIAGEM</option>
                                                     <option value="Outros">Outros</option>
                                                 </select>
                                             </div>
@@ -118,15 +125,12 @@ include_once __DIR__ . './../../src/components/header.php';
                                         </div>
 
                                     </form>
-                                    <!-- FIM DO FORM -->
-
+                                    <!-- FIM FORM -->
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -137,24 +141,42 @@ include_once __DIR__ . './../../src/components/header.php';
 <!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    const patientId = <?= $patientId ? $patientId : 'null' ?>;
+    const patientSelect = document.getElementById("txtpatient");
+
     // --- Carregar Pacientes ---
     fetch("routes/patientRoutes.php")
         .then(res => res.json())
         .then(data => {
-            const select = document.getElementById("txtpatient");
-            select.innerHTML = '<option value="">Selecione um Paciente</option>';
+            patientSelect.innerHTML = '<option value="">Selecione um Paciente</option>';
             if (data.status === "success" && Array.isArray(data.data)) {
                 data.data.forEach(p => {
                     const opt = document.createElement("option");
                     opt.value = p.id;
                     opt.textContent = p.name || p.nome;
-                    select.appendChild(opt);
+                    patientSelect.appendChild(opt);
                 });
+
+                // Caso tenha vindo com patient_id
+                if (patientId) {
+                    patientSelect.value = patientId;
+                    patientSelect.disabled = true; // bloqueia para evitar troca
+                }
+
+                // Deixar o nome do paciente selecionado em negrito
+                const selectedOption = patientSelect.options[patientSelect.selectedIndex];
+                if (selectedOption) {
+                    selectedOption.style.fontWeight = "bold";
+                    selectedOption.style.color = "#007bff"; // opcional: azul para destaque
+                }
+
+
+
+
             } else {
-                select.innerHTML = '<option value="">Nenhum paciente encontrado</option>';
+                patientSelect.innerHTML = '<option value="">Nenhum paciente encontrado</option>';
             }
         })
         .catch(err => console.error("Erro ao carregar pacientes:", err));
@@ -179,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Erro ao carregar médicos:", err));
 });
 
-// --- Submissão do Formulário ---
+// --- Submissão ---
 function submitConsulta(event) {
     event.preventDefault();
 
@@ -209,7 +231,6 @@ function submitConsulta(event) {
                     text: data.message || "Consulta registada com sucesso!",
                     confirmButtonText: "OK"
                 }).then(() => {
-                    // Redirecionar após fechar o Swal
                     window.location.href = "link.php?route=7";
                 });
             } else {

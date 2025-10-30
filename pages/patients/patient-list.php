@@ -366,7 +366,7 @@ $(document).ready(function() {
             return;
         } else if (action === "agendar-consulta") {
             const patientId = data[0];
-            window.location.href = `link.php?route=18&patient_id=${patientId}`;
+            window.location.href = `link.php?route=6&patient_id=${patientId}`;
             return;
         }
 
