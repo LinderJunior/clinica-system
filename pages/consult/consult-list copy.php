@@ -7,9 +7,15 @@
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
                     Gestão de Consultas
                 </h5>
+                <!-- <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddUser"
+                    style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
+                    <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
+                    Novo Registo
+                </button> -->
             </div>
         </div>
     </div>
+
 
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -19,7 +25,7 @@
                         <div class="card-header bg-light d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-secondary mb-0 text-uppercase">Tabela de Consultas</h6>
-                                <small class="text-muted">Visualização de consultas registadas</small>
+                                <small class="text-muted">Visualização geral de consultas registadas</small>
                             </div>
                         </div>
                         <div class="card-body">
@@ -81,6 +87,7 @@
     border: 1px solid #dee2e6;
 }
 
+/* ---------- Status visual ---------- */
 .badge {
     font-size: 0.75rem;
     padding: 5px 8px;
@@ -96,6 +103,7 @@
     color: #212529 !important;
 }
 
+/* ---------- Ícones e botões ---------- */
 #consultTable .btn-sm {
     padding: 4px 6px;
     font-size: 0.85rem;
@@ -146,6 +154,18 @@
     transform: scale(1.05);
 }
 
+/* ---------- Table ----------------- */
+
+/* Centraliza os títulos das colunas */
+#consultTable thead th {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+
+
+
+/* ---------- DataTables ---------- */
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_filter {
     margin-bottom: 10px;
@@ -188,8 +208,8 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-                <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
-                    <i class="icofont icofont-eye"></i>
+               <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
+                    <i class="icofont icofont-eye" style="font-size: 1.5rem;"></i>
                 </button>
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar Consulta">
                     <i class="icofont icofont-edit"></i>
@@ -200,52 +220,25 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
                     <i class="icofont icofont-file-pdf"></i>
                 </button>
+
+                
+                
             `
         }]
     });
 
-    // Pegar parâmetro id da URL (paciente)
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-
+    // Carrega consultas
     function loadConsults() {
-        const patientId = getQueryParam('id'); // id do paciente na URL
-
-        let url = "routes/index.php?route=consults";
-        let fetchOptions = {};
-
-        if (patientId) {
-            // buscar só desse paciente via POST
-            fetchOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    action: "searchByPatient",
-                    patient_id: Number(patientId)
-                })
-            };
-        } else {
-            // buscar todas as consultas via GET
-            url += ""; // já retorna todas
-            fetchOptions = {
-                method: "GET"
-            };
-        }
-
-        fetch(url, fetchOptions)
+        fetch("routes/consultRoutes.php")
             .then(res => res.json())
             .then(data => {
-                table.clear();
                 if (data.status === "success" && Array.isArray(data.data)) {
+                    table.clear();
                     data.data.forEach(consult => {
                         const statusLabel = consult.status == 1 ?
                             '<span class="badge badge-success">Concluída</span>' :
                             '<span class="badge badge-warning">Pendente</span>';
+
                         table.row.add([
                             consult.id,
                             consult.date,
@@ -257,26 +250,36 @@ $(document).ready(function() {
                             null
                         ]);
                     });
+                    table.draw();
                 }
-                table.draw();
-            })
-            .catch(err => console.error(err));
+            }).catch(err => console.error(err));
     }
 
     loadConsults();
 
+
+    // Função genérica de ação
     $('#consultTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
 
-        if (action === "edit") {
-            $('#edit-consultid').val(data[0]);
-            $('#edit-date').val(data[1]);
-            $('#edit-time').val(data[2]);
-            $('#edit-type').val(data[3]);
-            $('#edit-status').val(data[4]);
-            $('#edit-patient_id').val(data[5]);
-            $('#edit-doctor_id').val(data[6]);
+        if (action === "view") {
+            // IDs baseados na estrutura do modalViewMedication
+            $('#view-date').text(data[1]); // date
+            $('#view-time').text(data[2]); // time
+            $('#view-type').text(data[3]); // type
+            $('#view-status').text(data[4] == 0 ? 'Pendente' : 'Concluída'); // status
+            $('#view-patient_id').text(data[5]); // patient_id
+            $('#view-doctor_id').text(data[6]); // doctor_id
+            $('#modalViewConsult').modal('show');
+        } else if (action === "edit") {
+            $('#edit-consultid').val(data[0]); // id
+            $('#edit-date').val(data[1]); // date
+            $('#edit-time').val(data[2]); // time
+            $('#edit-type').val(data[3]); // type
+            $('#edit-status').val(data[4]); // status
+            $('#edit-patient_id').val(data[5]); // patient_id
+            $('#edit-doctor_id').val(data[6]); // doctor_id
             $('#modalEditConsult').modal('show');
         } else if (action === "delete") {
             $('#delete-consultid').val(data[0]);
@@ -285,15 +288,69 @@ $(document).ready(function() {
         } else if (action === "manage") {
             const consultId = data[0];
             window.location.href = `link.php?route=17&id=${consultId}`;
-        } else if (action === "pdf") {
+            return;
+        }
+
+
+
+    });
+
+
+    // 🔹 Submissão da edição
+    $('#formEditConsult').on('submit', function(e) {
+        e.preventDefault();
+
+        const payload = {
+            action: "update",
+            id: Number($('#edit-consultid').val()),
+            date: $('#edit-date').val(),
+            time: $('#edit-time').val(),
+            type: $('#edit-type').val(),
+            status: parseInt($('#edit-status').val()),
+            patient_id: parseInt($('#edit-patient_id').val()),
+            doctor_id: parseInt($('#edit-doctor_id').val())
+        };
+
+        console.log("Payload enviado:", payload);
+
+        fetch("routes/consultRoutes.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    $('#modalEditConsult').modal('hide');
+                    loadConsults(); // função que recarrega a tabela
+                    swal("Sucesso!", "Consulta atualizada com sucesso.", "success");
+                } else {
+                    swal("Erro!", data.message, "error");
+                }
+            })
+            .catch(err => console.error("Erro ao atualizar consulta:", err));
+        swal("Erro!", "Falha na comunicação com o servidor.", "error");
+    });
+
+    $('#consultTable tbody').on('click', '.action', function() {
+        const action = $(this).data('action');
+        const data = table.row($(this).parents('tr')).data();
+
+        if (action === "pdf") {
             const {
                 jsPDF
             } = window.jspdf;
             const doc = new jsPDF();
             doc.setFontSize(16);
             doc.text("Detalhes da consulta", 105, 20, null, null, "center");
+
+            // Borda
             doc.setDrawColor(0, 123, 255);
             doc.rect(15, 30, 180, 100, "S");
+
+            // Conteúdo
             const startY = 40;
             const lineHeight = 10;
             const details = [
@@ -306,62 +363,42 @@ $(document).ready(function() {
                 `Doutor: ${data[6]}`
             ];
             details.forEach((line, i) => doc.text(line, 20, startY + i * lineHeight));
-            window.open(doc.output('bloburl'), '_blank');
+
+            // Abrir em nova aba para visualizar
+            const blobUrl = doc.output('bloburl');
+            window.open(blobUrl, '_blank');
         }
     });
 
+
+
+
+
+    // Confirmar delete
     $('#confirmDeleteConsult').on('click', function() {
-        const consultId = Number($('#delete-consultid').val());
-        fetch("routes/index.php?route=consults", {
+        const medicationId = Number($('#delete-consultid').val()); // garante que é número
+
+        fetch("routes/consultRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     action: "delete",
-                    id: consultId
+                    id: medicationId
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
                     $('#modalDeleteConsult').modal('hide');
-                    loadConsults();
-                    swal("Deletado!", "Consulta excluída.", "success");
-                } else swal("Erro!", data.message, "error");
-            }).catch(err => console.error(err));
-    });
-
-    $('#formEditConsult').on('submit', function(e) {
-        e.preventDefault();
-        const payload = {
-            action: "update",
-            id: Number($('#edit-consultid').val()),
-            date: $('#edit-date').val(),
-            time: $('#edit-time').val(),
-            type: $('#edit-type').val(),
-            status: parseInt($('#edit-status').val()),
-            patient_id: parseInt($('#edit-patient_id').val()),
-            doctor_id: parseInt($('#edit-doctor_id').val())
-        };
-        fetch("routes/index.php?route=consults", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
+                    loadConsults(); // recarrega a tabela
+                    swal("Deletado!", "Medicamento excluído.", "success");
+                } else {
+                    swal("Erro!", data.message, "error");
+                }
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    $('#modalEditConsult').modal('hide');
-                    loadConsults();
-                    swal("Sucesso!", "Consulta atualizada com sucesso.", "success");
-                } else swal("Erro!", data.message, "error");
-            }).catch(err => {
-                console.error("Erro ao atualizar consulta:", err);
-                swal("Erro!", "Falha na comunicação com o servidor.", "error");
-            });
+            .catch(err => console.error("Erro ao deletar Medicamento:", err));
     });
-});
+})
 </script>

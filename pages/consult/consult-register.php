@@ -75,16 +75,6 @@ include_once __DIR__ . './../../src/components/header.php';
                                                 <select class="form-control" id="txttype" required>
                                                     <option value="">Selecione o tipo de consulta</option>
                                                     <option value="Rotina">TRIAGEM</option>
-                                                    <!-- <option value="Urgência">Consulta de Urgência</option>
-                                                    <option value="Seguimento">Consulta de Seguimento</option>
-                                                    <option value="Pediatria">Consulta de Pediatria</option>
-                                                    <option value="Ginecologia">Consulta de Ginecologia</option>
-                                                    <option value="Cardiologia">Consulta de Cardiologia</option>
-                                                    <option value="Ortopedia">Consulta de Ortopedia</option>
-                                                    <option value="Dermatologia">Consulta de Dermatologia</option>
-                                                    <option value="Neurologia">Consulta de Neurologia</option>
-                                                    <option value="Oftalmologia">Consulta de Oftalmologia</option>
-                                                    <option value="Psiquiatria">Consulta de Psiquiatria</option> -->
                                                     <option value="Outros">Outros</option>
                                                 </select>
                                             </div>
@@ -117,12 +107,12 @@ include_once __DIR__ . './../../src/components/header.php';
                                         <!-- Médico -->
                                         <div class="form-group row">
                                             <label for="txtdoctor"
-                                                class="col-sm-2 col-form-label font-weight-bold">Clinico</label>
-                                            <!-- <div class="col-sm-10">
+                                                class="col-sm-2 col-form-label font-weight-bold">Clínico</label>
+                                            <div class="col-sm-10">
                                                 <select class="form-control" id="txtdoctor" required>
                                                     <option value="">Carregando médicos...</option>
                                                 </select>
-                                            </div> -->
+                                            </div>
                                         </div>
 
                                         <!-- Botões -->
@@ -167,13 +157,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 data.data.forEach(p => {
                     const opt = document.createElement("option");
                     opt.value = p.id;
-                    opt.textContent = p.name;
+                    opt.textContent = p.name || p.nome;
                     select.appendChild(opt);
                 });
+            } else {
+                select.innerHTML = '<option value="">Nenhum paciente encontrado</option>';
             }
-        });
+        })
+        .catch(err => console.error("Erro ao carregar pacientes:", err));
 
-
+    // Carregar médicos (via employeeRoutes)
+    fetch("routes/employeeRoutes.php?doctors=true")
+        .then(res => res.json())
+        .then(data => {
+            const select = document.getElementById("txtdoctor");
+            select.innerHTML = '<option value="">Selecione um Médico</option>';
+            if (data.status === "success") {
+                Swal.fire({
+                    icon: "success",
+                    title: "Cadastro realizado!",
+                    text: data.message || "O paciente foi registado com sucesso linder.",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didClose: () => {
+                        // Redirecionar após fechar
+                        window.location.href = "link.php?route=3";
+                    }
+                });
+            } else {
+                select.innerHTML = '<option value="">Nenhum médico encontrado</option>';
+            }
+        })
+        .catch(err => console.error("Erro ao carregar médicos:", err));
 });
 
 // Submeter consulta

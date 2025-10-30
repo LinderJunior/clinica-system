@@ -171,6 +171,23 @@
     cursor: pointer;
 }
 
+/* Padronizar tamanho dos botões personalizados */
+.btn-ver,
+.btn-marcar {
+    min-width: 130px;
+    /* define uma largura mínima igual aos outros botões */
+    height: 38px;
+    /* altura proporcional à classe .btn-sm */
+    font-size: 14px;
+    /* texto uniforme */
+    font-weight: 500;
+    border-radius: 6px;
+    /* bordas suaves como os outros */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Botão MARCAR CONSULTA */
 .btn-marcar {
     background: linear-gradient(135deg, #28a745, #34d058);
@@ -235,15 +252,22 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-    
+
+                <button class="btn btn-sm btn-ver action" data-action="ver-consultas" title="Ver Consultas">
+                    <i class="icofont icofont-eye"></i> Ver Consultas
+                </button>
+                <button class="btn btn-sm btn-marcar action" data-action="agendar-consulta" title="Agendar Consulta">
+                <i class="icofont icofont-calendar"></i> Agendar
+                </button>
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
                         <i class="icofont icofont-edit"></i>
                 </button>
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
                         <i class="icofont icofont-trash"></i>
                 <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
-        <i class="icofont icofont-file-pdf"></i>
-    </button>
+                    <i class="icofont icofont-file-pdf"></i>
+                </button>
+            
             `
         }]
     });
@@ -297,12 +321,6 @@ $(document).ready(function() {
             .catch(err => console.error("Erro ao carregar pacientes:", err));
     }
 
-
-
-
-
-
-
     loadPatients();
 
     // Função genérica de ação
@@ -342,7 +360,18 @@ $(document).ready(function() {
             $('#delete-patientid').val(data[0]);
             $('#delete-username').text(data[1]);
             $('#modalDeletePatient').modal('show');
+        } else if (action === "ver-consultas") {
+            const patientId = data[0];
+            window.location.href = `link.php?route=7&id=${patientId}`;
+            return;
+        } else if (action === "agendar-consulta") {
+            const patientId = data[0];
+            window.location.href = `link.php?route=18&patient_id=${patientId}`;
+            return;
         }
+
+
+
     });
 
     //adicionar novo usuário
