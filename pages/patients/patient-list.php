@@ -368,7 +368,18 @@ $(document).ready(function() {
             const patientId = data[0];
             window.location.href = `link.php?route=6&patient_id=${patientId}`;
             return;
+        } else if (action === "pdf") {
+            const patientId = data[0];
+
+            if (!patientId) {
+                alert("ID do paciente inválido!");
+                return;
+            }
+
+            // Abrir PDF inline (pode trocar por download, se preferir)
+            window.open(`routes/patientPDF.php?id=${patientId}&action=preview`, '_blank');
         }
+
 
 
 
