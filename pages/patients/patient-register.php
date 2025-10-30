@@ -240,20 +240,40 @@ function sendFormData(formData) {
 
 function handleResponse(data) {
     if (data.status === "success") {
-        alert(data.message);
-        window.location.href = "link.php?route=3";
+        Swal.fire({
+            icon: "success",
+            title: "Cadastro realizado!",
+            text: data.message || "O paciente foi registado com sucesso linder.",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didClose: () => {
+                // Redirecionar após fechar
+                window.location.href = "link.php?route=3";
+            }
+        });
     } else {
-        alert("Erro: " + data.message);
+        Swal.fire({
+            icon: "error",
+            title: "Erro no cadastro",
+            text: data.message || "Ocorreu um erro ao tentar cadastrar o paciente.",
+            confirmButtonText: "Ok"
+        });
     }
 }
 
+
+
 function handleError(error) {
     console.error("Erro:", error);
-    alert("Ocorreu um erro ao enviar os dados.");
+    Swal.fire({
+        icon: "error",
+        title: "Erro inesperado",
+        text: "Ocorreu um erro ao enviar os dados. Verifica a tua ligação.",
+        confirmButtonText: "Ok"
+    });
 }
 </script>
-
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

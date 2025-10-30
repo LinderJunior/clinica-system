@@ -248,33 +248,6 @@ $(document).ready(function() {
         }]
     });
 
-    // // Carrega pacientes
-    // function loadPatients() {
-    //     fetch("routes/patientRoutes.php")
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.status === "success" && Array.isArray(data.data)) {
-    //                 table.clear();
-    //                 data.data.forEach(patient => {
-    //                     table.row.add([
-    //                         patient.id,
-    //                         patient.name,
-    //                         patient.dateBirth,
-    //                         patient.bi,
-    //                         patient.province,
-    //                         patient.city,
-    //                         patient.neighborhood,
-    //                         patient.phoneNumber,
-
-    //                         null
-    //                     ]);
-    //                 });
-    //                 table.draw();
-    //             }
-    //         }).catch(err => console.error(err));
-    // }
-
-    // Carrega pacientes
     function loadPatients() {
         fetch("routes/patientRoutes.php")
             .then(res => res.json())

@@ -62,17 +62,6 @@
     <!-- no <head> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-
-
-
-
-
-
-
-
-
-
-
 </head>
 
 <body>
@@ -114,87 +103,9 @@
                                     </div>
                                 </div>
                             </li>
-                            <!-- <li>
-                                <a href="#!"
-                                    onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleFullScreen()"
-                                    class="waves-effect waves-light" data-cf-modified-2d8d78e876b340f9029c575b-="">
-                                    <i class="full-screen feather icon-maximize"></i>
-                                </a>
-                            </li> -->
+
                         </ul>
                         <ul class="nav-right">
-
-                            <!--
-                            <li class="header-notification">
-                                <div class="dropdown-primary dropdown">
-                                    <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="feather icon-bell"></i>
-                                        <span class="badge bg-c-red">5</span>
-                                    </div>
-
-
-
-                                    <ul class="show-notification notification-view dropdown-menu"
-                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                        <li>
-                                            <h6>Notifications</h6>
-                                            <label class="label label-danger">New</label>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <img class="img-radius" src="assets/jpg/avatar-4.jpg"
-                                                    alt="Generic placeholder image">
-                                                <div class="media-body">
-                                                    <h5 class="notification-user">John Doe</h5>
-                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
-                                                        elit.</p>
-                                                    <span class="notification-time">30 minutes ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <img class="img-radius" src="assets/jpg/avatar-3.jpg"
-                                                    alt="Generic placeholder image">
-                                                <div class="media-body">
-                                                    <h5 class="notification-user">Joseph William</h5>
-                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
-                                                        elit.</p>
-                                                    <span class="notification-time">30 minutes ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <img class="img-radius" src="assets/jpg/avatar-4.jpg"
-                                                    alt="Generic placeholder image">
-                                                <div class="media-body">
-                                                    <h5 class="notification-user">Sara Soudein</h5>
-                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer
-                                                        elit.</p>
-                                                    <span class="notification-time">30 minutes ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul> 
-
-
-
-
-                                </div>
-                            </li>-->
-                            <!-- <li class="header-notification">
-                                <div class="dropdown-primary dropdown">
-                                    <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
-                                        <i class="feather icon-message-square"></i>
-                                        <span class="badge bg-c-green">3</span>
-                                    </div>
-                                </div>
-                            </li> -->
-
-
-
-
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
@@ -236,18 +147,6 @@
                     </div>
                 </div>
             </nav>
-
-
-
-
-
-
-
-
-
-
-
-
             <div id="sidebar" class="users p-chat-user showChat">
                 <div class="had-container">
                     <div class="p-fixed users-main">
@@ -477,65 +376,6 @@
                                         </ul>
                                     </li>
 
-
-
-
-                                    <!-- <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="feather icon-activity"></i></span>
-                                            <span class="pcoded-mtext">Diagnosticos</span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li>
-                                                <a href="link.php?route=8" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Registar</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="link.php?route=9" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Listar</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-                                    <!-- <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
-                                            <span class="pcoded-mtext">Receitas</span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li>
-                                                <a href="link.php?route=10" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Registar</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="link.php?route=11" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Listar</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-
-                                    <!-- <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
-                                            <span class="pcoded-mtext">Usuarios</span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li>
-                                                <a href="link.php?route=11" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Registar</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="link.php?route=12" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Listar</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="feather icon-user"></i></span>
@@ -655,23 +495,6 @@
                     </script>
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/script.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
                         type="6424b555e09833c9225d172a-text/javascript"></script>
                     <script type="6424b555e09833c9225d172a-text/javascript">
@@ -686,7 +509,6 @@
                     </script>
                     <script src="assets/js/rocket-loader.min.js" data-cf-settings="6424b555e09833c9225d172a-|49"
                         defer=""></script>
-
 
                     <script src="assets/js/jquery.min.js"></script>
                     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -716,7 +538,7 @@
                     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>
