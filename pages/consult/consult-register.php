@@ -35,14 +35,7 @@ include_once __DIR__ . './../../src/components/header.php';
                         <div class="col-sm-12">
 
                             <div class="card shadow-sm">
-                                <div
-                                    class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0"><i class="feather icon-plus-circle"></i> Nova Consulta</h5>
-                                    <button type="button" class="btn btn-light text-primary"
-                                        onclick="gerarPDFConsulta()">
-                                        <i class="feather icon-file-text"></i> Gerar PDF
-                                    </button>
-                                </div>
+
 
                                 <div class="card-block p-4">
 
@@ -147,13 +140,13 @@ include_once __DIR__ . './../../src/components/header.php';
 <!-- SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Carregar pacientes
+    // --- Carregar Pacientes ---
     fetch("routes/patientRoutes.php")
         .then(res => res.json())
         .then(data => {
             const select = document.getElementById("txtpatient");
             select.innerHTML = '<option value="">Selecione um Paciente</option>';
-            if (data.status === "success" && data.data.length > 0) {
+            if (data.status === "success" && Array.isArray(data.data)) {
                 data.data.forEach(p => {
                     const opt = document.createElement("option");
                     opt.value = p.id;
@@ -166,24 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error("Erro ao carregar pacientes:", err));
 
-    // Carregar médicos (via employeeRoutes)
+    // --- Carregar Médicos ---
     fetch("routes/employeeRoutes.php?doctors=true")
         .then(res => res.json())
         .then(data => {
             const select = document.getElementById("txtdoctor");
             select.innerHTML = '<option value="">Selecione um Médico</option>';
-            if (data.status === "success") {
-                Swal.fire({
-                    icon: "success",
-                    title: "Cadastro realizado!",
-                    text: data.message || "O paciente foi registado com sucesso linder.",
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didClose: () => {
-                        // Redirecionar após fechar
-                        window.location.href = "link.php?route=3";
-                    }
+            if (data.status === "success" && Array.isArray(data.data)) {
+                data.data.forEach(m => {
+                    const opt = document.createElement("option");
+                    opt.value = m.id;
+                    opt.textContent = m.name || m.nome;
+                    select.appendChild(opt);
                 });
             } else {
                 select.innerHTML = '<option value="">Nenhum médico encontrado</option>';
@@ -192,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Erro ao carregar médicos:", err));
 });
 
-// Submeter consulta
+// --- Submissão do Formulário ---
 function submitConsulta(event) {
     event.preventDefault();
 
@@ -216,19 +203,26 @@ function submitConsulta(event) {
         .then(res => res.json())
         .then(data => {
             if (data.status === "success") {
-                swal("Sucesso!", data.message, "success")
-                    .then(() => window.location.href = "link.php?route=7");
+                Swal.fire({
+                    icon: "success",
+                    title: "Sucesso!",
+                    text: data.message || "Consulta registada com sucesso!",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    // Redirecionar após fechar o Swal
+                    window.location.href = "link.php?route=7";
+                });
             } else {
-                swal("Erro!", data.message, "error");
+                Swal.fire("Erro!", data.message, "error");
             }
         })
         .catch(err => {
             console.error("Erro ao enviar a requisição:", err);
-            swal("Erro!", "Falha ao tentar enviar os dados.", "error");
+            Swal.fire("Erro!", "Falha ao tentar enviar os dados.", "error");
         });
 }
 
-// Gerar PDF
+// --- Gerar PDF ---
 function gerarPDFConsulta() {
     const {
         jsPDF

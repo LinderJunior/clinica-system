@@ -63,7 +63,7 @@
 }
 
 .table thead th {
-    background-color: #748595ff;
+    background-color: #f9fafb;
     color: #495057;
     font-weight: 600;
     text-align: center;
@@ -81,21 +81,7 @@
     border: 1px solid #dee2e6;
 }
 
-.badge {
-    font-size: 0.75rem;
-    padding: 5px 8px;
-    border-radius: 8px;
-}
-
-.badge-success {
-    background-color: #28a745 !important;
-}
-
-.badge-warning {
-    background-color: #ffc107 !important;
-    color: #212529 !important;
-}
-
+/* ---------- Botões e ícones ---------- */
 #consultTable .btn-sm {
     padding: 4px 6px;
     font-size: 0.85rem;
@@ -146,6 +132,23 @@
     transform: scale(1.05);
 }
 
+/* ---------- Badges ---------- */
+.badge {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+    border-radius: 8px;
+}
+
+.badge-success {
+    background-color: #28a745 !important;
+}
+
+.badge-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+/* ---------- DataTables ---------- */
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_filter {
     margin-bottom: 10px;
@@ -159,6 +162,12 @@
 .dataTables_wrapper .dataTables_info {
     font-size: 0.85rem;
     color: #6c757d;
+}
+
+/* Centraliza colunas */
+#consultTable thead th {
+    text-align: center !important;
+    vertical-align: middle;
 }
 </style>
 
@@ -309,6 +318,21 @@ $(document).ready(function() {
             window.open(doc.output('bloburl'), '_blank');
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $('#confirmDeleteConsult').on('click', function() {
         const consultId = Number($('#delete-consultid').val());
