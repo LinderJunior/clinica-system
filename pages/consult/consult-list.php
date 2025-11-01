@@ -374,15 +374,96 @@ $(document).ready(function() {
     $('#consultTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
         const data = table.row($(this).parents('tr')).data();
-
         if (action === "edit") {
-            $('#edit-consultid').val(data[0]);
-            $('#edit-date').val(data[1]);
+            const consultId = data[0];
+            const formattedDate = data[1];
+            const dateParts = formattedDate.split("/");
+            const isoDate = dateParts.length === 3 ? `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}` :
+                "";
+
+            // Preenche campos da consulta
+            $('#edit-consultid').val(consultId);
+            $('#edit-date').val(isoDate);
             $('#edit-time').val(data[2]);
             $('#edit-type').val(data[3]);
-            $('#edit-status').val(data[4]);
-            $('#edit-patient_id').val(data[5]);
-            $('#edit-doctor_id').val(data[6]);
+            // Recupera o status e define o valor do select corretamente
+            let statusValue = "0"; // valor padrão
+            const statusText = (data[4] || '').trim().toLowerCase();
+
+            if (statusText === "pendente") statusValue = "0";
+            else if (statusText === "concluída" || statusText === "concluida") statusValue = "1";
+            else if (statusText === "cancelada") statusValue = "2";
+
+            $('#edit-status').val(statusValue);
+
+
+
+
+            // Carregar pacientes dinamicamente
+            const patientSelect = document.getElementById("edit-patient_id");
+            const currentPatient = data[5]; // nome do paciente atual (exibido na tabela)
+
+            fetch("routes/patientRoutes.php")
+                .then(res => res.json())
+                .then(pData => {
+                    patientSelect.innerHTML = '<option value="">Selecione um Paciente</option>';
+                    if (pData.status === "success" && Array.isArray(pData.data)) {
+                        pData.data.forEach(p => {
+                            const opt = document.createElement("option");
+                            opt.value = p.id;
+                            opt.textContent = p.name || p.nome;
+                            patientSelect.appendChild(opt);
+                        });
+
+                        // Selecionar o paciente atual
+                        const selected = Array.from(patientSelect.options).find(
+                            opt => opt.textContent.trim() === currentPatient.trim()
+                        );
+                        if (selected) {
+                            selected.selected = true;
+                        }
+                    } else {
+                        patientSelect.innerHTML =
+                            '<option value="">Nenhum paciente encontrado</option>';
+                    }
+                })
+                .catch(err => console.error("Erro ao carregar pacientes:", err));
+
+            // Carregar médicos dinamicamente (mesmo princípio, se quiser)
+            // Carregar médicos dinamicamente
+            const doctorSelect = document.getElementById("edit-doctor_id");
+            const currentDoctor = data[6]; // nome do médico atual
+
+            fetch("routes/employeeRoutes.php?doctors=true")
+                .then(res => res.json())
+                .then(dData => {
+                    doctorSelect.innerHTML = '<option value="">Selecione um Médico</option>';
+
+                    if (dData.status === "success" && Array.isArray(dData.data)) {
+                        dData.data.forEach(m => {
+                            const opt = document.createElement("option");
+                            opt.value = m.id;
+                            opt.textContent = m.name || m.nome;
+                            doctorSelect.appendChild(opt);
+                        });
+
+                        // Seleciona o médico correspondente à consulta atual
+                        const selected = Array.from(doctorSelect.options).find(
+                            opt => opt.textContent.trim().toLowerCase() === currentDoctor.trim()
+                            .toLowerCase()
+                        );
+                        if (selected) {
+                            selected.selected = true;
+                        }
+                    } else {
+                        doctorSelect.innerHTML =
+                            '<option value="">Nenhum médico encontrado</option>';
+                    }
+                })
+                .catch(err => console.error("Erro ao carregar médicos:", err));
+
+
+            // Exibir modal
             $('#modalEditConsult').modal('show');
         } else if (action === "delete") {
             $('#delete-consultid').val(data[0]);
@@ -439,8 +520,13 @@ $(document).ready(function() {
             }).catch(err => console.error(err));
     });
 
+
+
+
+
     $('#formEditConsult').on('submit', function(e) {
         e.preventDefault();
+
         const payload = {
             action: "update",
             id: Number($('#edit-consultid').val()),
@@ -451,6 +537,7 @@ $(document).ready(function() {
             patient_id: parseInt($('#edit-patient_id').val()),
             doctor_id: parseInt($('#edit-doctor_id').val())
         };
+
         fetch("routes/index.php?route=consults", {
                 method: "POST",
                 headers: {
@@ -463,12 +550,35 @@ $(document).ready(function() {
                 if (data.status === "success") {
                     $('#modalEditConsult').modal('hide');
                     loadConsults();
-                    swal("Sucesso!", "Consulta atualizada com sucesso.", "success");
-                } else swal("Erro!", data.message, "error");
-            }).catch(err => {
+                    Swal.fire({
+                        title: "Sucesso!",
+                        text: "Consulta atualizada com sucesso.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Erro!",
+                        text: data.message,
+                        icon: "error",
+                        confirmButtonText: "Fechar"
+                    });
+                }
+            })
+            .catch(err => {
                 console.error("Erro ao atualizar consulta:", err);
-                swal("Erro!", "Falha na comunicação com o servidor.", "error");
+                Swal.fire({
+                    title: "Erro!",
+                    text: "Falha na comunicação com o servidor.",
+                    icon: "error",
+                    confirmButtonText: "Fechar"
+                });
             });
     });
+
+
+
+
+
 });
 </script>

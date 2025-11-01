@@ -106,24 +106,14 @@
                         <div class="form-group col-md-6">
                             <label for="edit-patientid">Paciente</label>
                             <select class="form-control" id="edit-patient_id" required>
-                                <option value="">Selecione um Paciente</option>
-                                <option value="1">Paciente 1</option>
-                                <option value="2">Paciente 2</option>
-                                <option value="3">Paciente 3</option>
-                                <option value="4">Paciente 4</option>
-                                <option value="5">Paciente 5</option>
+
                             </select>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="edit-doctorid">Médico</label>
                             <select class="form-control" id="edit-doctor_id" required>
-                                <option value="">Selecione um Médico</option>
-                                <option value="1">Dr. Almeida</option>
-                                <option value="2">Dra. Sofia</option>
-                                <option value="3">Dr. Carlos</option>
-                                <option value="4">Dra. Joana</option>
-                                <option value="5">Dr. Mendes</option>
+
                             </select>
                         </div>
                     </div>
@@ -136,6 +126,7 @@
                             <option value="2">Cancelada</option>
                         </select>
                     </div>
+
 
                 </div>
 
