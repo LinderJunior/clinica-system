@@ -169,6 +169,86 @@
     text-align: center !important;
     vertical-align: middle;
 }
+
+
+
+
+
+/* BOTOES MARCAR CONSULTA E VER CONSULTA */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Padronizar tamanho dos botões personalizados */
+.btn-ver,
+.btn-marcar {
+    min-width: 130px;
+    /* define uma largura mínima igual aos outros botões */
+    height: 38px;
+    /* altura proporcional à classe .btn-sm */
+    font-size: 14px;
+    /* texto uniforme */
+    font-weight: 500;
+    border-radius: 6px;
+    /* bordas suaves como os outros */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botão MARCAR CONSULTA */
+.btn-marcar {
+    background: linear-gradient(135deg, #28a745, #34d058);
+    color: white;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+}
+
+.btn-marcar:hover {
+    background: linear-gradient(135deg, #218838, #2ebf4f);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* Botão VER CONSULTA */
+.btn-ver {
+    background: linear-gradient(135deg, #007bff, #3399ff);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-ver:hover {
+    background: linear-gradient(135deg, #0069d9, #2a8cff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Ícones */
+.btn i {
+    margin-right: 6px;
+    font-size: 15px;
+}
+
+/* Espaçamento entre botões */
+.action {
+    margin-right: 10px;
+}
+</style>
+
+
+
+
+
+
+
+
+
 </style>
 
 <script>
@@ -197,9 +277,14 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-                <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
-                    <i class="icofont icofont-eye"></i>
+              
+
+                <button class="btn btn-sm btn-ver action" data-action="manage" title="Ver Consultas">
+                    <i class="icofont icofont-eye"></i>Detalhes da consulta
                 </button>
+
+
+
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar Consulta">
                     <i class="icofont icofont-edit"></i>
                 </button>
@@ -240,7 +325,6 @@ $(document).ready(function() {
             };
         } else {
             // buscar todas as consultas via GET
-            url += ""; // já retorna todas
             fetchOptions = {
                 method: "GET"
             };
@@ -252,12 +336,24 @@ $(document).ready(function() {
                 table.clear();
                 if (data.status === "success" && Array.isArray(data.data)) {
                     data.data.forEach(consult => {
+                        // Converter a data de YYYY-MM-DD -> DD/MM/YYYY
+                        let formattedDate = "";
+                        if (consult.date) {
+                            const parts = consult.date.split("-");
+                            if (parts.length === 3) {
+                                formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                            } else {
+                                formattedDate = consult.date; // fallback
+                            }
+                        }
+
                         const statusLabel = consult.status == 1 ?
                             '<span class="badge badge-success">Concluída</span>' :
                             '<span class="badge badge-warning">Pendente</span>';
+
                         table.row.add([
                             consult.id,
-                            consult.date,
+                            formattedDate, // ✅ data formatada no estilo mocambicano
                             consult.time,
                             consult.type,
                             statusLabel,
@@ -269,10 +365,11 @@ $(document).ready(function() {
                 }
                 table.draw();
             })
-            .catch(err => console.error(err));
+            .catch(err => console.error("Erro ao carregar consultas:", err));
     }
 
     loadConsults();
+
 
     $('#consultTable tbody').on('click', '.action', function() {
         const action = $(this).data('action');
@@ -318,20 +415,6 @@ $(document).ready(function() {
             window.open(doc.output('bloburl'), '_blank');
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     $('#confirmDeleteConsult').on('click', function() {
