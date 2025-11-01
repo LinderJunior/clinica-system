@@ -54,7 +54,8 @@ $patientId = isset($_GET['patient_id']) ? intval($_GET['patient_id']) : null;
                                             <label for="txtdate"
                                                 class="col-sm-2 col-form-label font-weight-bold">Data</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" id="txtdate" required>
+                                                <input type="text" class="form-control" id="txtdate"
+                                                    placeholder="dd/mm/yyyy" required>
                                             </div>
                                         </div>
 
@@ -271,4 +272,66 @@ function gerarPDFConsulta() {
 
     doc.save(`Consulta_${paciente}_${data}.pdf`);
 }
+</script>
+
+
+
+
+
+
+
+<!-- Flatpickr Date Picker -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Se flatpickr ainda não estiver definido, espera 200ms e tenta novamente (até 5x)
+    function waitForFlatpickr(attemptsLeft = 5) {
+        if (window.flatpickr) {
+            initFlatpickr();
+        } else if (attemptsLeft > 0) {
+            setTimeout(() => waitForFlatpickr(attemptsLeft - 1), 200);
+        } else {
+            // fallback: carrega dinamicamente
+            loadFlatpickrDynamically().then(initFlatpickr).catch(err => {
+                console.error("Não foi possível carregar o flatpickr:", err);
+            });
+        }
+    }
+
+    function loadFlatpickrDynamically() {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js";
+            s.onload = () => {
+                const s2 = document.createElement('script');
+                s2.src = "https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js";
+                s2.onload = resolve;
+                s2.onerror = reject;
+                document.body.appendChild(s2);
+            };
+            s.onerror = reject;
+            document.body.appendChild(s);
+        });
+    }
+
+    function initFlatpickr() {
+        // garante que o campo existe
+        const el = document.getElementById("txtdate");
+        if (!el) return;
+
+        flatpickr(el, {
+            dateFormat: "Y-m-d", // formato interno (recomendado ISO para backend)
+            altInput: true,
+            altFormat: "d/m/Y", // formato visível para o utilizador (dd/mm/yyyy)
+            locale: "pt", // pt (usa o ficheiro l10n)
+            maxDate: "today",
+            disableMobile: true
+        });
+
+        // Se quiseres forçar valor placeholder já formatado:
+        // el.placeholder = "dd/mm/yyyy";
+    }
+
+    waitForFlatpickr();
+});
 </script>
