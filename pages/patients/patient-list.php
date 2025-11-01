@@ -375,14 +375,9 @@ $(document).ready(function() {
                 alert("ID do paciente inválido!");
                 return;
             }
-
             // Abrir PDF inline (pode trocar por download, se preferir)
             window.open(`routes/patientPDF.php?id=${patientId}&action=preview`, '_blank');
         }
-
-
-
-
     });
 
     //adicionar novo usuário
@@ -470,44 +465,6 @@ $(document).ready(function() {
                 }
             })
             .catch(err => console.error("Erro ao atualizar paciente:", err));
-    });
-
-
-    $('#patientTable tbody').on('click', '.action', function() {
-        const action = $(this).data('action');
-        const data = table.row($(this).parents('tr')).data();
-
-        if (action === "pdf") {
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFontSize(16);
-            doc.text("Detalhes do Paciente", 105, 20, null, null, "center");
-
-            // Borda
-            doc.setDrawColor(0, 123, 255);
-            doc.rect(15, 30, 180, 100, "S");
-
-            // Conteúdo
-            const startY = 40;
-            const lineHeight = 10;
-            const details = [
-                `ID: ${data[0]}`,
-                `Nome: ${data[1]}`,
-                `Data de Nascimento: ${data[2]}`,
-                `B.I: ${data[3]}`,
-                `Província: ${data[4]}`,
-                `Cidade: ${data[5]}`,
-                `Bairro: ${data[6]}`,
-                `Telefone: ${data[7]}`
-            ];
-            details.forEach((line, i) => doc.text(line, 20, startY + i * lineHeight));
-
-            // Abrir em nova aba para visualizar
-            const blobUrl = doc.output('bloburl');
-            window.open(blobUrl, '_blank');
-        }
     });
 
     // Confirmar delete

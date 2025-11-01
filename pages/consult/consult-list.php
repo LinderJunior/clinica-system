@@ -291,7 +291,8 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar Consulta">
                     <i class="icofont icofont-trash"></i>
                 </button>
-                <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+
+                  <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
                     <i class="icofont icofont-file-pdf"></i>
                 </button>
             `
@@ -306,12 +307,12 @@ $(document).ready(function() {
 
 
     function loadConsults() {
-        const patientId = getQueryParam('id'); // id do paciente na URL
+        const consultId = getQueryParam('id'); // id do paciente na URL
 
         let url = "routes/index.php?route=consults";
         let fetchOptions = {};
 
-        if (patientId) {
+        if (consultId) {
             // buscar só desse paciente via POST
             fetchOptions = {
                 method: "POST",
@@ -320,7 +321,7 @@ $(document).ready(function() {
                 },
                 body: JSON.stringify({
                     action: "searchByPatient",
-                    patient_id: Number(patientId)
+                    patient_id: Number(consultId)
                 })
             };
         } else {
@@ -397,8 +398,6 @@ $(document).ready(function() {
             $('#edit-status').val(statusValue);
 
 
-
-
             // Carregar pacientes dinamicamente
             const patientSelect = document.getElementById("edit-patient_id");
             const currentPatient = data[5]; // nome do paciente atual (exibido na tabela)
@@ -473,27 +472,14 @@ $(document).ready(function() {
             const consultId = data[0];
             window.location.href = `link.php?route=17&id=${consultId}`;
         } else if (action === "pdf") {
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFontSize(16);
-            doc.text("Detalhes da consulta", 105, 20, null, null, "center");
-            doc.setDrawColor(0, 123, 255);
-            doc.rect(15, 30, 180, 100, "S");
-            const startY = 40;
-            const lineHeight = 10;
-            const details = [
-                `ID: ${data[0]}`,
-                `Data: ${data[1]}`,
-                `Hora: ${data[2]}`,
-                `Tipo: ${data[3]}`,
-                `Status: ${data[4]}`,
-                `Paciente: ${data[5]}`,
-                `Doutor: ${data[6]}`
-            ];
-            details.forEach((line, i) => doc.text(line, 20, startY + i * lineHeight));
-            window.open(doc.output('bloburl'), '_blank');
+            const consultId = data[0];
+
+            if (!consultId) {
+                alert("ID do paciente inválido!");
+                return;
+            }
+            // Abrir PDF inline (pode trocar por download, se preferir)
+            window.open(`routes/consultPDF.php?id=${consultId}&action=preview`, '_blank');
         }
     });
 
