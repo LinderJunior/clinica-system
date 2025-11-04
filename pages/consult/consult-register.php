@@ -145,7 +145,10 @@ $patientId = isset($_GET['patient_id']) ? intval($_GET['patient_id']) : null;
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const patientId = <?= $patientId ? $patientId : 'null' ?>;
+    const urlParams = new URLSearchParams(window.location.search);
+    const employeeId = urlParams.get("id") ? parseInt(urlParams.get("id")) : null; // pega employeeId da URL
     const patientSelect = document.getElementById("txtpatient");
+    const doctorSelect = document.getElementById("txtdoctor");
 
     // --- Carregar Pacientes ---
     fetch("routes/patientRoutes.php")
@@ -182,25 +185,48 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error("Erro ao carregar pacientes:", err));
 
+
+
+
+
+
+
     // --- Carregar Médicos ---
     fetch("routes/employeeRoutes.php?doctors=true")
         .then(res => res.json())
         .then(data => {
-            const select = document.getElementById("txtdoctor");
-            select.innerHTML = '<option value="">Selecione um Médico</option>';
+            doctorSelect.innerHTML = '<option value="">Selecione um Médico</option>';
             if (data.status === "success" && Array.isArray(data.data)) {
                 data.data.forEach(m => {
                     const opt = document.createElement("option");
                     opt.value = m.id;
                     opt.textContent = m.name || m.nome;
-                    select.appendChild(opt);
+                    doctorSelect.appendChild(opt);
                 });
+
+                // Se veio employeeId na URL
+                if (employeeId) {
+                    doctorSelect.value = employeeId;
+                    doctorSelect.disabled = true; // bloqueia alteração
+                    const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+                    if (selectedOption) {
+                        selectedOption.style.fontWeight = "bold";
+                        selectedOption.style.color = "#28a745"; // destaque verde
+                    }
+                }
+
             } else {
-                select.innerHTML = '<option value="">Nenhum médico encontrado</option>';
+                doctorSelect.innerHTML = '<option value="">Nenhum médico encontrado</option>';
             }
         })
         .catch(err => console.error("Erro ao carregar médicos:", err));
 });
+
+
+
+
+
+
 
 // --- Submissão ---
 function submitConsulta(event) {

@@ -8,11 +8,7 @@
                 <h5 class="mb-0 text-secondary" style="font-size: 1.25rem; font-weight: 500;">
                     Gestão de Funcionários
                 </h5>
-                <!-- <button class="btn btn-success btn-sm d-flex align-items-center shadow-sm" id="btnAddEmployee"
-                    style="font-size: 0.9rem; padding: 0.35rem 0.7rem;">
-                    <i class="icofont icofont-plus mr-1" style="font-size: 1rem;"></i>
-                    Novo Registo
-                </button> -->
+
             </div>
         </div>
     </div>
@@ -349,8 +345,8 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-ver action" data-action="manage" title="Ver Consultas">
                     <i class="icofont icofont-eye"></i> Ver Consultas
                 </button>
-                <button class="btn btn-sm btn-marcar action" data-action="marcar-consulta" title="Marcar Consulta">
-                <i class="icofont icofont-calendar"></i> Marcar Consulta
+                 <button class="btn btn-sm btn-marcar action" data-action="agendar-consulta" title="Agendar Consulta">
+                <i class="icofont icofont-calendar"></i> Agendar
                 </button>
 
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
@@ -464,6 +460,11 @@ $(document).ready(function() {
             case "manage":
                 window.location.href = `link.php?route=20&id=${employeeId}`;
                 break;
+            case "agendar-consulta":
+                window.location.href = `link.php?route=6&id=${employeeId}`;
+                break;
+
+
         }
     });
 

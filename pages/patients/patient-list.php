@@ -380,8 +380,6 @@ $(document).ready(function() {
         }
     });
 
-    //adicionar novo usuário
-    // Abrir modal de adicionar
     $('#btnAddUser').on('click', function() {
         $('#formAddUser')[0].reset(); // limpa os campos
         $('#modalAddUser').modal('show');
