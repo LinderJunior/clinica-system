@@ -274,5 +274,123 @@ class Consult {
             return [];
         }
     }
+
+
+
+
+
+        /**
+     * Retorna o resumo e as consultas de um médico para o dashboard
+     */
+    public function getDoctorDashboardData(int $doctor_id): array {
+        try {
+            // Totais gerais
+            $stmtTotal = $this->pdo->prepare("SELECT COUNT(*) FROM consult WHERE doctor_id = ?");
+            $stmtTotal->execute([$doctor_id]);
+            $total = (int)$stmtTotal->fetchColumn();
+
+            $stmtCompleted = $this->pdo->prepare("SELECT COUNT(*) FROM consult WHERE doctor_id = ? AND status = 1");
+            $stmtCompleted->execute([$doctor_id]);
+            $completed = (int)$stmtCompleted->fetchColumn();
+
+            $stmtPending = $this->pdo->prepare("SELECT COUNT(*) FROM consult WHERE doctor_id = ? AND status = 0");
+            $stmtPending->execute([$doctor_id]);
+            $pending = (int)$stmtPending->fetchColumn();
+
+            $stmtCanceled = $this->pdo->prepare("SELECT COUNT(*) FROM consult WHERE doctor_id = ? AND status = 2");
+            $stmtCanceled->execute([$doctor_id]);
+            $canceled = (int)$stmtCanceled->fetchColumn();
+
+            // Totais do mês e semana atuais
+            $stmtMonth = $this->pdo->prepare("
+                SELECT COUNT(*) FROM consult 
+                WHERE doctor_id = ? AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())
+            ");
+            $stmtMonth->execute([$doctor_id]);
+            $monthTotal = (int)$stmtMonth->fetchColumn();
+
+            $stmtWeek = $this->pdo->prepare("
+                SELECT COUNT(*) FROM consult 
+                WHERE doctor_id = ? AND YEARWEEK(date, 1) = YEARWEEK(CURRENT_DATE(), 1)
+            ");
+            $stmtWeek->execute([$doctor_id]);
+            $weekTotal = (int)$stmtWeek->fetchColumn();
+
+            // Faturamento (considerando apenas consultas concluídas)
+            $stmtFaturamento = $this->pdo->prepare("
+                SELECT SUM(CASE WHEN type LIKE '%VIP%' THEN 5000 
+                                WHEN type LIKE '%Normal%' THEN 3500 
+                                ELSE 3000 END)
+                FROM consult 
+                WHERE doctor_id = ? AND status = 1
+            ");
+            $stmtFaturamento->execute([$doctor_id]);
+            $faturamento = (float)($stmtFaturamento->fetchColumn() ?? 0);
+
+            // Salário (exemplo: 70% do faturamento)
+            $salary = round($faturamento * 0.7, 2);
+
+            // Lista de consultas recentes
+            $stmtConsults = $this->pdo->prepare("
+                SELECT c.id, c.date, c.time, c.type, c.status, p.name AS patient_name
+                FROM consult c
+                LEFT JOIN patient p ON c.patient_id = p.id
+                WHERE c.doctor_id = ?
+                ORDER BY c.date DESC, c.time DESC
+                LIMIT 50
+            ");
+            $stmtConsults->execute([$doctor_id]);
+            $consults = $stmtConsults->fetchAll(PDO::FETCH_ASSOC);
+
+            return [
+                "total_consults" => $total,
+                "completed" => $completed,
+                "pending" => $pending,
+                "canceled" => $canceled,
+                "month_total" => $monthTotal,
+                "week_total" => $weekTotal,
+                "faturamento" => $faturamento,
+                "salary" => $salary,
+                "consults" => $consults
+            ];
+
+        } catch (PDOException $e) {
+            error_log("Erro ao carregar dashboard do médico: " . $e->getMessage());
+            return [];
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 ?>

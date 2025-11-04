@@ -473,7 +473,7 @@
                                 </ul>
                             </div>
                     </nav>
-                    <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery.min.js"></script>
+
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/jquery-ui.min.js">
                     </script>
                     <script type="6424b555e09833c9225d172a-text/javascript" src="assets/js/popper.min.js"></script>
@@ -539,6 +539,8 @@
                     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 </body>

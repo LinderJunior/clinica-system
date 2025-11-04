@@ -277,8 +277,6 @@ $(document).ready(function() {
             orderable: false,
             className: "text-center",
             defaultContent: `
-              
-
                 <button class="btn btn-sm btn-ver action" data-action="manage" title="Ver Consultas">
                     <i class="icofont icofont-eye"></i>Detalhes da consulta
                 </button>
@@ -292,7 +290,7 @@ $(document).ready(function() {
                     <i class="icofont icofont-trash"></i>
                 </button>
 
-                  <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+                <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
                     <i class="icofont icofont-file-pdf"></i>
                 </button>
             `

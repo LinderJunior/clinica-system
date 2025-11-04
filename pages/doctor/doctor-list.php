@@ -125,43 +125,65 @@
 }
 
 
-/**Estilizacao de Botoes */
 
-/* ---------- Botões da tabela de médicos ---------- */
-#employeeTable .btn-sm {
+
+
+
+<style>
+
+/* ---------- Layout clínico e limpo ---------- */
+.card {
+    border-radius: 10px;
+}
+
+.table {
+    font-size: 0.9rem;
+    border-color: #dee2e6;
+}
+
+.table thead th {
+    background-color: #f9fafb;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    text-align: center;
     padding: 6px 10px;
+}
+
+#patientTable {
+    border: 1px solid #dee2e6;
+}
+
+/* ---------- Ícones e botões ---------- */
+#patientTable .btn-sm {
+    padding: 4px 6px;
     font-size: 0.85rem;
     margin: 0 3px;
     border-radius: 6px;
-    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 32px;
+    height: 32px;
 }
 
-#employeeTable .btn-sm i {
-    margin-right: 4px;
+.btn-icon i {
     font-size: 1rem;
-}
-
-/* Cores dos botões */
-.btn-success {
-    background-color: #28a745 !important;
-    border: none;
-    color: #fff;
-}
-
-.btn-success:hover {
-    background-color: #218838 !important;
-    transform: scale(1.05);
 }
 
 .btn-info {
     background-color: #17a2b8 !important;
     border: none;
-    color: #fff;
 }
 
 .btn-info:hover {
@@ -172,7 +194,6 @@
 .btn-primary {
     background-color: #6c757d !important;
     border: none;
-    color: #fff;
 }
 
 .btn-primary:hover {
@@ -183,7 +204,6 @@
 .btn-danger {
     background-color: #dc3545 !important;
     border: none;
-    color: #fff;
 }
 
 .btn-danger:hover {
@@ -191,16 +211,103 @@
     transform: scale(1.05);
 }
 
-.btn-warning {
-    background-color: #ffc107 !important;
-    border: none;
-    color: #212529;
+/* ---------- Centraliza os títulos das colunas ---------- */
+#patientTable thead th {
+    text-align: center !important;
+    vertical-align: middle;
 }
 
-.btn-warning:hover {
-    background-color: #e0a800 !important;
-    transform: scale(1.05);
+/* ---------- DataTables ---------- */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 10px;
 }
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 2px 6px !important;
+    font-size: 0.85rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+
+
+/* BOTOES MARCAR CONSULTA E VER CONSULTA */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Padronizar tamanho dos botões personalizados */
+.btn-ver,
+.btn-marcar {
+    min-width: 130px;
+    /* define uma largura mínima igual aos outros botões */
+    height: 38px;
+    /* altura proporcional à classe .btn-sm */
+    font-size: 14px;
+    /* texto uniforme */
+    font-weight: 500;
+    border-radius: 6px;
+    /* bordas suaves como os outros */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botão MARCAR CONSULTA */
+.btn-marcar {
+    background: linear-gradient(135deg, #28a745, #34d058);
+    color: white;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4);
+}
+
+.btn-marcar:hover {
+    background: linear-gradient(135deg, #218838, #2ebf4f);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* Botão VER CONSULTA */
+.btn-ver {
+    background: linear-gradient(135deg, #007bff, #3399ff);
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-ver:hover {
+    background: linear-gradient(135deg, #0069d9, #2a8cff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Ícones */
+.btn i {
+    margin-right: 6px;
+    font-size: 15px;
+}
+
+/* Espaçamento entre botões */
+.action {
+    margin-right: 10px;
+}
+</style>
+
+
+
+
+
+
+
 </style>
 
 <script>
@@ -239,15 +346,21 @@ $(document).ready(function() {
             className: "text-center",
             defaultContent: `
 
-
-                <button class="btn btn-sm btn-info btn-icon action" data-action="manage" title="Gerir Consulta">
-                    <i class="icofont icofont-eye" style="font-size: 1.5rem;"></i>
+                <button class="btn btn-sm btn-ver action" data-action="manage" title="Ver Consultas">
+                    <i class="icofont icofont-eye"></i> Ver Consultas
                 </button>
+                <button class="btn btn-sm btn-marcar action" data-action="marcar-consulta" title="Marcar Consulta">
+                <i class="icofont icofont-calendar"></i> Marcar Consulta
+                </button>
+
                 <button class="btn btn-sm btn-primary btn-icon action" data-action="edit" title="Editar">
                     <i class="icofont icofont-edit"></i>
                 </button>
                 <button class="btn btn-sm btn-danger btn-icon action" data-action="delete" title="Eliminar">
                     <i class="icofont icofont-trash"></i>
+                </button>
+                <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
+                    <i class="icofont icofont-file-pdf"></i>
                 </button>
             `
         }],
@@ -266,16 +379,6 @@ $(document).ready(function() {
             }
         }
     });
-
-
-
-    //     <button class="btn btn-sm btn-success action" data-action="marcar">
-    //     <i class="icofont icofont-plus"></i> AGENDAR CONSULTA
-    // </button>
-    // <button class="btn btn-sm btn-info action" data-action="view">
-    //     <i class="icofont icofont-eye"></i> VER CONSULTAS
-    // </button>
-
 
     // Função para carregar médicos
     function loadDoctors() {

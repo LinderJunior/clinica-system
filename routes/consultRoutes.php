@@ -68,11 +68,13 @@ function handlePostRequest($consultController) {
         'searchByStatus' => $consultController->searchConsultsByStatus($data['status']),
         'patients' => $consultController->getAllPatients(),
         'doctors' => $consultController->getAllDoctors(),
+        'dashboard_doctor' => $consultController->getDoctorDashboard($data['doctor_id']),
         default => ["status" => "error", "message" => "Ação inválida!"]
     };
 
     sendResponse($response);
 }
+
 
 /**
  * Processa requisições GET
@@ -97,9 +99,13 @@ function handleGetRequest($consultController) {
         $response = $consultController->getAllPatients();
     } elseif (isset($_GET['doctors']) && $_GET['doctors'] === 'true') {
         $response = $consultController->getAllDoctors();
+
     } else {
         $response = $consultController->listConsults();
     }
+
+
+    
     sendResponse($response);
 }
 

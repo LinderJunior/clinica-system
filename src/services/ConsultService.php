@@ -126,6 +126,25 @@ class ConsultController {
         return ["status" => "success", "data" => $this->consultModel->getAllDoctors()];
     }
 
+
+
+        /**
+     * Retorna os dados do dashboard do médico (consultas, totais, faturamento etc.)
+     */
+    public function getDoctorDashboard(int $doctor_id): array {
+        $data = $this->consultModel->getDoctorDashboardData($doctor_id);
+        if (!empty($data)) {
+            return ["status" => "success", "data" => $data];
+        }
+        return ["status" => "error", "message" => "Nenhum dado encontrado para este médico."];
+    }
+
+
+
+
+
+
+
     /**
      * Gera uma resposta padronizada.
      */
