@@ -34,7 +34,7 @@
                                             <th>Nome</th>
                                             <th>B.I</th>
                                             <th>Telefone</th>
-                                            <!-- <th>Posições</th> -->
+                                            <th>Posições</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                    <?php include_once __DIR__ . '/employee-modal.php'; ?>
+                    <?php include_once __DIR__ . '/doctor-modal.php'; ?>
                 </div>
             </div>
         </div>
@@ -345,7 +345,7 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-ver action" data-action="manage" title="Ver Consultas">
                     <i class="icofont icofont-eye"></i> Ver Consultas
                 </button>
-                 <button class="btn btn-sm btn-marcar action" data-action="agendar-consulta" title="Agendar Consulta">
+                <button class="btn btn-sm btn-marcar action" data-action="agendar-consulta" title="Agendar Consulta">
                 <i class="icofont icofont-calendar"></i> Agendar
                 </button>
 
@@ -391,7 +391,7 @@ $(document).ready(function() {
                             employee.name,
                             employee.bi,
                             employee.phoneNumber,
-                            // employee.positions.map(p => p.type || p.position_id).join(", "),
+                            employee.positions.map(p => p.type || p.position_id).join(", "),
                             null
                         ]);
                     });
@@ -437,19 +437,15 @@ $(document).ready(function() {
                 break;
 
             case "edit":
-                $('#edit-employeeid').val(employee.id);
-                $('#edit-nome').val(employee.name);
-                $('#edit-bi').val(employee.bi);
-                $('#edit-telefone').val(employee.phoneNumber);
-
-                positions = employee.positions.map(p => ({
-                    id: parseInt(p.id || p.position_id),
-                    name: p.type || p.position_id
-                }));
-                renderPositions();
-
-                $('#modalEditEmployee').modal('show');
+                // Preenche os campos do modal corretamente
+                $('#edit-doctorid').val(employee.id);
+                $('#edit-doctor-nome').val(employee.name);
+                $('#edit-doctor-bi').val(employee.bi);
+                $('#edit-doctor-telefone').val(employee.phoneNumber);
+                // Exibe o modal
+                $('#modalEditDoctor').modal('show');
                 break;
+
 
             case "delete":
                 $('#delete-employeeid').val(employee.id);
@@ -473,18 +469,16 @@ $(document).ready(function() {
         $('#formAddUser')[0].reset();
         $('#modalAddUser').modal('show');
     });
-
     // Submissão do formulário de edição
-    $('#formEditEmployee').on('submit', function(e) {
+    $('#formEditDoctor').on('submit', function(e) {
         e.preventDefault();
 
         const payload = {
-            action: "update",
-            id: Number($('#edit-employeeid').val()),
-            name: $('#edit-nome').val(),
-            bi: $('#edit-bi').val(),
-            phoneNumber: $('#edit-telefone').val(),
-            positionIds: positions.map(p => p.id)
+            action: "updateBasic",
+            id: Number($('#edit-doctorid').val()),
+            name: $('#edit-doctor-nome').val(),
+            bi: $('#edit-doctor-bi').val(),
+            phoneNumber: $('#edit-doctor-telefone').val()
         };
 
         fetch("routes/employeeRoutes.php", {
@@ -497,15 +491,34 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    $('#modalEditEmployee').modal('hide');
+
+                    // Fecha o modal
+                    $('#modalEditDoctor').modal('hide');
+
+                    // Atualiza a tabela silenciosamente
                     loadDoctors();
-                    swal("Sucesso!", "Funcionário atualizado com sucesso.", "success");
+
+                    // Mostra Swal suave
+                    Swal.fire({
+                        icon: "success",
+                        title: "Cadastro atualizado!",
+                        text: data.message || "O médico foi atualizado com sucesso.",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
                 } else {
-                    swal("Erro!", data.message, "error");
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: data.message || "Ocorreu um erro ao atualizar o médico."
+                    });
                 }
             })
             .catch(err => console.error("Erro ao atualizar funcionário:", err));
     });
+
 
     // Confirmar delete
     $('#confirmDeleteEmployee').on('click', function() {

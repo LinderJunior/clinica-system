@@ -234,6 +234,56 @@ class Employee {
         }
     }
 
+
+
+    public function updateEmployeeBasic(int $id, string $name, string $bi, string $phoneNumber): bool {
+    try {
+        $stmt = $this->pdo->prepare("
+            UPDATE employee 
+            SET name = ?, bi = ?, phoneNumber = ?
+            WHERE id = ?
+        ");
+        return $stmt->execute([$name, $bi, $phoneNumber, $id]);
+    } catch (PDOException $e) {
+        error_log("Erro ao atualizar dados do funcionário: " . $e->getMessage());
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+public function updateEmployeePositions(int $id, array $positionIds): bool {
+    try {
+        $this->pdo->beginTransaction();
+
+        // Remover associações antigas
+        $stmt = $this->pdo->prepare("DELETE FROM employee_position WHERE employee_id = ?");
+        $stmt->execute([$id]);
+
+        // Inserir novas posições
+        $stmt = $this->pdo->prepare("INSERT INTO employee_position (employee_id, position_id) VALUES (?, ?)");
+        foreach ($positionIds as $positionId) {
+            $stmt->execute([$id, $positionId]);
+        }
+
+        $this->pdo->commit();
+        return true;
+    } catch (PDOException $e) {
+        $this->pdo->rollBack();
+        error_log("Erro ao atualizar posições do funcionário: " . $e->getMessage());
+        return false;
+    }
+}
+
+
+
+
+
     /**
      * Remove um funcionário e suas associações com posições/cargos
      */

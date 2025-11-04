@@ -59,6 +59,16 @@ function handlePostRequest($employeeController) {
             $data['phoneNumber'], 
             $data['positionIds']
         ),
+        'updateBasic' => $employeeController->editEmployeeBasic(
+        $data['id'],
+        $data['name'], 
+        $data['bi'], 
+        $data['phoneNumber']
+        ),
+        'updatePositions' => $employeeController->editEmployeePositions(
+            $data['id'],
+            $data['positionIds'] ?? []
+        ),
         'delete' => $employeeController->removeEmployee($data['id']),
         'search' => $employeeController->searchEmployeesByName($data['name']),
         'positions' => $employeeController->getAllPositions(),

@@ -98,6 +98,13 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
 <!-- Modal Delete Patient -->
 <div class="modal fade" id="modalDeletePatient" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">

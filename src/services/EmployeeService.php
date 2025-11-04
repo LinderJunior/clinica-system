@@ -46,6 +46,29 @@ class EmployeeController {
         return $this->createResponse($success, "Funcionário atualizado com sucesso!", "Erro ao atualizar funcionário.");
     }
 
+
+
+
+
+    public function editEmployeeBasic(int $id, string $name, string $bi, string $phoneNumber): array {
+    $success = $this->employeeModel->updateEmployeeBasic($id, $name, $bi, $phoneNumber);
+    return $this->createResponse($success, "Dados do funcionário atualizados com sucesso!", "Erro ao atualizar dados do funcionário.");
+}
+
+public function editEmployeePositions(int $id, array $positionIds): array {
+    $success = $this->employeeModel->updateEmployeePositions($id, $positionIds);
+    return $this->createResponse($success, "Posições atualizadas com sucesso!", "Erro ao atualizar posições do funcionário.");
+}
+
+
+
+
+
+
+
+
+    
+
     /**
      * Remove um funcionário.
      */
