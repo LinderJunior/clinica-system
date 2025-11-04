@@ -224,10 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
 // --- Submissão ---
 function submitConsulta(event) {
     event.preventDefault();
@@ -299,10 +295,6 @@ function gerarPDFConsulta() {
     doc.save(`Consulta_${paciente}_${data}.pdf`);
 }
 </script>
-
-
-
-
 
 
 
