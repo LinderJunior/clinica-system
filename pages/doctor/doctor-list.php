@@ -309,7 +309,8 @@
 <script>
 $(document).ready(function() {
     let employeesData = [];
-    let positions = [];
+
+
 
     // Inicializa DataTable
     const table = $('#employeeTable').DataTable({
@@ -358,6 +359,9 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
                     <i class="icofont icofont-file-pdf"></i>
                 </button>
+                  <button class="btn btn-sm btn-info btn-icon action" data-action="positions" title="Gerenciar Posições">
+                    <i class="icofont icofont-network"></i>
+                </button>
             `
         }],
         language: {
@@ -401,23 +405,18 @@ $(document).ready(function() {
             .catch(err => console.error(err));
     }
 
+
     loadDoctors();
 
-    // Renderiza lista de posições no modal de edição
-    function renderPositions() {
-        const list = $('#positionsList');
-        list.empty();
 
-        positions.forEach(pos => {
-            const li = `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${pos.name}
-                    <button type="button" class="btn btn-sm btn-danger" onclick="removePosition(${pos.id})">Remover</button>
-                </li>
-            `;
-            list.append(li);
-        });
-    }
+
+
+
+
+
+
+
+
 
     // Handler para ações da tabela
     $('#employeeTable tbody').on('click', '.action', function() {
@@ -458,6 +457,13 @@ $(document).ready(function() {
                 break;
             case "agendar-consulta":
                 window.location.href = `link.php?route=6&id=${employeeId}`;
+                break;
+            case "positions":
+                $('#positions-employee-id').val(employee.id);
+                currentPositions = employee.positions.map(p => p.id);
+                renderPositionsList();
+                renderPositionOptions();
+                $('#modalEditPositions').modal('show');
                 break;
 
 
@@ -520,31 +526,177 @@ $(document).ready(function() {
     });
 
 
-    // Confirmar delete
-    $('#confirmDeleteEmployee').on('click', function() {
-        const employeeId = Number($('#delete-employeeid').val());
 
-        fetch("routes/employeeRoutes.php", {
+
+
+    let availablePositions = [];
+    let currentPositions = [];
+
+    // Função para carregar posições do servidor
+    async function loadPositions() {
+        try {
+            const res = await fetch("routes/positionRoutes.php?route=positions");
+            const data = await res.json();
+            if (data.status === "success") {
+                availablePositions = data.data;
+            } else {
+                console.error("Erro ao carregar posições:", data.message);
+            }
+        } catch (err) {
+            console.error("Erro na requisição de posições:", err);
+        }
+    }
+
+
+
+    // Renderiza lista de posições já atribuídas
+    function renderPositionsList() {
+        const list = $('#positionsList');
+        list.empty();
+
+        currentPositions.forEach(posId => {
+            const pos = availablePositions.find(p => p.id === posId);
+            console.log("Procurando posição com id=" + posId + ", encontrada:", pos);
+            if (pos) {
+                list.append(`
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${pos.type}
+                    <button class="btn btn-sm btn-danger remove-position" data-id="${pos.id}">Remover</button>
+                </li>
+            `);
+            } else {
+                list.append(
+                    `<li class="list-group-item text-danger">Posição não encontrada (ID: ${posId})</li>`
+                );
+            }
+        });
+    }
+
+
+    // Renderiza select com posições disponíveis
+    function renderPositionOptions() {
+        const select = $('#newPositionSelect');
+        select.empty();
+
+        availablePositions.forEach(pos => {
+            console.log("Renderizando option para posição:", pos);
+            if (!currentPositions.includes(pos.id)) {
+                select.append(`<option value="${pos.id}">${pos.type}</option>`);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+    async function openPositionsModal(employeeId) {
+        if (availablePositions.length === 0) {
+            await loadPositions();
+        }
+
+        const employee = employeesData.find(e => e.id == employeeId);
+        if (!employee) return;
+
+        $('#positions-employee-id').val(employee.id);
+
+        // Conversão para número
+        currentPositions = employee.positions.map(p => Number(p.id));
+
+        console.log("currentPositions convertidos para número:", currentPositions);
+
+        renderPositionsList();
+        renderPositionOptions();
+        $('#modalEditPositions').modal('show');
+    }
+
+
+
+
+
+
+    // Handler botão abrir modal
+    $('#employeeTable tbody').on('click', '.action[data-action="positions"]', function() {
+        const data = $('#employeeTable').DataTable().row($(this).parents('tr')).data();
+        const employeeId = data[0];
+        openPositionsModal(employeeId);
+    });
+
+    // Adicionar posição
+    $('#addPositionBtn').on('click', function() {
+        const selectedId = Number($('#newPositionSelect').val());
+        if (selectedId && !currentPositions.includes(selectedId)) {
+            currentPositions.push(selectedId);
+            renderPositionsList();
+            renderPositionOptions();
+        }
+    });
+
+    // Remover posição
+    $('#positionsList').on('click', '.remove-position', function() {
+        const id = Number($(this).data('id'));
+        currentPositions = currentPositions.filter(p => p !== id);
+        renderPositionsList();
+        renderPositionOptions();
+    });
+
+    // Salvar alterações
+    $('#savePositionsBtn').on('click', async function() {
+        const employeeId = Number($('#positions-employee-id').val());
+        try {
+            const res = await fetch("routes/employeeRoutes.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    action: "delete",
-                    id: employeeId
+                    action: "updatePositions",
+                    id: employeeId,
+                    positionIds: currentPositions
                 })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    $('#modalDeleteEmployee').modal('hide');
-                    loadDoctors();
-                    swal("Deletado!", "Funcionário excluído.", "success");
-                } else {
-                    swal("Erro!", data.message, "error");
-                }
-            })
-            .catch(err => console.error("Erro ao deletar funcionário:", err));
+            });
+            const data = await res.json();
+            if (data.status === "success") {
+                $('#modalEditPositions').modal('hide');
+                Swal.fire({
+                    icon: "success",
+                    title: "Posições atualizadas!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                }).then(() => loadDoctors()); // Atualiza tabela silenciosamente
+            } else {
+                Swal.fire("Erro!", data.message, "error");
+            }
+        } catch (err) {
+            console.error("Erro ao atualizar posições:", err);
+            Swal.fire("Erro!", "Não foi possível atualizar as posições.", "error");
+        }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 </script>

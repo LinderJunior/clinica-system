@@ -53,3 +53,43 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<div class="modal fade" id="modalEditPositions" tabindex="-1" role="dialog" aria-labelledby="modalEditPositionsLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditPositionsLabel">Gerenciar Posições do Médico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="positions-employee-id">
+                <div class="form-group mb-3">
+                    <label for="newPositionSelect" class="form-label">Adicionar nova posição:</label>
+                    <div class="input-group">
+                        <select class="form-control" id="newPositionSelect"></select>
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" id="addPositionBtn">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="list-group" id="positionsList"></ul>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="savePositionsBtn">Salvar Alterações</button>
+            </div>
+
+        </div>
+    </div>
+</div>
