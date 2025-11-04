@@ -8,7 +8,7 @@ include_once __DIR__ . './../../src/components/header.php';
             <div class="col-lg-8">
                 <div class="page-header-title">
                     <div class="d-inline">
-                        <h5>Registo de Funcionários</h5>
+                        <h5>Registo de Médicos</h5>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@ include_once __DIR__ . './../../src/components/header.php';
                         <li class="breadcrumb-item">
                             <a href="index.html"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Funcionários</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Médicos</a></li>
                         <li class="breadcrumb-item"><a href="#!">Registo</a></li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@ include_once __DIR__ . './../../src/components/header.php';
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Preencha o formulário</h5>
-                                    <span>Os campos abaixo são obrigatórios para registo de funcionários.</span>
+                                    <span>Os campos abaixo são obrigatórios para registo dos médicos.</span>
                                 </div>
                                 <div class="card-block">
                                     <form id="employeeForm" onsubmit="submitForm(event)">
@@ -67,7 +67,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Posições</label>
+                                            <label class="col-sm-2 col-form-label">Especialização</label>
                                             <div class="col-sm-10">
                                                 <div class="input-group mb-2">
                                                     <select class="form-control" id="selectPosition">
@@ -96,7 +96,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                                     </select>
                                                     <div class="input-group-append">
                                                         <button type="button" class="btn btn-success"
-                                                            onclick="addPosition()">Adicionar</button>
+                                                            onclick="addPosition()">Adicionar especialização</button>
                                                     </div>
                                                 </div>
                                                 <ul id="positionsList" class="list-group"></ul>
@@ -106,7 +106,7 @@ include_once __DIR__ . './../../src/components/header.php';
                                         <!-- Botão -->
                                         <div class="form-group row">
                                             <div class="col-sm-12 text-right">
-                                                <button type="submit" class="btn btn-info">Registar Funcionário</button>
+                                                <button type="submit" class="btn btn-info">Registar Medico</button>
                                             </div>
                                         </div>
                                     </form>
@@ -121,6 +121,92 @@ include_once __DIR__ . './../../src/components/header.php';
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<style>
+/* ---- BOTÕES ---- */
+.btn {
+    border-radius: 25px !important;
+    padding: 8px 18px !important;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:focus,
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Botão principal (azul suave) */
+.btn-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    border: none;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background: linear-gradient(135deg, #138496, #0f6b78);
+}
+
+/* Botão verde (Adicionar especialização) */
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+}
+
+/* Botão vermelho (Remover especialização) */
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border: none;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333, #a71d2a);
+}
+
+/* ---- LISTA DE ESPECIALIZAÇÕES ---- */
+#positionsList .list-group-item {
+    border-radius: 15px;
+    margin-bottom: 6px;
+    border: 1px solid #dee2e6;
+    background: #f9f9f9;
+    font-size: 0.95rem;
+}
+
+#positionsList .btn-danger {
+    border-radius: 20px;
+    padding: 4px 10px;
+}
+
+/* ---- BOTÃO DE SUBMISSÃO ---- */
+#employeeForm button[type="submit"] {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 28px;
+}
+
+#employeeForm button[type="submit"]:hover {
+    background: linear-gradient(135deg, #138496, #0f6b78);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+
 
 <script>
 let positions = []; // vai guardar os IDs das posições escolhidas
@@ -172,10 +258,16 @@ function submitForm(event) {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                alert(data.message);
-                window.location.href = "link.php?route=3";
+                Swal.fire({
+                    icon: "success",
+                    title: "Sucesso!",
+                    text: data.message || "Consulta registada com sucesso!",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location.href = "link.php?route=19";
+                });
             } else {
-                alert("Erro: " + data.message);
+                Swal.fire("Erro!", data.message, "error");
             }
         })
         .catch(error => {
