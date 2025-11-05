@@ -444,8 +444,6 @@ $(document).ready(function() {
                 // Exibe o modal
                 $('#modalEditDoctor').modal('show');
                 break;
-
-
             case "delete":
                 $('#delete-employeeid').val(employee.id);
                 $('#delete-username').text(employee.name);
@@ -464,6 +462,9 @@ $(document).ready(function() {
                 renderPositionsList();
                 renderPositionOptions();
                 $('#modalEditPositions').modal('show');
+                break;
+            case "pdf":
+                window.open(`routes/doctorPDF.php?id=${employeeId}&action=preview`, '_blank');
                 break;
 
 
@@ -585,12 +586,6 @@ $(document).ready(function() {
             }
         });
     }
-
-
-
-
-
-
 
 
     async function openPositionsModal(employeeId) {
