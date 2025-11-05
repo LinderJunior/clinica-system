@@ -20,8 +20,8 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-header bg-light d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="text-secondary mb-0 text-uppercase">Tabela de Funcionários</h6>
-                                <small class="text-muted">Visualização geral dos funcionários</small>
+                                <h6 class="text-secondary mb-0 text-uppercase">Tabela dos Doctores</h6>
+                                <small class="text-muted">Visualização geral dos doctores</small>
                             </div>
                         </div>
                         <div class="card-body">
