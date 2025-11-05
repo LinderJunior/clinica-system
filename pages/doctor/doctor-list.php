@@ -359,9 +359,12 @@ $(document).ready(function() {
                 <button class="btn btn-sm btn-info btn-icon action" data-action="pdf" title="PDF">
                     <i class="icofont icofont-file-pdf"></i>
                 </button>
-                  <button class="btn btn-sm btn-info btn-icon action" data-action="positions" title="Gerenciar Posições">
-                    <i class="icofont icofont-network"></i>
-                </button>
+<button class="btn btn-sm btn-icon action" data-action="positions" title="Gerenciar Posições"
+    style="background-color: #ffa94d; border-color: #ffa94d; color: #fff;">
+    <i class="icofont icofont-stethoscope"></i>
+</button>
+
+
             `
         }],
         language: {
