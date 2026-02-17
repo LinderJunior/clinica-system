@@ -172,6 +172,25 @@
 
 <script>
 $(document).ready(function() {
+    function showAlert(title, text, icon) {
+        try {
+            if (typeof Swal !== 'undefined' && Swal && typeof Swal.fire === 'function') {
+                return Swal.fire({
+                    title,
+                    text,
+                    icon
+                });
+            }
+            if (typeof swal === 'function') {
+                return swal(title, text, icon);
+            }
+        } catch (e) {
+            console.error('Erro ao mostrar alerta:', e);
+        }
+        alert(`${title}\n\n${text}`);
+        return Promise.resolve();
+    }
+
     // Carregar clientes no select
     function loadClients() {
         fetch("routes/index.php?route=patients")
@@ -246,12 +265,12 @@ $(document).ready(function() {
 
         // Validação básica
         if (!payload.client_id) {
-            swal("Erro!", "Por favor, selecione um cliente.", "error");
+            showAlert("Erro!", "Por favor, selecione um cliente.", "error");
             return;
         }
 
         if (!payload.height || !payload.weight) {
-            swal("Erro!", "Por favor, preencha altura e peso.", "error");
+            showAlert("Erro!", "Por favor, preencha altura e peso.", "error");
             return;
         }
 
@@ -267,41 +286,79 @@ $(document).ready(function() {
                 },
                 body: JSON.stringify(payload)
             })
-            .then(res => res.json())
+            .then(async (res) => {
+                const contentType = res.headers.get('content-type') || '';
+                const raw = await res.text();
+                if (!res.ok) {
+                    console.error('Resposta HTTP inválida:', res.status, raw);
+                    throw new Error(`HTTP ${res.status}`);
+                }
+                if (!contentType.toLowerCase().includes('application/json')) {
+                    console.error('Resposta não é JSON. Raw:', raw);
+                    throw new Error('Resposta inválida (não JSON)');
+                }
+                try {
+                    return JSON.parse(raw);
+                } catch (e) {
+                    console.error('Falha ao fazer parse do JSON. Raw:', raw);
+                    throw e;
+                }
+            })
             .then(data => {
                 if (data.status === "success") {
-                    swal({
-                        title: "Sucesso!",
-                        text: "Registro de peso salvo com sucesso.",
-                        icon: "success",
-                        buttons: {
-                            list: {
-                                text: "Ver Lista",
-                                value: "list",
-                                className: "btn-info"
-                            },
-                            new: {
-                                text: "Novo Registro",
-                                value: "new",
-                                className: "btn-success"
+                    if (typeof Swal !== 'undefined' && Swal && typeof Swal.fire === 'function') {
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Registro de peso salvo com sucesso.',
+                            icon: 'success',
+                            showDenyButton: true,
+                            confirmButtonText: 'Ver Lista',
+                            denyButtonText: 'Novo Registro'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "link.php?route=23";
+                            } else if (result.isDenied) {
+                                $('#formRegisterWeight')[0].reset();
+                                $('#bmi').val('');
+                                $('#classification').val('');
                             }
-                        }
-                    }).then((value) => {
-                        if (value === "list") {
-                            window.location.href = "link.php?route=23";
-                        } else if (value === "new") {
-                            $('#formRegisterWeight')[0].reset();
-                            $('#bmi').val('');
-                            $('#classification').val('');
-                        }
-                    });
+                        });
+                    } else if (typeof swal === 'function') {
+                        swal({
+                            title: "Sucesso!",
+                            text: "Registro de peso salvo com sucesso.",
+                            icon: "success",
+                            buttons: {
+                                list: {
+                                    text: "Ver Lista",
+                                    value: "list",
+                                    className: "btn-info"
+                                },
+                                new: {
+                                    text: "Novo Registro",
+                                    value: "new",
+                                    className: "btn-success"
+                                }
+                            }
+                        }).then((value) => {
+                            if (value === "list") {
+                                window.location.href = "link.php?route=23";
+                            } else if (value === "new") {
+                                $('#formRegisterWeight')[0].reset();
+                                $('#bmi').val('');
+                                $('#classification').val('');
+                            }
+                        });
+                    } else {
+                        alert('Sucesso!\n\nRegistro de peso salvo com sucesso.');
+                    }
                 } else {
-                    swal("Erro!", data.message, "error");
+                    showAlert("Erro!", data.message || "Erro ao salvar registro.", "error");
                 }
             })
             .catch(err => {
                 console.error("Erro ao salvar registro:", err);
-                swal("Erro!", "Erro ao salvar registro. Tente novamente.", "error");
+                showAlert("Erro!", "Erro ao salvar registro. Verifique o Console (F12) para detalhes.", "error");
             })
             .finally(() => {
                 // Reabilitar botão

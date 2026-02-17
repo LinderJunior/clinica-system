@@ -126,7 +126,7 @@ $activities = DashboardService::getRecentActivities();
                 <div class="page-header-title">
                     <div class="d-inline">
                         <h4 class="mb-0">Dashboard</h4>
-                        <p class="text-muted mb-0">Bem-vindo ao Sistema de Gestão da Clínica Linder</p>
+                        <!-- <p class="text-muted mb-0">Bem-vindo ao Sistema de Gestão da Clínica Linder</p> -->
                     </div>
                 </div>
             </div>

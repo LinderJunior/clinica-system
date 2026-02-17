@@ -123,11 +123,10 @@ include_once __DIR__ . './../../src/components/header.php';
                                             <label for="txtiswhatsapp" class="col-sm-2 col-form-label">Tem
                                                 WhatsApp</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="txtiswhatsapp">
-                                                    <option value="">Selecione uma opção</option>
-                                                    <option value="1">Sim</option>
-                                                    <option value="2">Nao</option>
-                                                </select>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="txtiswhatsapp" value="1">
+                                                    <label class="form-check-label" for="txtiswhatsapp">Sim</label>
+                                                </div>
                                             </div>
                                         </div>
 
